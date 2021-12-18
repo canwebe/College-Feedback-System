@@ -31,13 +31,13 @@ function App() {
     const snapshot = await getDocs(q)
     snapshot.forEach((doc) => {
       setUserData(doc.data())
-      // pno = userData.number
+      pno = doc.data().number
     })
 
-    if (userData?.number) {
+    if (pno) {
       console.log('Phone Number Found')
       let verify = new RecaptchaVerifier('captcha', { size: 'invisible' }, auth)
-      signInWithPhoneNumber(auth, '+91' + userData.number, verify)
+      signInWithPhoneNumber(auth, '+91' + pno, verify)
         .then((confirm) => {
           console.log('Otp Sent')
           setSucces(
@@ -52,6 +52,7 @@ function App() {
           window.location.reload()
         })
     } else {
+      console.log(userData, pno)
       setError('No info found USN incorrect , please try again')
     }
   }
