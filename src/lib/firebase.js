@@ -6,13 +6,13 @@ import { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyATsYHkC-12JBig5IfLuSLzfxmigRO07E4',
-  authDomain: 'saitfeedback.firebaseapp.com',
-  projectId: 'saitfeedback',
-  storageBucket: 'saitfeedback.appspot.com',
-  messagingSenderId: '1082037507867',
-  appId: '1:1082037507867:web:043e88845df0998bde65be',
-  measurementId: 'G-QD4XXLSHQ1',
+  apiKey: process.env.REACT_APP_APIKEY,
+  authDomain: process.env.REACT_APP_AUTHDOMAIN,
+  projectId: process.env.REACT_APP_PROJECTID,
+  storageBucket: process.env.REACT_APP_STORAGEBUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGINGSENDERID,
+  appId: process.env.REACT_APP_APPID,
+  measurementId: process.env.REACT_APP_MEASUREMENTID,
 }
 
 // Initialize Firebase
