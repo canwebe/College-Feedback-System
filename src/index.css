@@ -1,13 +1,137 @@
-body {
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #ccc;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+}
+
+nav {
+  text-align: center;
+  padding: 12px;
+  font-size: 1.6em;
+  margin: 15px auto;
+  background-color: #eee;
+  box-shadow: 0 3px 10px rgba(88, 88, 88, 0.719);
+}
+nav span {
+  font-weight: 600;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  width: 100%;
+  box-shadow: 2px 3px 6px 2px rgba(41, 41, 41, 0.815);
+  padding: 80px 20px;
+  background-color: white;
+  border: 10px solid rgb(211, 211, 211);
+  /* border-radius: 10px 10px 5px 5px; */
+}
+
+form label {
+  font-size: 1.5em;
+  margin-top: 15px;
+}
+
+form input {
+  padding: 14px 6px;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+  margin: 15px auto 20px;
+  font-size: 1.5em;
+  border-radius: 13px;
+  border: 3px solid rgb(6, 53, 180);
+  color: rgb(51, 51, 51);
+  background-color: rgb(210, 219, 247);
+  /* box-shadow: 2px 3px 7px rgba(78, 78, 78, 0.76); */
+  outline: none;
+  transition: background-color 0.2s ease-in;
+}
+input:focus {
+  border: 4px solid rgb(26, 3, 128);
+  background-color: rgb(236, 224, 243);
+}
+
+.btn {
+  width: 90%;
+  padding: 14px 0;
+  box-shadow: 2px 3px 6px rgba(70, 70, 70, 0.76);
+  font-size: 1.4em;
+  /* font-weight: 600; */
+  text-transform: uppercase;
+  color: rgb(252, 252, 252);
+  background-color: transparent;
+  cursor: pointer;
+  outline: none;
+  background-color: rgb(79, 68, 224);
+  transition: all 0.3s ease-in-out;
+}
+
+.btn.disabled {
+  filter: opacity(0.6);
+  cursor: not-allowed;
+}
+
+.btn:hover {
+  background-color: rgb(136, 68, 224);
+}
+.btn:active {
+  box-shadow: 2px 3px 6px rgba(97, 97, 97, 0.795);
+  background-color: rgb(21, 10, 172);
+}
+
+.wrapper {
+  width: 90%;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+}
+h1.welcome {
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 48px;
+  margin-bottom: 25px;
+}
+
+.errorMsg,
+.succesMsg {
+  font-size: 1.1em;
+  text-align: center;
+  margin-top: -20px;
+  margin-bottom: 15px;
+}
+
+.errorMsg {
+  color: rgb(212, 0, 0);
+}
+
+.succesMsg {
+  color: rgb(3, 189, 49);
+}
+
+.signOut {
+  padding: 10px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
