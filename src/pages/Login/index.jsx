@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { auth, db } from "../../lib/firebase";
 import {
   RecaptchaVerifier,
@@ -14,8 +14,8 @@ import {
 } from "firebase/firestore";
 import useAuthListner from "../../hooks/useAuthListner";
 import "./login.style.css";
-import { studentWithUid } from "../../utils/firebase";
-import useUser from "../../hooks/useUser";
+import { updateInfo } from "../../utils/firebase";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [usn, setUsn] = useState("");
@@ -25,15 +25,21 @@ const Login = () => {
   const [userData, setUserData] = useState({});
   const [error, setError] = useState("");
   const [succes, setSucces] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const inputRef = useRef();
 
   const { user } = useAuthListner();
+  const navigate = useNavigate();
   // const no = useUser();
   let pno = "";
   const isValid = usn === "" || usn.length < 10;
+  const otpInvalid = otp === "" || otp.length < 6;
 
   // Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     console.log(usn);
     const q = query(
       collection(db, "cse"),
@@ -55,6 +61,7 @@ const Login = () => {
       );
       signInWithPhoneNumber(auth, "+91" + pno, verify)
         .then((confirm) => {
+          setLoading(false);
           console.log("Otp Sent");
           setError("");
           setSucces(
@@ -64,13 +71,16 @@ const Login = () => {
           );
           setFinal(confirm);
           setShow(true);
+          inputRef.current.focus();
         })
         .catch((err) => {
+          setLoading(false);
           console.log(err);
-
+          alert(err);
           window.location.reload();
         });
     } else {
+      setLoading(false);
       console.log(userData, pno);
       setSucces("");
       setError("No info found USN incorrect , please try again");
@@ -80,18 +90,25 @@ const Login = () => {
   // Verify
   const handleVerify = (e) => {
     e.preventDefault();
+    setLoading(true);
     if (otp === null || final === null) return;
     final
       .confirm(otp)
       .then((result) => {
         console.log(result.user.uid);
-        updateInfo(result.user.uid);
+        updateInfo(result.user.uid, usn);
+        setLoading(false);
+        navigate("/");
         window.grecaptcha = null;
         window.recaptcha = null;
       })
       .catch((err) => {
         console.log(err);
-        setError(err);
+        setLoading(false);
+
+        setOtp("");
+        setSucces("");
+        setError("Verification failed OTP did not matched Try Again !!");
       });
   };
 
@@ -106,91 +123,75 @@ const Login = () => {
       });
   };
 
-  const updateInfo = async (uid) => {
-    const q = query(
-      collection(db, "cse"),
-      where("usn", "==", usn.trim().toUpperCase())
-    );
-    const result = await getDocs(q);
-    console.log(result.docs[0].ref);
-    await updateDoc(result.docs[0].ref, {
-      uid,
-    });
-  };
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user]);
 
   return (
     <div className="wrapper login">
       <div className="app">
-        <h1 className="welcome">Welcome to SaITFeedBack</h1>
-        {user ? (
-          <div className="userData">
-            <p>
-              USN: <strong>{userData.usn}</strong>,<br />
-              Class: <strong>{userData.sec}</strong>
-            </p>
-          </div>
-        ) : (
-          <form>
-            {error && <p className="errorMsg">{error}</p>}
-            {succes && <p className="succesMsg">{succes}</p>}
-            <h2>Authentication</h2>
-            {show ? (
-              <>
-                <div className="formDiv">
-                  <input
-                    name="otp"
-                    autoFocus
-                    className="formInput"
-                    placeholder=" "
-                    value={otp}
-                    maxLength="6"
-                    required
-                    onChange={(e) => setOtp(e.target.value)}
-                  />
-                  <label className="formLabel">Enter OTP</label>
-                </div>
+        <form>
+          {error && <p className="errorMsg">{error}</p>}
+          {succes && <p className="succesMsg">{succes}</p>}
+          <h2>Authentication</h2>
+          {show ? (
+            <>
+              <div className="formDiv">
+                <input
+                  name="otp"
+                  ref={inputRef}
+                  className="formInput"
+                  placeholder=" "
+                  value={otp}
+                  maxLength="6"
+                  required
+                  onChange={(e) => setOtp(e.target.value)}
+                />
+                <label className="formLabel">Enter OTP</label>
+              </div>
 
-                <button
-                  onClick={handleVerify}
-                  className="btn"
-                  disabled={isValid}
-                >
-                  Verify
-                </button>
-              </>
-            ) : (
-              <>
-                <div className="formDiv">
-                  <input
-                    name="usn"
-                    className="formInput"
-                    placeholder=" "
-                    value={usn}
-                    required
-                    maxLength="10"
-                    onChange={(e) => setUsn(e.target.value)}
-                  />
-                  <label className="formLabel">Enter Your USN</label>
-                </div>
+              <button
+                onClick={handleVerify}
+                className={`btn ${otpInvalid ? "disabled" : ""}`}
+                disabled={otpInvalid || loading}
+              >
+                {loading ? "loading..." : "Verify"}
+              </button>
+            </>
+          ) : (
+            <>
+              <div className="formDiv">
+                <input
+                  name="usn"
+                  className="formInput"
+                  placeholder=" "
+                  value={usn}
+                  required
+                  maxLength="10"
+                  onChange={(e) => setUsn(e.target.value)}
+                />
+                <label className="formLabel">Enter Your USN</label>
+              </div>
 
-                <div id="captcha" className="captcha"></div>
+              <div id="captcha" className="captcha"></div>
 
-                <button
-                  onClick={handleSubmit}
-                  className={`btn ${isValid ? "disabled" : ""}`}
-                  disabled={isValid}
-                >
-                  Next
-                </button>
-              </>
-            )}
-          </form>
-        )}
+              <button
+                onClick={handleSubmit}
+                className={`btn ${isValid ? "disabled" : ""}`}
+                disabled={isValid || loading}
+              >
+                {loading ? "loading..." : "Next"}
+              </button>
+            </>
+          )}
+        </form>
       </div>
       {/* <button onClick={() => studentWithUid("abc")}>Update</button> */}
-      <button className="signOut" onClick={handleSignout}>
+      {/* <button className="signOut" onClick={handleSignout}>
         SignOut---Only for testing
-      </button>
+      </button> */}
     </div>
   );
 };
