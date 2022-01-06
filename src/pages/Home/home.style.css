@@ -1,0 +1,44 @@
+.usnCard {
+  padding: 20px 15px;
+  margin: 40px 0;
+  box-shadow: 2px 4px 10px 3px rgba(0, 0, 0, 0.2);
+}
+.home .usnCard hr {
+  width: 95%;
+  margin: 6px auto 15px;
+  height: 1px;
+  background-color: rgb(154, 155, 247);
+  border: none;
+  border-radius: 100px;
+}
+
+.home .usnNumber {
+  font-size: 1.8rem;
+  letter-spacing: 1px;
+  text-align: center;
+}
+.home .usnNumber strong {
+  font-weight: 600;
+  color: rgb(56, 56, 56);
+}
+
+.home .semSec {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.usnCard p {
+  font-size: 1.1rem;
+}
+
+.semSec p {
+  margin: 0 10px 0 0;
+}
+
+.usnCard span.status {
+  color: rgb(211, 11, 11);
+}
+
+.usnCard span.usn {
+  color: var(--secondary-purple);
+}

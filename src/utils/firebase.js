@@ -1,4 +1,10 @@
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 import { db } from "../lib/firebase";
 
 export const studentWithUid = async (uid) => {
@@ -8,4 +14,16 @@ export const studentWithUid = async (uid) => {
   snapshot.forEach((doc) => (result = doc.data()));
   console.log(result);
   return result;
+};
+
+export const updateInfo = async (uid, usn) => {
+  const q = query(
+    collection(db, "cse"),
+    where("usn", "==", usn.trim().toUpperCase())
+  );
+  const result = await getDocs(q);
+  console.log(result.docs[0].ref);
+  await updateDoc(result.docs[0].ref, {
+    uid,
+  });
 };
