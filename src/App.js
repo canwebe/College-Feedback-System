@@ -4,7 +4,6 @@ import useAuthListner from "./hooks/useAuthListner";
 import useUser from "./hooks/useUser";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import ProtectedRoute from "./utils/protected.route";
 import RequireAuth from "./utils/requireAuth.route";
 
 const App = () => {

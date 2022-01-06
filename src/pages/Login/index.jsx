@@ -25,6 +25,7 @@ const Login = () => {
   const [userData, setUserData] = useState({});
   const [error, setError] = useState("");
   const [succes, setSucces] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const inputRef = useRef();
 
@@ -38,6 +39,7 @@ const Login = () => {
   // Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     console.log(usn);
     const q = query(
       collection(db, "cse"),
@@ -59,6 +61,7 @@ const Login = () => {
       );
       signInWithPhoneNumber(auth, "+91" + pno, verify)
         .then((confirm) => {
+          setLoading(false);
           console.log("Otp Sent");
           setError("");
           setSucces(
@@ -71,11 +74,13 @@ const Login = () => {
           inputRef.current.focus();
         })
         .catch((err) => {
+          setLoading(false);
           console.log(err);
           alert(err);
           window.location.reload();
         });
     } else {
+      setLoading(false);
       console.log(userData, pno);
       setSucces("");
       setError("No info found USN incorrect , please try again");
@@ -85,19 +90,22 @@ const Login = () => {
   // Verify
   const handleVerify = (e) => {
     e.preventDefault();
+    setLoading(true);
     if (otp === null || final === null) return;
     final
       .confirm(otp)
       .then((result) => {
         console.log(result.user.uid);
         updateInfo(result.user.uid, usn);
+        setLoading(false);
         navigate("/");
         window.grecaptcha = null;
         window.recaptcha = null;
       })
       .catch((err) => {
         console.log(err);
-        alert(err);
+        setLoading(false);
+
         setOtp("");
         setSucces("");
         setError("Verification failed OTP did not matched Try Again !!");
@@ -147,9 +155,9 @@ const Login = () => {
               <button
                 onClick={handleVerify}
                 className={`btn ${otpInvalid ? "disabled" : ""}`}
-                disabled={otpInvalid}
+                disabled={otpInvalid || loading}
               >
-                Verify
+                {loading ? "loading..." : "Verify"}
               </button>
             </>
           ) : (
@@ -172,9 +180,9 @@ const Login = () => {
               <button
                 onClick={handleSubmit}
                 className={`btn ${isValid ? "disabled" : ""}`}
-                disabled={isValid}
+                disabled={isValid || loading}
               >
-                Next
+                {loading ? "loading..." : "Next"}
               </button>
             </>
           )}

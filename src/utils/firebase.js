@@ -27,3 +27,10 @@ export const updateInfo = async (uid, usn) => {
     uid,
   });
 };
+
+export const fetchTechers = async () => {
+  const q = collection(db, "teachers");
+  const result = await getDocs(q);
+  const data = result.docs.map((item) => item.data());
+  return data;
+};
