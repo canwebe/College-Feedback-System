@@ -8,11 +8,14 @@
   --primary-blue: #1a73e8;
   --input-color: #80868b;
   --border-color: #dadce0;
+  --form-border: ##cedcf1;
+  --body-background: #e8dff7;
 }
 
 body {
   font-family: "Montserrat", sans-serif;
-  background-color: #ccc;
+  /* background-color: #ccc; */
+  background-color: var(--body-background);
 }
 
 .app {

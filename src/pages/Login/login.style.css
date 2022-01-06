@@ -12,8 +12,9 @@ form {
   justify-content: center;
   align-items: center;
   margin-top: 10px;
-  width: 100%;
-  box-shadow: 2px 3px 6px 2px rgba(41, 41, 41, 0.815);
+  width: 95%;
+  /* box-shadow: 2px 3px 6px 2px rgba(41, 41, 41, 0.815); */
+  box-shadow: 2px 3px 10px 2px rgba(107, 106, 106, 62%);
   padding: 52px 20px 80px;
   background-color: white;
   border: 10px solid rgb(211, 211, 211);
@@ -21,7 +22,7 @@ form {
 }
 
 form h2 {
-  margin-bottom: 1.9rem;
+  margin-bottom: 2.6rem;
   color: var(--primary-blue);
 }
 
@@ -44,18 +45,18 @@ form h2 {
   padding: 1rem;
   background: none;
   z-index: 1;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
 .formLabel {
   position: absolute;
   left: 1rem;
-  top: 1rem;
+  top: 0.85rem;
   padding: 0 0.25rem;
   background-color: white;
   color: var(--input-color);
   transition: top 0.2s ease-in, left 0.2s ease-in, font-size 0.2s ease-in;
-  font-size: 1rem;
+  font-size: 1.1rem;
   cursor: text;
 }
 
