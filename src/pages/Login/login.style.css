@@ -80,7 +80,7 @@ form h2 {
 }
 
 .btn:hover:not(.disabled) {
-  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 7px 26px rgba(0, 0, 0, 0.15);
   background-color: rgb(88, 88, 238);
 }
 
