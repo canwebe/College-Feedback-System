@@ -13,12 +13,15 @@
   --secondary-purple: #5f249d;
   --secondary-blue: #2e249d;
   --light-boxshadow: 0 5px 17px rgba(0, 0, 0, 0.52);
+  --medium-fontsize: 1.4rem;
+  --normal-fontsize: 1rem;
 }
 
 body {
   font-family: "Montserrat", sans-serif;
   /* background-color: #ccc; */
   background-color: var(--body-background);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .app {
@@ -33,12 +36,19 @@ nav {
   text-align: center;
   padding: 12px;
   font-size: 1.6em;
-  margin: 15px auto;
   background-color: #eee;
-  box-shadow: 0 3px 10px rgba(88, 88, 88, 0.719);
+  box-shadow: 0 3px 16px rgba(0, 0, 0, 0.322);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99;
 }
 nav span {
   font-weight: 600;
+}
+.navMargin {
+  height: 56px;
 }
 
 .wrapper {
@@ -46,6 +56,11 @@ nav span {
   margin: 0 auto;
 }
 
-h1 {
+h1,
+h2 {
   text-align: center;
+}
+a {
+  text-decoration: none;
+  color: #000;
 }

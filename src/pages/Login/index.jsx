@@ -170,6 +170,7 @@ const Login = () => {
                   value={usn}
                   required
                   maxLength="10"
+                  autoComplete="off"
                   onChange={(e) => setUsn(e.target.value)}
                 />
                 <label className="formLabel">Enter Your USN</label>

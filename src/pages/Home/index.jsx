@@ -45,9 +45,9 @@ const Home = () => {
       <div className="teacherListWrapper">
         <h1>Teachers</h1>
         <hr />
-        {teacherList &&
+        {teacherList ? (
           teacherList.map((teacher, i) => (
-            <div key={i} className="teacherCard">
+            <Link to="feedback" key={i} className="teacherCard">
               <div className="img"></div>
               <div className="right">
                 <p className="teacherName">{teacher.name}</p>
@@ -57,8 +57,11 @@ const Home = () => {
                 </p>
                 <p className="subFull">{teacher.subfull}</p>
               </div>
-            </div>
-          ))}
+            </Link>
+          ))
+        ) : (
+          <h2>Loading...</h2>
+        )}
       </div>
     </div>
   );

@@ -1,0 +1,79 @@
+/* Heading Part */
+.feedback h2 {
+  font-weight: 300;
+  margin-top: 15px;
+}
+.feedback hr {
+  width: 200px;
+  margin: 5px auto;
+  border: none;
+  background-color: var(--secondary-purple);
+  height: 1.2px;
+  border-radius: 10px;
+}
+
+/* Inside Feedback Section */
+.feedbackSection {
+  text-align: center;
+  margin: 20px auto;
+  padding: 25px 12px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+  border-radius: 7px;
+}
+
+.finishCard {
+  text-align: center;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25);
+  border-radius: 7px;
+  padding: 45px 15px;
+  font-size: 1.35rem;
+  margin: 20px auto;
+}
+
+.continue {
+  display: block;
+  width: 60% !important;
+  margin: 15px auto 0;
+}
+
+.question {
+  font-size: 1.35rem;
+  margin: 10px auto 16px;
+  font-weight: 500;
+  color: rgb(71, 2, 88);
+  line-height: 29px;
+  /* color: var(--secondary-purple); */
+}
+
+.answers {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.answers button {
+  width: 90%;
+  text-align: left;
+  padding: 8px 20px 8px 15px;
+  font-size: var(--normal-fontsize);
+  margin: 7px auto;
+  background-color: transparent;
+  border: 1px solid var(--secondary-purple);
+  color: var(--secondary-purple);
+  border-radius: 7px;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  /* background-color: var(--secondary-purple);
+  color: white; */
+}
+
+/* .answers button:active {
+  background-color: var(--secondary-purple);
+  color: white;
+} */
+
+span.star {
+  font-size: 1.4rem;
+  margin-bottom: -4px;
+  color: rgb(177, 177, 177);
+}
