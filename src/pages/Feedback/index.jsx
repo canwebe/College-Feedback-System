@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Star from "../../components/star";
 import "./feedback.style.css";
 
@@ -14,6 +14,9 @@ const questions = [
 ];
 
 const Feedback = () => {
+  const location = useLocation();
+
+  const { name, sub, uid } = location.state;
   // ------States-------
   //For question number
   const [question, setQuestion] = useState(0);
@@ -41,9 +44,13 @@ const Feedback = () => {
 
   return (
     <div className="feedback">
-      <h2>Feedback</h2>
-      <hr />
-      <p>SRIKANT SP</p>
+      {/* <h2>Feedback</h2>
+      <hr /> */}
+      <div className="wrapper teacherInfo">
+        <p className="teacherName">{name}</p>
+        <p className="sub">{sub}</p>
+      </div>
+
       <div className="wrapper">
         {isFinish ? (
           <div className="finishCard">

@@ -47,7 +47,16 @@ const Home = () => {
         <hr />
         {teacherList ? (
           teacherList.map((teacher, i) => (
-            <Link to="feedback" key={i} className="teacherCard">
+            <Link
+              to="feedback"
+              state={{
+                name: teacher.name,
+                sub: teacher.subfull,
+                uid: user.uid,
+              }}
+              key={i}
+              className="teacherCard"
+            >
               <div className="img"></div>
               <div className="right">
                 <p className="teacherName">{teacher.name}</p>

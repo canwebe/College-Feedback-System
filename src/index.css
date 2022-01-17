@@ -11,7 +11,7 @@
   --form-border: ##cedcf1;
   --body-background: #e8dff7;
   --secondary-purple: #5f249d;
-  --secondary-blue: #2e249d;
+  --secondary-blue: #2f4fc1;
   --light-boxshadow: 0 5px 17px rgba(0, 0, 0, 0.52);
   --medium-fontsize: 1.4rem;
   --normal-fontsize: 1rem;
@@ -52,7 +52,7 @@ nav span {
 }
 
 .wrapper {
-  width: 90%;
+  width: 93%;
   margin: 0 auto;
 }
 
