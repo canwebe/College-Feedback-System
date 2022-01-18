@@ -3,6 +3,20 @@ import { Link } from "react-router-dom";
 import useUser from "../../hooks/useUser";
 import { fetchTechers } from "../../utils/firebase";
 import "./home.style.css";
+import { motion } from "framer-motion";
+const downloadCardVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { delay: 0.7 } },
+  hover: {
+    backgroundColor: "#2a305c",
+    x: 5,
+    boxShadow: "2px 3px 6px 0px  rgba(51, 51, 51, 0.226)",
+    transition: {
+      type: "spring",
+      stiffness: 150,
+    },
+  },
+};
 
 const Home = () => {
   const [teacherList, setTeacherList] = useState();
@@ -42,35 +56,44 @@ const Home = () => {
         </p>
       </div>
 
-      <div className="teacherListWrapper">
+      <div className="teacherListCard">
         <h1>Teachers</h1>
         <hr />
-        {teacherList ? (
-          teacherList.map((teacher, i) => (
-            <Link
-              to="feedback"
-              state={{
-                name: teacher.name,
-                sub: teacher.subfull,
-                uid: user.uid,
-              }}
-              key={i}
-              className="teacherCard"
-            >
-              <div className="img"></div>
-              <div className="right">
-                <p className="teacherName">{teacher.name}</p>
-                <p className="subName">
-                  <strong>Subject : </strong>
-                  {teacher.subshort}
-                </p>
-                <p className="subFull">{teacher.subfull}</p>
+        <div layout className="teacherListWrapper">
+          {teacherList ? (
+            teacherList.map((teacher, i) => (
+              <div
+                layout
+                variants={downloadCardVariants}
+                initial="hidden"
+                animate="visible"
+                key={i}
+              >
+                <Link
+                  to="feedback"
+                  state={{
+                    name: teacher.name,
+                    sub: teacher.subfull,
+                    uid: user.uid,
+                  }}
+                  className="teacherCard"
+                >
+                  <div className="img"></div>
+                  <div className="right">
+                    <p className="teacherName">{teacher.name}</p>
+                    <p className="subName">
+                      <strong>Subject : </strong>
+                      {teacher.subshort}
+                    </p>
+                    <p className="subFull">{teacher.subfull}</p>
+                  </div>
+                </Link>
               </div>
-            </Link>
-          ))
-        ) : (
-          <h2>Loading...</h2>
-        )}
+            ))
+          ) : (
+            <h2>Loading...</h2>
+          )}
+        </div>
       </div>
     </div>
   );

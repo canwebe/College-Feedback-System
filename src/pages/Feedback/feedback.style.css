@@ -48,6 +48,7 @@
   padding: 45px 15px;
   font-size: 1.35rem;
   margin: 20px auto;
+  width: 98%;
   background-color: #f7f7f7;
 }
 
@@ -84,14 +85,23 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
   /* background-color: var(--secondary-purple);
   color: white; */
 }
 
-/* .answers button:active {
+.answers button:active {
   background-color: var(--secondary-purple);
   color: white;
-} */
+}
+
+.answers button:active span.star {
+  color: rgb(105, 79, 147);
+}
+
+.answers button:active svg.fill {
+  color: #eeeeee;
+}
 
 span.star {
   font-size: 1.4rem;
