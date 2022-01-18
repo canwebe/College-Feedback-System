@@ -16,6 +16,28 @@ import useAuthListner from "../../hooks/useAuthListner";
 import "./login.style.css";
 import { updateInfo } from "../../utils/firebase";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+
+const containerVariants = {
+  hidden: {
+    y: "-80vh",
+    opacity: 0,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      mass: 0.5,
+      damping: 9,
+    },
+  },
+
+  exit: {
+    y: "80vh",
+    transition: { ease: "easeInOut" },
+  },
+};
 
 const Login = () => {
   const [usn, setUsn] = useState("");
@@ -65,7 +87,7 @@ const Login = () => {
           console.log("Otp Sent");
           setError("");
           setSucces(
-            `OTP sent to the phone number ending with +91 ********${pno.slice(
+            `OTP sent to the phone number ending with +91 XXXXXXXX${pno.slice(
               -2
             )}`
           );
@@ -130,7 +152,13 @@ const Login = () => {
   }, [user]);
 
   return (
-    <div className="wrapper login">
+    <motion.div
+      variants={containerVariants}
+      animate="visible"
+      initial="hidden"
+      exit="exit"
+      className="wrapper login"
+    >
       <div className="app">
         <form>
           {error && <p className="errorMsg">{error}</p>}
@@ -159,6 +187,7 @@ const Login = () => {
               >
                 {loading ? "loading..." : "Verify"}
               </button>
+              <p className="captchaText">Hidden Auto ReCaptcha Verifier</p>
             </>
           ) : (
             <>
@@ -183,8 +212,9 @@ const Login = () => {
                 className={`btn ${isValid ? "disabled" : ""}`}
                 disabled={isValid || loading}
               >
-                {loading ? "loading..." : "Next"}
+                {loading ? "Sending Code..." : "Next"}
               </button>
+              <p className="captchaText">Hidden Auto ReCaptcha Verifier</p>
             </>
           )}
         </form>
@@ -193,7 +223,7 @@ const Login = () => {
       {/* <button className="signOut" onClick={handleSignout}>
         SignOut---Only for testing
       </button> */}
-    </div>
+    </motion.div>
   );
 };
 

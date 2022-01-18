@@ -44,20 +44,26 @@
   color: var(--secondary-purple);
 }
 
-.teacherListWrapper {
+.teacherListCard {
   padding: 15px 12px;
   box-shadow: 0 0 16px 3px rgba(0, 0, 0, 0.3);
   margin: 60px 0 40px;
   border-top: 9px solid var(--secondary-purple);
   border-radius: 8px 8px 0 0;
   background-color: whitesmoke;
+  min-height: 700px;
+}
+
+.teacherListWrapper {
+  display: grid;
+  grid-gap: 18px;
 }
 
 .teacherListWrapper .teacherCard {
   padding: 16px 13px;
   background-color: var(--secondary-blue);
   /* background-color: #d3d3d3; */
-  margin: 18px 0;
+  /* margin: 18px 0; */
   display: flex;
   align-items: center;
   min-height: 129px;
@@ -67,7 +73,7 @@
   box-shadow: var(--light-boxshadow);
   /* box-shadow:  1px 2px 12px 2px rgb(0 0 0 / 40%); */
 }
-.teacherListWrapper hr {
+.teacherListCard hr {
   border: none;
   height: 1px;
   background-color: royalblue;
