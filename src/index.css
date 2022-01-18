@@ -10,8 +10,11 @@
   --border-color: #dadce0;
   --form-border: ##cedcf1;
   --body-background: #e8dff7;
-  --secondary-purple: #5f249d;
+  /* --secondary-purple: #5f249d; */
+  --secondary-purple: #845ec2;
+  /* --secondary-blue: #268caa; */
   --secondary-blue: #2f4fc1;
+  --light-background: #d9f2fd;
   --light-boxshadow: 0 5px 17px rgba(0, 0, 0, 0.52);
   --medium-fontsize: 1.4rem;
   --normal-fontsize: 1rem;
@@ -29,7 +32,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 70vh;
+  min-height: 85vh;
 }
 
 nav {
@@ -37,15 +40,23 @@ nav {
   padding: 12px;
   font-size: 1.6em;
   background-color: #eee;
-  box-shadow: 0 3px 16px rgba(0, 0, 0, 0.322);
+  background-color: var(--secondary-purple);
+  box-shadow: 0 3px 26px rgba(0, 0, 0, 0.422);
+  border-bottom: 2px solid #704cad;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 99;
+  width: 100vw;
+}
+a.logo {
+  color: rgb(255, 255, 255);
 }
 nav span {
   font-weight: 600;
+  color: var(--light-background);
+  color: rgb(52, 2, 88);
 }
 .navMargin {
   height: 56px;
