@@ -32,7 +32,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 85vh;
+  min-height: 80vh;
 }
 
 nav {
