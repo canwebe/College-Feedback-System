@@ -15,9 +15,9 @@ form {
   /* box-shadow: 2px 3px 6px 2px rgba(41, 41, 41, 0.815); */
   box-shadow: 2px 3px 10px 2px rgba(107, 106, 106, 62%);
   /* padding: 52px 20px 80px; */
-  padding: 52px 20px 31px;
+  padding: 52px 20px 37px;
   background-color: white;
-  border: 10px solid rgb(211, 211, 211);
+  border: 10px solid var(--primary-blue);
   /* border-radius: 10px 10px 5px 5px; */
 }
 
@@ -186,5 +186,5 @@ input:focus {
 .captchaText {
   font-size: 0.8rem;
   margin-top: 35px;
-  color: rgb(0, 3, 27);
+  color: #8b8a8a;
 }
