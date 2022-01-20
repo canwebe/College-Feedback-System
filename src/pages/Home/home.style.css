@@ -60,7 +60,7 @@
 }
 
 .teacherListWrapper .teacherCard {
-  padding: 16px 13px;
+  padding: 16px 13px 16px 10px;
   background-color: var(--secondary-blue);
   /* background-color: #d3d3d3; */
   /* margin: 18px 0; */
@@ -68,11 +68,19 @@
   align-items: center;
   color: rgb(0, 0, 0);
   border-radius: 8px;
+  min-height: 129.8px;
   color: rgb(228, 220, 220);
   box-shadow: var(--light-boxshadow);
   transition: all 0.3s ease-in-out;
   z-index: 8;
+  border-left: 12px solid red;
   /* box-shadow:  1px 2px 12px 2px rgb(0 0 0 / 40%); */
+}
+
+.teacherListWrapper .teacherCard.done {
+  border-color: var(--secondary-blue);
+  background-color: #006900;
+  pointer-events: none;
 }
 
 .teacherCard:hover {

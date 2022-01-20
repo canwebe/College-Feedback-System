@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useUser from "../../hooks/useUser";
-import { fetchTechers } from "../../utils/firebase";
+import { checkMarking, fetchTechers } from "../../utils/firebase";
 import "./home.style.css";
 import { motion } from "framer-motion";
 import Loader from "../../components/loader";
+import TeacherCard from "../../components/teacherCard";
 
 const usncardVariants = {
   hidden: {
@@ -89,6 +90,12 @@ const Home = () => {
     setTeacherList(data);
   };
 
+  const checkColor = async (uid, name) => {
+    const result = await checkMarking(uid, name);
+    if (!result) return;
+    return "done";
+  };
+
   const loading = user && teacherList?.length;
 
   useEffect(() => {
@@ -141,27 +148,37 @@ const Home = () => {
         <div className="teacherListWrapper">
           {teacherList &&
             teacherList.map((teacher, i) => (
-              <motion.div variants={teachercardVariants} key={i}>
-                <Link
-                  to="feedback"
-                  state={{
-                    name: teacher.name,
-                    sub: teacher.subfull,
-                    uid: user.uid,
-                  }}
-                  className="teacherCard"
-                >
-                  <div className="img"></div>
-                  <div className="right">
-                    <p className="teacherName">{teacher.name}</p>
-                    <p className="subName">
-                      <strong>Subject : </strong>
-                      {teacher.subshort}
-                    </p>
-                    <p className="subFull">{teacher.subfull}</p>
-                  </div>
-                </Link>
-              </motion.div>
+              <TeacherCard
+                key={i}
+                name={teacher.name}
+                subfull={teacher.subfull}
+                subshort={teacher.subshort}
+                uid={user.uid}
+              />
+              // <motion.div variants={teachercardVariants} key={i}>
+              //   <Link
+              //     to="feedback"
+              //     state={{
+              //       name: teacher.name,
+              //       sub: teacher.subfull,
+              //       uid: user.uid,
+              //     }}
+              //     className={`teacherCard ${checkColor(
+              //       user.uid,
+              //       teacher.name
+              //     )}`}
+              //   >
+              //     <div className="img"></div>
+              //     <div className="right">
+              //       <p className="teacherName">{teacher.name}</p>
+              //       <p className="subName">
+              //         <strong>Subject : </strong>
+              //         {teacher.subshort}
+              //       </p>
+              //       <p className="subFull">{teacher.subfull}</p>
+              //     </div>
+              //   </Link>
+              // </motion.div>
             ))}
         </div>
       </motion.div>

@@ -1,5 +1,4 @@
 import { Navigate } from "react-router-dom";
-import { Fragment } from "react";
 import { motion } from "framer-motion";
 
 const RequireAuth = ({ children, redirectTo, user }) => {
