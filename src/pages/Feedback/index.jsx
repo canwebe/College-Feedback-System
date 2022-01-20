@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./feedback.style.css";
 import { AnimatePresence, motion } from "framer-motion";
 import Options from "../../components/options";
+import { addRating, markComplete } from "../../utils/firebase";
 
 const questions = [
   "Faculty preparation for the class",
@@ -74,7 +75,11 @@ const Feedback = () => {
 
   // Continue button click function
   const hadleBtnClick = () => {
-    navigate("/");
+    addRating(teacherState.name, points).then(() => {
+      markComplete(teacherState.uid, teacherState.name).then(() => {
+        navigate("/");
+      });
+    });
   };
 
   const feedbackVariants = {

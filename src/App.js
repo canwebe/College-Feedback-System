@@ -6,7 +6,7 @@ import useUser from "./hooks/useUser";
 import Feedback from "./pages/Feedback";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import RequireAuth from "./utils/requireAuth.route";
+import RequireAuth from "./components/requireAuth";
 
 const App = () => {
   const { user } = useAuthListner();
