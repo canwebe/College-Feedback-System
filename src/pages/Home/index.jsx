@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import useUser from "../../hooks/useUser";
-import { checkMarking, fetchTechers } from "../../utils/firebase";
-import "./home.style.css";
-import { motion } from "framer-motion";
-import Loader from "../../components/loader";
-import TeacherCard from "../../components/teacherCard";
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import useUser from '../../hooks/useUser'
+import { checkMarking, fetchTechers } from '../../utils/firebase'
+import './home.style.css'
+import { motion } from 'framer-motion'
+import Loader from '../../components/loader'
+import TeacherCard from '../../components/teacherCard'
 
 const usncardVariants = {
   hidden: {
@@ -16,7 +16,7 @@ const usncardVariants = {
     y: 0,
     opacity: 1,
     transition: {
-      type: "spring",
+      type: 'spring',
       mass: 0.5,
       damping: 8,
     },
@@ -25,9 +25,9 @@ const usncardVariants = {
   exit: {
     y: -200,
     opacity: 0,
-    transition: { ease: "easeInOut" },
+    transition: { ease: 'easeInOut' },
   },
-};
+}
 
 const wrappercardVariants = {
   hidden: {
@@ -38,20 +38,20 @@ const wrappercardVariants = {
     y: 0,
     opacity: 1,
     transition: {
-      type: "spring",
+      type: 'spring',
       mass: 0.5,
       damping: 8,
-      when: "beforeChildren",
-      staggerChildren: 0.3,
+      when: 'beforeChildren',
+      staggerChildren: 0.4,
     },
   },
 
   exit: {
     y: 200,
     opacity: 0,
-    transition: { ease: "easeInOut" },
+    transition: { ease: 'easeInOut' },
   },
-};
+}
 
 const teachercardVariants = {
   hidden: { opacity: 0, rotateX: -180 },
@@ -59,9 +59,6 @@ const teachercardVariants = {
   visible: {
     opacity: 1,
     rotateX: 0,
-    transition: {
-      duration: 0.5,
-    },
   },
   // tap: {
   //   boxShadow: "none",
@@ -76,49 +73,50 @@ const teachercardVariants = {
   //     stiffness: 150,
   //   },
   // },
-};
+}
 
 const Home = () => {
   //-----States-------
   //Teacher List Data
-  const [teacherList, setTeacherList] = useState();
+  const [teacherList, setTeacherList] = useState()
   // const user = useUser();
-  const user = useUser();
-  console.log("My user", user);
+  const user = useUser()
+  console.log('My user', user)
   const fetchData = async () => {
-    const data = await fetchTechers();
-    setTeacherList(data);
-  };
+    const data = await fetchTechers()
+    setTeacherList(data)
+  }
 
   const checkColor = async (uid, name) => {
-    const result = await checkMarking(uid, name);
-    if (!result) return;
-    return "done";
-  };
+    const result = await checkMarking(uid, name)
+    if (!result) return
+    return 'done'
+  }
 
-  const loading = user && teacherList?.length;
+  const loading = user && teacherList?.length
 
   useEffect(() => {
-    fetchData();
+    fetchData()
 
-    console.log("Users", user);
-  }, []);
+    console.log('Users', user)
+  }, [])
 
   return loading ? (
-    <div className="wrapper home">
-      {console.log("Loading", loading)}
+    <div className='wrapper home'>
+      {console.log('Loading', loading)}
       <motion.div
         variants={usncardVariants}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-        className="usnCard"
+        initial='hidden'
+        animate='visible'
+        exit='exit'
+        className='usnCard'
       >
-        <p className="usnNumber">
-          <strong>USN :</strong> <span className="usn">{user.usn}</span>
+        <p className='deptName'>DEPERTMENT OF COMPUTER SCIENCE</p>
+        <p className='usnNumber'>
+          <strong>USN :</strong> <span className='usn'>{user.usn}</span>
         </p>
         <hr />
-        <div className="semSec">
+        <div className='semSec'>
           <p>
             <strong>Sem :</strong> {user.sem} ,
           </p>
@@ -131,21 +129,21 @@ const Home = () => {
         </div>
 
         <p>
-          <strong>Feedback Status :</strong>{" "}
-          <span className="status">Pending</span>
+          <strong>Feedback Status :</strong>{' '}
+          <span className='status'>Pending</span>
         </p>
       </motion.div>
 
       <motion.div
         variants={wrappercardVariants}
-        animate="visible"
-        initial="hidden"
-        exit="exit"
-        className="teacherListCard"
+        animate='visible'
+        initial='hidden'
+        exit='exit'
+        className='teacherListCard'
       >
         <h1>Teachers</h1>
         <hr />
-        <div className="teacherListWrapper">
+        <div className='teacherListWrapper'>
           {teacherList &&
             teacherList.map((teacher, i) => (
               <TeacherCard
@@ -185,7 +183,7 @@ const Home = () => {
     </div>
   ) : (
     <Loader />
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

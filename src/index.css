@@ -21,7 +21,7 @@
 }
 
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Montserrat', sans-serif;
   /* background-color: #ccc; */
   background-color: var(--body-background);
   -webkit-tap-highlight-color: transparent;
@@ -58,12 +58,13 @@ nav span {
   color: var(--light-background);
   color: rgb(52, 2, 88);
 }
-.navMargin {
+/* .navMargin {
   height: 56px;
-}
+} */
 
 .wrapper {
   width: 93%;
+  max-width: 1800px;
   margin: 0 auto;
 }
 
@@ -74,4 +75,19 @@ h2 {
 a {
   text-decoration: none;
   color: #000;
+}
+
+.mainBody {
+  min-height: 93vh;
+  padding: 56px 0 70px;
+}
+
+/* --- MEDIA QUERIES --- */
+@media screen and (min-width: 720px) {
+  .wrapper {
+    width: 65%;
+  }
+  .mainBody {
+    min-height: 100vh;
+  }
 }

@@ -1,4 +1,5 @@
 /* Heading Part */
+
 .feedback h2 {
   font-weight: 300;
   margin-top: 15px;
@@ -26,7 +27,7 @@
 .teacherInfo {
   padding: 13px 15px;
   width: 90%;
-  margin: 17px auto 25px;
+  margin: 25px auto 25px;
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
   border: 4px solid white;
 }
@@ -107,4 +108,17 @@ span.star {
   font-size: 1.4rem;
   margin-bottom: -4px;
   color: rgb(209, 209, 209);
+}
+
+@media screen and (min-width: 720px) {
+  .teacherInfo {
+    padding: 20px 30px;
+    margin: 28px auto;
+    width: 40%;
+  }
+
+  .feedbackSection {
+    padding: 35px 25px;
+    width: 60%;
+  }
 }
