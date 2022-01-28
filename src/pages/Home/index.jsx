@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import useUser from '../../hooks/useUser'
 import { checkMarking, fetchTechers } from '../../utils/firebase'
 import './home.style.css'
@@ -53,29 +53,17 @@ const wrappercardVariants = {
   },
 }
 
-const teachercardVariants = {
-  hidden: { opacity: 0, rotateX: -180 },
-
-  visible: {
-    opacity: 1,
-    rotateX: 0,
-  },
-  // tap: {
-  //   boxShadow: "none",
-  //   scale: 0.98,
-  // },
-  // hover: {
-  //   backgroundColor: "#2a305c",
-  //   x: 5,
-  //   boxShadow: "2px 3px 6px 0px  rgba(51, 51, 51, 0.226)",
-  //   transition: {
-  //     type: "spring",
-  //     stiffness: 150,
-  //   },
-  // },
+const deptList = {
+  cse: 'COMPUTER SCIENCE',
+  is: 'INFORMATION SCIENCE',
+  me: 'MECHANICAL ENGINEERING',
+  ece: 'ELECTRONICS AND COMMUNICATION',
+  civil: 'CIVIL ENGINEERING',
 }
 
 const Home = () => {
+  const branch = useParams()?.id
+
   //-----States-------
   //Teacher List Data
   const [teacherList, setTeacherList] = useState()
@@ -111,7 +99,7 @@ const Home = () => {
         exit='exit'
         className='usnCard'
       >
-        <p className='deptName'>DEPERTMENT OF COMPUTER SCIENCE</p>
+        <p className='deptName'>DEPARTMENT OF {deptList[branch]}</p>
         <p className='usnNumber'>
           <strong>USN :</strong> <span className='usn'>{user.usn}</span>
         </p>
