@@ -22,11 +22,13 @@
   border-radius: 7px;
   background-color: #f7f7f7;
   width: 98%;
+  max-width: 589px;
 }
 
 .teacherInfo {
   padding: 13px 15px;
   width: 90%;
+  max-width: 604px;
   margin: 25px auto 25px;
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
   border: 4px solid white;
@@ -110,7 +112,17 @@ span.star {
   color: rgb(209, 209, 209);
 }
 
-@media screen and (min-width: 720px) {
+@media screen and (min-width: 630px) {
+  .teacherInfo {
+    padding: 20px 30px;
+    margin: 28px auto;
+  }
+  .feedbackSection {
+    padding: 35px 25px;
+  }
+}
+
+/* @media screen and (min-width: 1220px) {
   .teacherInfo {
     padding: 20px 30px;
     margin: 28px auto;
@@ -121,4 +133,4 @@ span.star {
     padding: 35px 25px;
     width: 60%;
   }
-}
+} */

@@ -6,6 +6,7 @@ import useUser from './hooks/useUser'
 import Feedback from './pages/Feedback'
 import Home from './pages/Home'
 import Login from './pages/Login'
+import SelectDept from './pages/SelectDept'
 import RequireAuth from './components/requireAuth'
 import Footer from './components/footer'
 
@@ -17,6 +18,7 @@ const App = () => {
     <>
       <nav>
         <Link to='/' className='logo'>
+          <img src='logo.svg' alt='logo' />
           SaIT<span>FeedBack</span>
         </Link>
       </nav>
@@ -29,12 +31,21 @@ const App = () => {
               path='/'
               element={
                 <RequireAuth user={user} redirectTo='/login'>
-                  <Home />
+                  <SelectDept />
                 </RequireAuth>
               }
             />
             <Route
-              path='/feedback'
+              path=':id'
+              element={
+                <RequireAuth user={user} redirectTo='/login'>
+                  <Home />
+                </RequireAuth>
+              }
+            />
+
+            <Route
+              path='/:id/feedback'
               element={
                 <RequireAuth user={user} redirectTo='/login'>
                   <Feedback />
