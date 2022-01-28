@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { checkMarking } from "../../utils/firebase";
+import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { checkMarking } from '../../utils/firebase'
 
 const teachercardVariants = {
   hidden: { opacity: 0, rotateX: -180 },
@@ -26,24 +26,24 @@ const teachercardVariants = {
   //     stiffness: 150,
   //   },
   // },
-};
+}
 
 const TeacherCard = ({ name, subfull, subshort, uid }) => {
-  const [classList, setClassList] = useState("");
+  const [classList, setClassList] = useState('')
 
   const checkColor = async () => {
-    const result = await checkMarking(uid, name);
-    if (result) return setClassList("done");
-  };
+    const result = await checkMarking(uid, name)
+    if (result) return setClassList('done')
+  }
 
   useEffect(() => {
-    checkColor();
-  }, []);
+    checkColor()
+  }, [])
 
   return (
     <motion.div variants={teachercardVariants}>
       <Link
-        to="feedback"
+        to='feedback'
         onClick={(e) => classList && e.preventDefault()}
         state={{
           name,
@@ -52,18 +52,18 @@ const TeacherCard = ({ name, subfull, subshort, uid }) => {
         }}
         className={`teacherCard ${classList}`}
       >
-        <div className="img"></div>
-        <div className="right">
-          <p className="teacherName">{name}</p>
-          <p className="subName">
+        <div className='img'></div>
+        <div className='right'>
+          <p className='teacherName'>{name}</p>
+          <p className='subName'>
             <strong>Subject : </strong>
             {subshort}
           </p>
-          <p className="subFull">{subfull}</p>
+          <p className='subFull'>{subfull}</p>
         </div>
       </Link>
     </motion.div>
-  );
-};
+  )
+}
 
-export default TeacherCard;
+export default TeacherCard
