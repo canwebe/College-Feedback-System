@@ -1,0 +1,120 @@
+.backDrop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: 19;
+  background-color: rgba(0, 0, 0, 0.739);
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(2px);
+}
+
+.modalCard {
+  padding: 40px 40px 0px;
+  /* width: auto; */
+  max-width: 1400px;
+  width: 90%;
+  /* margin-top: 50px; */
+  background-color: rgb(255, 255, 255);
+  z-index: 20;
+  box-shadow: 1px 3px 5px rgb(0, 0, 0);
+  position: relative;
+  border: 7px solid rgb(220, 227, 255);
+}
+
+.headlineCentre {
+  text-align: center;
+  font-size: 2rem;
+  line-break: auto;
+  margin-bottom: 20px;
+}
+.headtitle {
+  font-weight: 600;
+  font-size: 1.6rem;
+  margin-bottom: 7px;
+}
+.device,
+.modalCard li {
+  font-size: 1.6rem;
+}
+.device {
+  margin: 8px auto 4px;
+}
+.modalCard li {
+  margin: 5px auto;
+}
+.notifiCation {
+  color: rgb(255, 0, 64);
+  font-weight: 600;
+}
+.cancelIcon svg {
+  /* color: rgb(59, 59, 59); */
+  color: rgb(89, 0, 172);
+  color: var(--primary-blue);
+  font-size: 1.8rem;
+}
+.cancelIcon {
+  position: absolute;
+  right: 5px;
+  top: 4px;
+  cursor: pointer;
+}
+
+.headLineInfo {
+  font-size: 2.4rem;
+}
+
+.modalBtnDiv {
+  margin: 20px auto;
+  display: flex;
+  gap: 10px;
+}
+
+.modalBtnDiv button {
+  /* background-color: rgb(226, 226, 226); */
+  padding: 10px;
+  border: none;
+  display: block;
+  width: 100%;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.modalBtnDiv button:nth-child(2) {
+  color: white;
+  background-color: var(--primary-blue);
+  border-radius: 7px;
+}
+
+.modalBtnDiv button:nth-child(2):hover,
+.modalBtnDiv button:nth-child(2):active {
+  background-color: var(--secondary-blue);
+}
+.modalBtnDiv button:nth-child(1):hover,
+.modalBtnDiv button:nth-child(1):active {
+  background-color: rgb(218, 218, 218);
+  /* background-color: rgb(226, 226, 226); */
+}
+
+/* @media screen and (max-width: 780px) {
+  .modalCard.small {
+    width: 90%;
+    padding: 20px;
+    margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .modalCard {
+    width: 90%;
+    padding: 20px 14px 20px 30px;
+    margin-top: 0;
+  }
+  .headlineCentre {
+    text-align: left;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+} */
