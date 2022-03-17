@@ -6,6 +6,7 @@ import './home.style.css'
 import { motion } from 'framer-motion'
 import Loader from '../../components/loader'
 import TeacherCard from '../../components/teacherCard'
+import useBranch from '../../hooks/useBranch'
 
 const usncardVariants = {
   hidden: {
@@ -62,12 +63,11 @@ const deptList = {
 }
 
 const Home = () => {
-  const branch = useParams()?.id
-
   //-----States-------
   //Teacher List Data
   const [teacherList, setTeacherList] = useState()
   // const user = useUser();
+  const branch = useBranch()
   const user = useUser()
   console.log('My user', user)
   const fetchData = async () => {

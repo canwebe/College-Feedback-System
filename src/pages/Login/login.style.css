@@ -6,6 +6,12 @@ h1.welcome {
   margin-bottom: 25px;
 }
 
+.loginDiv {
+  display: flex;
+  align-items: center;
+  min-height: 85vh;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -42,19 +48,24 @@ form h2 {
   border: 1px solid var(--border-color);
   border-radius: 0.5rem;
   outline: none;
-  padding: 0.8rem 1rem;
+  padding: 0.7rem 1rem;
   background: none;
   z-index: 1;
   font-size: 1.1rem;
+  color: rgb(49, 49, 49);
   color: var(--input-color);
+  /* appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -webkit-appearance: none; */
 }
 
 .formDiv select option {
-  color: red;
+  background-color: var(--border-color);
 }
 
-select::placeholder {
-  color: blue;
+.formDiv select option {
+  color: rgb(0, 0, 0);
 }
 
 .formDiv input {
@@ -108,7 +119,8 @@ select::placeholder {
   background-color: rgb(88, 88, 238);
 }
 
-.formInput:focus {
+.formInput:focus,
+.formDiv select:focus {
   border: 1.5px solid var(--primary-blue);
 }
 

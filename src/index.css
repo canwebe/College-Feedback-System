@@ -107,10 +107,10 @@ a {
 
 .mainBody {
   min-height: 93vh;
-  display: flex;
+  /* display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: column; */
   padding-top: 56px;
 }
 
