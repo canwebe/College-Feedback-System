@@ -27,16 +27,16 @@ const App = () => {
         <AnimatePresence exitBeforeEnter>
           <Routes location={location} key={location.pathname}>
             {/* <ProtectedRoute path="/" user={user} element={<Home />} /> */}
-            <Route
+            {/* <Route
               path='/'
               element={
                 <RequireAuth user={user} redirectTo='/login'>
                   <SelectDept />
                 </RequireAuth>
               }
-            />
+            /> */}
             <Route
-              path=':id'
+              path='/'
               element={
                 <RequireAuth user={user} redirectTo='/login'>
                   <Home />
@@ -45,7 +45,7 @@ const App = () => {
             />
 
             <Route
-              path='/:id/feedback'
+              path='/feedback'
               element={
                 <RequireAuth user={user} redirectTo='/login'>
                   <Feedback />

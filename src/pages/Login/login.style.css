@@ -6,6 +6,12 @@ h1.welcome {
   margin-bottom: 25px;
 }
 
+.loginDiv {
+  display: flex;
+  align-items: center;
+  min-height: 85vh;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -20,6 +26,7 @@ form {
   background-color: white;
   border: 10px solid var(--primary-blue);
   /* border-radius: 10px 10px 5px 5px; */
+  margin: 0 auto;
 }
 
 form h2 {
@@ -32,6 +39,33 @@ form h2 {
   margin-bottom: 1rem;
   position: relative;
   width: 100%;
+}
+
+.formDiv select {
+  width: 100%;
+  /* height: 100%; */
+  letter-spacing: 1px;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  outline: none;
+  padding: 0.7rem 1rem;
+  background: none;
+  z-index: 1;
+  font-size: 1.1rem;
+  color: rgb(49, 49, 49);
+  color: var(--input-color);
+  /* appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -webkit-appearance: none; */
+}
+
+.formDiv select option {
+  background-color: var(--border-color);
+}
+
+.formDiv select option {
+  color: rgb(0, 0, 0);
 }
 
 .formDiv input {
@@ -85,7 +119,8 @@ form h2 {
   background-color: rgb(88, 88, 238);
 }
 
-.formInput:focus {
+.formInput:focus,
+.formDiv select:focus {
   border: 1.5px solid var(--primary-blue);
 }
 
