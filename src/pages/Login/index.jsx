@@ -43,7 +43,6 @@ const containerVariants = {
 const Login = () => {
   const [inputData, setInputData] = useState({
     usn: '',
-    branch: '',
     otp: '',
   })
   // const [usn, setUsn] = useState('')
@@ -58,14 +57,14 @@ const Login = () => {
   const [isModal, setIsModal] = useState(false)
 
   const inputRef = useRef()
-  const { usn, branch, otp } = inputData
+  const { usn, otp } = inputData
   const { user } = useAuthListner()
   const navigate = useNavigate()
   // const no = useUser();
   let pno = ''
 
-  console.log(usn, branch, otp)
-  const isValid = usn === '' || usn.length < 10 || branch === ''
+  console.log(usn, otp)
+  const isValid = usn === '' || usn.length < 10
   const otpInvalid = otp === '' || otp.length < 6
 
   //Handling Inputs
@@ -91,7 +90,7 @@ const Login = () => {
     setLoading(true)
     console.log(usn)
     const q = query(
-      collection(db, 'cse'),
+      collection(db, 'students'),
       where('usn', '==', usn.trim().toUpperCase())
     )
     const snapshot = await getDocs(q)
@@ -124,7 +123,6 @@ const Login = () => {
           console.log(err)
           setUserData({
             usn: '',
-            branch: '',
             otp: '',
           })
           setError('Something went wrong , Try Again!')
@@ -159,7 +157,6 @@ const Login = () => {
 
         setInputData({
           usn: '',
-          branch: '',
           otp: '',
         })
         setSucces('')
@@ -224,23 +221,6 @@ const Login = () => {
             </>
           ) : (
             <>
-              <div className='formDiv'>
-                <select
-                  required
-                  onChange={handleChange}
-                  name='branch'
-                  value={branch}
-                >
-                  <option value=''>Select Your Branch</option>
-                  <option value='basic'>BASIC</option>
-                  <option value='cse'>CSE</option>
-                  <option value='is'>IS</option>
-                  <option value='me'>ME</option>
-                  <option value='ece'>ECE</option>
-                  <option value='civ'>CIVIL</option>
-                </select>
-                {/* <label className='formLabel'>Select Your Branch</label> */}
-              </div>
               <div className='formDiv'>
                 <input
                   name='usn'

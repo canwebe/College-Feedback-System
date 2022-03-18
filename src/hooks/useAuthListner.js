@@ -2,14 +2,13 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { useEffect, useState } from 'react'
 import { auth } from '../lib/firebase'
 
-export default function useAuthListner(branch = '') {
+export default function useAuthListner() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('authUser')))
 
   useEffect(() => {
     const listner = onAuthStateChanged(auth, (authuser) => {
       if (authuser) {
         // Have authuser
-        console.log(authuser, branch)
         localStorage.setItem('authUser', JSON.stringify(authuser))
         setUser(user)
         console.log('Set localstorage')

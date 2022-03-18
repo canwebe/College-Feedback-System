@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 import { studentWithUid } from '../utils/firebase'
 import useAuthListner from './useAuthListner'
 
-const useUser = (branch = '') => {
+const useUser = () => {
   const [activeUser, setActiveUser] = useState({})
-  const { user } = useAuthListner(branch)
+  const { user } = useAuthListner()
   const uid = user?.uid
   const getUser = async (uid) => {
     const response = await studentWithUid(uid)
