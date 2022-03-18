@@ -16,12 +16,78 @@ const questions = [
 ]
 
 const labels = [
-  { label: 'Excelent', value: '5' },
-  { label: 'Good', value: '4' },
-  { label: 'Average', value: '3' },
-  { label: 'Poor', value: '2' },
-  { label: 'Very Poor', value: '1' },
+  { label: 'Excelent', value: 5 },
+  { label: 'Good', value: 4 },
+  { label: 'Average', value: 3 },
+  { label: 'Poor', value: 2 },
+  { label: 'Very Poor', value: 1 },
 ]
+
+const feedbackVariants = {
+  hidden: {
+    x: '100vw',
+    opacity: 0,
+  },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      mass: 0.5,
+      damping: 8,
+    },
+  },
+
+  exit: {
+    x: '-100vw',
+    transition: { ease: 'easeInOut' },
+  },
+}
+
+const finishcardVariants = {
+  hidden: {
+    x: '100vw',
+    opacity: 0,
+  },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      mass: 0.5,
+      damping: 10,
+      delay: 0.6,
+    },
+  },
+}
+
+const teachercardVariants = {
+  hidden: {
+    y: -50,
+    opacity: 0,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      mass: 0.5,
+      damping: 8,
+    },
+  },
+
+  exit: {
+    x: '100vw',
+    transition: { ease: 'easeInOut' },
+  },
+}
+
+const mainvariants = {
+  exit: {
+    x: '100vw',
+    transition: { ease: 'easeInOut' },
+  },
+}
 
 const Feedback = () => {
   //React Router tools
@@ -60,6 +126,7 @@ const Feedback = () => {
   //Click Function to update question and points
 
   const handleClick = async (point) => {
+    console.log('Point is', point, typeof point)
     setIsToggled(false)
     //For last question
     if (question >= questions.length - 1) {
@@ -75,77 +142,12 @@ const Feedback = () => {
 
   // Continue button click function
   const hadleBtnClick = () => {
+    console.log('Points added to DB', points, typeof points)
     addRating(teacherState.name, points).then(() => {
       markComplete(teacherState.uid, teacherState.name).then(() => {
         navigate('/')
       })
     })
-  }
-
-  const feedbackVariants = {
-    hidden: {
-      x: '100vw',
-      opacity: 0,
-    },
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        type: 'spring',
-        mass: 0.5,
-        damping: 8,
-      },
-    },
-
-    exit: {
-      x: '-100vw',
-      transition: { ease: 'easeInOut' },
-    },
-  }
-
-  const finishcardVariants = {
-    hidden: {
-      x: '100vw',
-      opacity: 0,
-    },
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        type: 'spring',
-        mass: 0.5,
-        damping: 10,
-        delay: 0.6,
-      },
-    },
-  }
-
-  const teachercardVariants = {
-    hidden: {
-      y: -50,
-      opacity: 0,
-    },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: 'spring',
-        mass: 0.5,
-        damping: 8,
-      },
-    },
-
-    exit: {
-      x: '100vw',
-      transition: { ease: 'easeInOut' },
-    },
-  }
-
-  const mainvariants = {
-    exit: {
-      x: '100vw',
-      transition: { ease: 'easeInOut' },
-    },
   }
 
   useEffect(() => {
