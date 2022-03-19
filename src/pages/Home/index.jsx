@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import useUser from '../../hooks/useUser'
-import { checkMarking, fetchTechers } from '../../utils/firebase'
+import { checkMarking, fetchSubList } from '../../utils/firebase'
 import './home.style.css'
 import { motion } from 'framer-motion'
 import Loader from '../../components/loader'
@@ -68,9 +68,14 @@ const Home = () => {
   // const user = useUser();
   const user = useUser()
   console.log('My user', user)
+
   const fetchData = async () => {
-    const data = await fetchTechers()
-    setTeacherList(data)
+    if (user.branch) {
+      const classStr = `${user.branch}_${user.sem}_${user.sec}`
+      console.log(classStr)
+      const data = await fetchSubList(classStr)
+      setTeacherList(data.sub)
+    }
   }
 
   const checkColor = async (uid, name) => {
@@ -83,13 +88,11 @@ const Home = () => {
 
   useEffect(() => {
     fetchData()
-
-    console.log('Users', user)
-  }, [])
+  }, [user])
 
   return loading ? (
     <div className='wrapper home'>
-      {console.log('Loading', loading)}
+      {console.log('List', teacherList)}
       <motion.div
         variants={usncardVariants}
         initial='hidden'

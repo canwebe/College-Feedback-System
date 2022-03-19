@@ -1,6 +1,8 @@
 import {
   arrayUnion,
   collection,
+  doc,
+  getDoc,
   getDocs,
   query,
   setDoc,
@@ -9,32 +11,40 @@ import {
 } from 'firebase/firestore'
 import { db } from '../lib/firebase'
 
+// Getting Student Data with UID
 export const studentWithUid = async (uid) => {
   const q = query(collection(db, 'students'), where('uid', '==', uid))
   const snapshot = await getDocs(q)
-  let result
-  snapshot.forEach((doc) => (result = doc.data()))
-  console.log(result)
-  return result
+  if (!snapshot.empty) {
+    return snapshot.docs[0].data()
+  } else {
+    return null
+  }
 }
 
+// Update Student Data with UID
 export const updateInfo = async (uid, usn) => {
   const q = query(
     collection(db, 'students'),
     where('usn', '==', usn.trim().toUpperCase())
   )
   const result = await getDocs(q)
-  console.log(result.docs[0].ref)
+
   await updateDoc(result.docs[0].ref, {
     uid,
   })
 }
 
-export const fetchTechers = async () => {
-  const q = collection(db, 'teachers')
-  const result = await getDocs(q)
-  const data = result.docs.map((item) => item.data())
-  return data
+// Getting Subject List of Each Class
+export const fetchSubList = async (classStr) => {
+  const docRef = doc(db, 'classes', classStr)
+  const docSnap = await getDoc(docRef)
+
+  if (docSnap.exists()) {
+    return docSnap.data()
+  } else {
+    return []
+  }
 }
 
 export const addRating = async (name, rating) => {
