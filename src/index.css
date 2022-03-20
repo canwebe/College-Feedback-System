@@ -6,6 +6,7 @@
 
 html {
   height: 100%;
+  overflow: hidden;
 }
 
 #root {
@@ -41,6 +42,7 @@ body {
   background-color: var(--body-background);
   -webkit-tap-highlight-color: transparent;
   height: 100%;
+  overflow: auto;
 }
 
 /* .app {
