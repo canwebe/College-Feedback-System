@@ -64,17 +64,21 @@ const deptList = {
 const Home = () => {
   //-----States-------
   //Teacher List Data
-  const [teacherList, setTeacherList] = useState()
-  // const user = useUser();
-  const user = useUser()
-  console.log('My user', user)
+  const [subjectList, setSubjectList] = useState([])
 
+  // Getting User Data
+  const user = useUser()
+
+  // Loading state true means no loading
+  const loading = user && subjectList.length
+
+  // Function
   const fetchData = async () => {
-    if (user.branch) {
+    if (user?.branch) {
       const classStr = `${user.branch}_${user.sem}_${user.sec}`
       console.log(classStr)
       const data = await fetchSubList(classStr)
-      setTeacherList(data.sub)
+      setSubjectList(data.sub)
     }
   }
 
@@ -84,15 +88,14 @@ const Home = () => {
     return 'done'
   }
 
-  const loading = user && teacherList?.length
-
+  // Side Effect
   useEffect(() => {
     fetchData()
   }, [user])
 
   return loading ? (
     <div className='wrapper home'>
-      {console.log('List', teacherList)}
+      {console.log('List', subjectList)}
       <motion.div
         variants={usncardVariants}
         initial='hidden'
@@ -122,7 +125,6 @@ const Home = () => {
           <span className='status'>Pending</span>
         </p>
       </motion.div>
-
       <motion.div
         variants={wrappercardVariants}
         animate='visible'
@@ -133,40 +135,9 @@ const Home = () => {
         <h1>Teachers</h1>
         <hr />
         <div className='teacherListWrapper'>
-          {teacherList &&
-            teacherList.map((teacher, i) => (
-              <TeacherCard
-                key={i}
-                name={teacher.name}
-                subfull={teacher.subfull}
-                subshort={teacher.subshort}
-                uid={user.uid}
-              />
-              // <motion.div variants={teachercardVariants} key={i}>
-              //   <Link
-              //     to="feedback"
-              //     state={{
-              //       name: teacher.name,
-              //       sub: teacher.subfull,
-              //       uid: user.uid,
-              //     }}
-              //     className={`teacherCard ${checkColor(
-              //       user.uid,
-              //       teacher.name
-              //     )}`}
-              //   >
-              //     <div className="img"></div>
-              //     <div className="right">
-              //       <p className="teacherName">{teacher.name}</p>
-              //       <p className="subName">
-              //         <strong>Subject : </strong>
-              //         {teacher.subshort}
-              //       </p>
-              //       <p className="subFull">{teacher.subfull}</p>
-              //     </div>
-              //   </Link>
-              // </motion.div>
-            ))}
+          {subjectList.map((subject, i) => (
+            <TeacherCard key={i} subjectData={subject} uid={user.uid} />
+          ))}
         </div>
       </motion.div>
     </div>

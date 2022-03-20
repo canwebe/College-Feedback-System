@@ -103,24 +103,18 @@ const Feedback = () => {
   const [points, setPoints] = useState(0)
 
   //Name and Sub for teacher
-  const [teacherState, setTeacherState] = useState({})
+  const [subject, setSubject] = useState({
+    teacherName: '',
+    subfull: '',
+    subcode: '',
+    teacherid: '',
+    uid: '',
+  })
 
   //Checking last question
   const [isFinish, setIsFinish] = useState(false)
   //Mounting and dismounting feedback card
   const [isToggled, setIsToggled] = useState(false)
-
-  // Side Effects
-  useEffect(() => {
-    //Getting teacher data
-    const { name, sub, uid } = location.state
-    setTeacherState({ name, sub, uid })
-
-    // Delaying first animation load on feedback card
-    setTimeout(() => {
-      setIsToggled(true)
-    }, 400)
-  }, [])
 
   //-------Functions-----
   //Click Function to update question and points
@@ -143,14 +137,33 @@ const Feedback = () => {
   // Continue button click function
   const hadleBtnClick = () => {
     console.log('Points added to DB', points, typeof points)
-    addRating(teacherState.name, points).then(() => {
-      markComplete(teacherState.uid, teacherState.name).then(() => {
+    addRating(subject.teacherName, points).then(() => {
+      markComplete(subject.uid, subject.name).then(() => {
         navigate('/')
       })
     })
   }
 
+  // Side Effect
   useEffect(() => {
+    // If Location State is there
+    if (location.state) {
+      //Getting teacher data
+      const { teacherName, subfull, subcode, teacherid, uid } = location.state
+      setSubject({ teacherName, subfull, subcode, teacherid, uid })
+
+      // Delaying first animation load on feedback card
+      setTimeout(() => {
+        setIsToggled(true)
+      }, 400)
+    } else {
+      //Otherwise Navigate back to home
+      navigate('/')
+    }
+  }, [])
+
+  useEffect(() => {
+    // Scroll to Top
     window.scrollTo(0, 0)
   }, [])
 
@@ -163,8 +176,8 @@ const Feedback = () => {
         exit='exit'
         className='wrapper teacherInfo'
       >
-        <p className='teacherName'>{teacherState.name}</p>
-        <p className='sub'>{teacherState.sub}</p>
+        <p className='teacherName'>{subject.teacherName}</p>
+        <p className='sub'>{subject.subfull}</p>
       </motion.div>
 
       <div className='wrapper'>
@@ -202,7 +215,7 @@ const Feedback = () => {
           >
             <p>Thanks for the Review</p>
             <button onClick={hadleBtnClick} className='btn continue'>
-              Continue
+              Submit
             </button>
           </motion.div>
         )}

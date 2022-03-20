@@ -28,15 +28,19 @@ const teachercardVariants = {
   // },
 }
 
-const TeacherCard = ({ name, subfull, subshort, uid }) => {
+const TeacherCard = ({ subjectData, uid }) => {
+  // State Checking Is Review Done
   const [classList, setClassList] = useState('')
 
-  const checkColor = async () => {
-    const result = await checkMarking(uid, name)
-    if (result) return setClassList('done')
-  }
+  // Object Destruction subjectData
+  const { teacherName, subfull, subshort, subcode, teacherid } = subjectData
 
+  // Side Effect
   useEffect(() => {
+    const checkColor = async () => {
+      const result = await checkMarking(uid, teacherName)
+      if (result) return setClassList('done')
+    }
     checkColor()
   }, [])
 
@@ -46,15 +50,17 @@ const TeacherCard = ({ name, subfull, subshort, uid }) => {
         to='feedback'
         onClick={(e) => classList && e.preventDefault()}
         state={{
-          name,
-          sub: subfull,
+          teacherName,
+          teacherid,
+          subcode,
+          subfull,
           uid,
         }}
         className={`teacherCard ${classList}`}
       >
         <div className='img'></div>
         <div className='right'>
-          <p className='teacherName'>{name}</p>
+          <p className='teacherName'>{teacherName}</p>
           <p className='subName'>
             <strong>Subject : </strong>
             {subshort}
