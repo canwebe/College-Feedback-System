@@ -98,23 +98,13 @@
   /* background-color: rgb(226, 226, 226); */
 }
 
-/* @media screen and (max-width: 780px) {
-  .modalCard.small {
-    width: 90%;
-    padding: 20px;
-    margin-top: 0;
+@media screen and (min-width: 510px) {
+  .modalCard {
+    width: 35%;
+  }
+
+  .modalCard p {
+    line-height: 23px;
+    word-spacing: 1px;
   }
 }
-
-@media screen and (max-width: 510px) {
-  .modalCard {
-    width: 90%;
-    padding: 20px 14px 20px 30px;
-    margin-top: 0;
-  }
-  .headlineCentre {
-    text-align: left;
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-  }
-} */

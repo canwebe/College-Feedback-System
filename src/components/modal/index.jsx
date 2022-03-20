@@ -57,11 +57,16 @@ const Modal = ({ setIsModal, handleSubmit }) => {
           <FaTimes />
         </span>
         <div>
-          <p>
+          {/* <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
             Dignissimos, quasi molestiae esse dolor iure totam maiores facilis
             et repellat nulla porro aperiam beatae at doloribus repellendus
             voluptate mollitia repudiandae? Ab.
+          </p> */}
+          <p>
+            Please provide your valid USN only because for security reason this
+            app has no logout feature. Once You signed in with your usn there is
+            no way to go back. OTP will be sent to your registered phone number.
           </p>
           <div className='modalBtnDiv'>
             <button onClick={() => setIsModal(false)}>Cancel</button>
