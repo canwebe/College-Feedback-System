@@ -77,6 +77,9 @@ const Home = () => {
   // Loading state true means no loading
   const loading = user && subjectList.length
 
+  // Pending Status
+  const status = subjectList.length - completed.length
+
   // Function
   const fetchData = async () => {
     if (user?.branch) {
@@ -123,11 +126,17 @@ const Home = () => {
             <strong> Branch :</strong> CSE
           </p>
         </div>
-
-        <p>
-          <strong>Feedback Status :</strong>{' '}
-          <span className='status'>Pending</span>
-        </p>
+        {status === 0 ? (
+          <p>
+            <strong>Feedback Status :</strong>{' '}
+            <span className='status completed'>Completed</span>
+          </p>
+        ) : (
+          <p>
+            <strong>Pending Feedback :</strong>{' '}
+            <span className='status'>{status}</span>
+          </p>
+        )}
       </motion.div>
       <motion.div
         variants={wrappercardVariants}

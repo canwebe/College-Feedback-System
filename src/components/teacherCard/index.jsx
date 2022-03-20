@@ -27,19 +27,8 @@ const teachercardVariants = {
 }
 
 const TeacherCard = ({ subjectData, uid, mark }) => {
-  // State Checking Is Review Done
-  // const [classList, setClassList] = useState('')
   // Object Destruction subjectData
   const { teacherName, subfull, subshort, subcode, teacherid } = subjectData
-
-  // Side Effect
-  // useEffect(() => {
-  //   const checkColor = async () => {
-  //     const result = await checkMarking(uid, teacherName)
-  //     if (result) return setClassList('done')
-  //   }
-  //   checkColor()
-  // }, [])
 
   return (
     <motion.div variants={teachercardVariants}>

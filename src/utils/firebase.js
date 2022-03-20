@@ -66,7 +66,7 @@ export const submitReview = async (teacherid, point) => {
   await setDoc(
     docRef.ref,
     {
-      avgRating: newAvg.toFixed(4),
+      avgRating: parseInt(newAvg.toFixed(4)),
       total: newTotal,
     },
     {

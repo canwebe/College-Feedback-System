@@ -116,6 +116,8 @@ const Feedback = () => {
   const [isFinish, setIsFinish] = useState(false)
   //Mounting and dismounting feedback card
   const [isToggled, setIsToggled] = useState(false)
+  //Loading State
+  const [isLoading, setIsLoading] = useState(false)
 
   useTitle(
     subject.teacherName
@@ -143,15 +145,18 @@ const Feedback = () => {
 
   // Submit button click function for submitting rating
   const handleBtnClick = () => {
+    setIsLoading(true)
     console.log('Points added to DB', points, typeof points)
     try {
       submitReview(subject.teacherid, points).then(() => {
         markComplete(subject.uid, subject.subcode).then(() => {
+          setIsLoading(false)
           navigate('/')
         })
       })
     } catch (error) {
       console.log('Submit Failed', error)
+      setIsLoading(false)
       alert('Something Went Wrong , Please Try Again ')
       navigate('/')
     }
@@ -227,8 +232,12 @@ const Feedback = () => {
             exit='exit'
           >
             <p>Thanks for the Review</p>
-            <button onClick={handleBtnClick} className='btn continue'>
-              Submit
+            <button
+              disabled={isLoading}
+              onClick={handleBtnClick}
+              className='btn continue'
+            >
+              {isLoading ? 'Loading..' : 'Submit'}
             </button>
           </motion.div>
         )}

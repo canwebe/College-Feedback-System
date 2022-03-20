@@ -41,6 +41,9 @@
 .usnCard span.status {
   color: rgb(211, 11, 11);
 }
+.usnCard span.status.completed {
+  color: #006900;
+}
 
 .usnCard span.usn {
   color: var(--secondary-purple);
