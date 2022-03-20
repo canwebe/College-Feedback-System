@@ -7,6 +7,8 @@ import { motion } from 'framer-motion'
 import Loader from '../../components/loader'
 import TeacherCard from '../../components/teacherCard'
 import useTitle from '../../hooks/useTitle'
+import Footer from '../../components/footer'
+import Nav from '../../components/nav'
 
 const usncardVariants = {
   hidden: {
@@ -100,67 +102,76 @@ const Home = () => {
     }
   }, [user])
 
-  return loading ? (
-    <div className='wrapper home'>
-      {console.log('List', completed)}
-      <motion.div
-        variants={usncardVariants}
-        initial='hidden'
-        animate='visible'
-        exit='exit'
-        className='usnCard'
-      >
-        <p className='deptName'>DEPARTMENT OF {deptList[user.branch]}</p>
-        <p className='usnNumber'>
-          <strong>USN :</strong> <span className='usn'>{user.usn}</span>
-        </p>
-        <hr />
-        <div className='semSec'>
-          <p>
-            <strong>Sem :</strong> {user.sem} ,
-          </p>
-          <p>
-            <strong>Sec :</strong> {user.sec} ,
-          </p>
-          <p>
-            <strong> Branch :</strong> CSE
-          </p>
-        </div>
-        {status === 0 ? (
-          <p>
-            <strong>Feedback Status :</strong>{' '}
-            <span className='status completed'>Completed</span>
-          </p>
+  return (
+    <>
+      <Nav />
+      <div className='navMargin'></div>
+      <div className='mainBody'>
+        {loading ? (
+          <div className='wrapper home'>
+            {console.log('List', completed)}
+            <motion.div
+              variants={usncardVariants}
+              initial='hidden'
+              animate='visible'
+              exit='exit'
+              className='usnCard'
+            >
+              <p className='deptName'>DEPARTMENT OF {deptList[user.branch]}</p>
+              <p className='usnNumber'>
+                <strong>USN :</strong> <span className='usn'>{user.usn}</span>
+              </p>
+              <hr />
+              <div className='semSec'>
+                <p>
+                  <strong>Sem :</strong> {user.sem} ,
+                </p>
+                <p>
+                  <strong>Sec :</strong> {user.sec} ,
+                </p>
+                <p>
+                  <strong> Branch :</strong> CSE
+                </p>
+              </div>
+              {status === 0 ? (
+                <p>
+                  <strong>Feedback Status :</strong>{' '}
+                  <span className='status completed'>Completed</span>
+                </p>
+              ) : (
+                <p>
+                  <strong>Pending Feedback :</strong>{' '}
+                  <span className='status'>{status}</span>
+                </p>
+              )}
+            </motion.div>
+            <motion.div
+              variants={wrappercardVariants}
+              animate='visible'
+              initial='hidden'
+              exit='exit'
+              className='teacherListCard'
+            >
+              <h1>Teachers</h1>
+              <hr />
+              <div className='teacherListWrapper'>
+                {subjectList.map((subject, i) => (
+                  <TeacherCard
+                    key={i}
+                    mark={completed.includes(subject.subcode)}
+                    subjectData={subject}
+                    uid={user.uid}
+                  />
+                ))}
+              </div>
+            </motion.div>
+          </div>
         ) : (
-          <p>
-            <strong>Pending Feedback :</strong>{' '}
-            <span className='status'>{status}</span>
-          </p>
+          <Loader />
         )}
-      </motion.div>
-      <motion.div
-        variants={wrappercardVariants}
-        animate='visible'
-        initial='hidden'
-        exit='exit'
-        className='teacherListCard'
-      >
-        <h1>Teachers</h1>
-        <hr />
-        <div className='teacherListWrapper'>
-          {subjectList.map((subject, i) => (
-            <TeacherCard
-              key={i}
-              mark={completed.includes(subject.subcode)}
-              subjectData={subject}
-              uid={user.uid}
-            />
-          ))}
-        </div>
-      </motion.div>
-    </div>
-  ) : (
-    <Loader />
+      </div>
+      <Footer />
+    </>
   )
 }
 

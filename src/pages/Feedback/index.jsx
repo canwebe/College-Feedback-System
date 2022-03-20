@@ -5,6 +5,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import Options from '../../components/options'
 import { markComplete, submitReview } from '../../utils/firebase'
 import useTitle from '../../hooks/useTitle'
+import Footer from '../../components/footer'
+import Nav from '../../components/nav'
 
 const questions = [
   'Faculty preparation for the class',
@@ -186,63 +188,70 @@ const Feedback = () => {
   }, [])
 
   return (
-    <motion.div className='feedback' variants={mainvariants} exit='exit'>
-      <motion.div
-        variants={teachercardVariants}
-        initial='hidden'
-        animate='visible'
-        exit='exit'
-        className='wrapper teacherInfo'
-      >
-        <p className='teacherName'>{subject.teacherName}</p>
-        <p className='sub'>{subject.subfull}</p>
-      </motion.div>
-
-      <div className='wrapper'>
-        <AnimatePresence exitBeforeEnter>
-          {isToggled && (
-            <motion.div
-              className='feedbackSection'
-              variants={feedbackVariants}
-              initial='hidden'
-              animate='visible'
-              exit='exit'
-            >
-              <p>{question + 1} / 7</p>
-              <p className='question'>{questions[question]}</p>
-              <div className='answers'>
-                {labels.map((item) => (
-                  <Options
-                    label={item.label}
-                    value={item.value}
-                    clickFxn={handleClick}
-                    key={item.value}
-                  />
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-        {isFinish && (
+    <>
+      <Nav />
+      <div className='navMargin'></div>
+      <div className='mainBody'>
+        <motion.div className='feedback' variants={mainvariants} exit='exit'>
           <motion.div
-            className='finishCard'
-            variants={finishcardVariants}
-            animate='visible'
+            variants={teachercardVariants}
             initial='hidden'
+            animate='visible'
             exit='exit'
+            className='wrapper teacherInfo'
           >
-            <p>Thanks for the Review</p>
-            <button
-              disabled={isLoading}
-              onClick={handleBtnClick}
-              className='btn continue'
-            >
-              {isLoading ? 'Loading..' : 'Submit'}
-            </button>
+            <p className='teacherName'>{subject.teacherName}</p>
+            <p className='sub'>{subject.subfull}</p>
           </motion.div>
-        )}
+
+          <div className='wrapper questionHeight'>
+            <AnimatePresence exitBeforeEnter>
+              {isToggled && (
+                <motion.div
+                  className='feedbackSection'
+                  variants={feedbackVariants}
+                  initial='hidden'
+                  animate='visible'
+                  exit='exit'
+                >
+                  <p>{question + 1} / 7</p>
+                  <p className='question'>{questions[question]}</p>
+                  <div className='answers'>
+                    {labels.map((item) => (
+                      <Options
+                        label={item.label}
+                        value={item.value}
+                        clickFxn={handleClick}
+                        key={item.value}
+                      />
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+            {isFinish && (
+              <motion.div
+                className='finishCard'
+                variants={finishcardVariants}
+                animate='visible'
+                initial='hidden'
+                exit='exit'
+              >
+                <p>Thanks for the Review</p>
+                <button
+                  disabled={isLoading}
+                  onClick={handleBtnClick}
+                  className='btn continue'
+                >
+                  {isLoading ? 'Loading..' : 'Submit'}
+                </button>
+              </motion.div>
+            )}
+          </div>
+        </motion.div>
       </div>
-    </motion.div>
+      <Footer />
+    </>
   )
 }
 

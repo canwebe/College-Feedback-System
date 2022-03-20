@@ -111,6 +111,13 @@ span.star {
   margin-bottom: -4px;
   color: rgb(209, 209, 209);
 }
+/* .questionHeight {
+  min-height: 500px;
+} */
+
+.feedback {
+  min-height: 88vh;
+}
 
 @media screen and (min-width: 630px) {
   .teacherInfo {
@@ -119,6 +126,9 @@ span.star {
   }
   .feedbackSection {
     padding: 35px 25px;
+  }
+  .finishCard {
+    width: 42%;
   }
 }
 

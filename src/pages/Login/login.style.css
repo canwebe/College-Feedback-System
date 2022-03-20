@@ -108,6 +108,7 @@ form h2 {
   font-size: 1rem;
   width: 99%;
   font-weight: 600;
+  letter-spacing: 1px;
 }
 .btn.disabled {
   background-color: var(--border-color);
