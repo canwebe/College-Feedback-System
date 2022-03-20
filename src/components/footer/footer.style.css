@@ -1,16 +1,18 @@
 .footer {
-  background-color: #000;
-  color: rgba(255, 255, 255, 0.62);
+  /* background-color: #e0d8ee; */
+  color: rgb(0 0 0 / 86%);
   width: 100%;
   text-align: center;
   padding: 17px;
   /* margin-top: 80px; */
   letter-spacing: 1px;
+  border-top: 1px solid #a7a7a7;
   font-size: 0.7rem;
+  margin-top: auto;
 }
 
 .footer a {
-  color: rgb(255 164 168 / 88%);
+  color: rgba(236, 115, 121, 0.88);
   font-weight: 500;
 }
 .desktop {

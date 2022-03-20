@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import useUser from '../../hooks/useUser'
-import { checkMarking, fetchTechers } from '../../utils/firebase'
+import { fetchSubList } from '../../utils/firebase'
 import './home.style.css'
 import { motion } from 'framer-motion'
 import Loader from '../../components/loader'
 import TeacherCard from '../../components/teacherCard'
+import useTitle from '../../hooks/useTitle'
 
 const usncardVariants = {
   hidden: {
@@ -62,36 +63,46 @@ const deptList = {
 }
 
 const Home = () => {
-  const branch = useParams()?.id
-
   //-----States-------
   //Teacher List Data
-  const [teacherList, setTeacherList] = useState()
-  // const user = useUser();
+  const [subjectList, setSubjectList] = useState([])
+  const [completed, setCompleted] = useState([])
+
+  // Getting User Data
   const user = useUser()
-  console.log('My user', user)
+  console.log(user)
+  // Setting Title
+  useTitle('Home | SaITFeedback')
+
+  // Loading state true means no loading
+  const loading = user && subjectList.length
+
+  // Pending Status
+  const status = subjectList.length - completed.length
+
+  // Function
   const fetchData = async () => {
-    const data = await fetchTechers()
-    setTeacherList(data)
+    if (user?.branch) {
+      const classStr = `${user.branch}_${user.sem}_${user.sec}`
+      console.log(classStr)
+      const data = await fetchSubList(classStr)
+      setSubjectList(data.sub)
+    }
   }
 
-  const checkColor = async (uid, name) => {
-    const result = await checkMarking(uid, name)
-    if (!result) return
-    return 'done'
-  }
-
-  const loading = user && teacherList?.length
-
+  // Side Effect
   useEffect(() => {
-    fetchData()
-
-    console.log('Users', user)
-  }, [])
+    if (user?.branch) {
+      fetchData()
+      if (user?.complete) {
+        setCompleted(user.complete)
+      }
+    }
+  }, [user])
 
   return loading ? (
     <div className='wrapper home'>
-      {console.log('Loading', loading)}
+      {console.log('List', completed)}
       <motion.div
         variants={usncardVariants}
         initial='hidden'
@@ -99,7 +110,7 @@ const Home = () => {
         exit='exit'
         className='usnCard'
       >
-        <p className='deptName'>DEPARTMENT OF {deptList[branch]}</p>
+        <p className='deptName'>DEPARTMENT OF {deptList[user.branch]}</p>
         <p className='usnNumber'>
           <strong>USN :</strong> <span className='usn'>{user.usn}</span>
         </p>
@@ -115,13 +126,18 @@ const Home = () => {
             <strong> Branch :</strong> CSE
           </p>
         </div>
-
-        <p>
-          <strong>Feedback Status :</strong>{' '}
-          <span className='status'>Pending</span>
-        </p>
+        {status === 0 ? (
+          <p>
+            <strong>Feedback Status :</strong>{' '}
+            <span className='status completed'>Completed</span>
+          </p>
+        ) : (
+          <p>
+            <strong>Pending Feedback :</strong>{' '}
+            <span className='status'>{status}</span>
+          </p>
+        )}
       </motion.div>
-
       <motion.div
         variants={wrappercardVariants}
         animate='visible'
@@ -132,40 +148,14 @@ const Home = () => {
         <h1>Teachers</h1>
         <hr />
         <div className='teacherListWrapper'>
-          {teacherList &&
-            teacherList.map((teacher, i) => (
-              <TeacherCard
-                key={i}
-                name={teacher.name}
-                subfull={teacher.subfull}
-                subshort={teacher.subshort}
-                uid={user.uid}
-              />
-              // <motion.div variants={teachercardVariants} key={i}>
-              //   <Link
-              //     to="feedback"
-              //     state={{
-              //       name: teacher.name,
-              //       sub: teacher.subfull,
-              //       uid: user.uid,
-              //     }}
-              //     className={`teacherCard ${checkColor(
-              //       user.uid,
-              //       teacher.name
-              //     )}`}
-              //   >
-              //     <div className="img"></div>
-              //     <div className="right">
-              //       <p className="teacherName">{teacher.name}</p>
-              //       <p className="subName">
-              //         <strong>Subject : </strong>
-              //         {teacher.subshort}
-              //       </p>
-              //       <p className="subFull">{teacher.subfull}</p>
-              //     </div>
-              //   </Link>
-              // </motion.div>
-            ))}
+          {subjectList.map((subject, i) => (
+            <TeacherCard
+              key={i}
+              mark={completed.includes(subject.subcode)}
+              subjectData={subject}
+              uid={user.uid}
+            />
+          ))}
         </div>
       </motion.div>
     </div>

@@ -3,7 +3,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import './feedback.style.css'
 import { AnimatePresence, motion } from 'framer-motion'
 import Options from '../../components/options'
-import { addRating, markComplete } from '../../utils/firebase'
+import { markComplete, submitReview } from '../../utils/firebase'
+import useTitle from '../../hooks/useTitle'
 
 const questions = [
   'Faculty preparation for the class',
@@ -16,12 +17,78 @@ const questions = [
 ]
 
 const labels = [
-  { label: 'Excelent', value: '5' },
-  { label: 'Good', value: '4' },
-  { label: 'Average', value: '3' },
-  { label: 'Poor', value: '2' },
-  { label: 'Very Poor', value: '1' },
+  { label: 'Excelent', value: 5 },
+  { label: 'Good', value: 4 },
+  { label: 'Average', value: 3 },
+  { label: 'Poor', value: 2 },
+  { label: 'Very Poor', value: 1 },
 ]
+
+const feedbackVariants = {
+  hidden: {
+    x: '100vw',
+    opacity: 0,
+  },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      mass: 0.5,
+      damping: 8,
+    },
+  },
+
+  exit: {
+    x: '-100vw',
+    transition: { ease: 'easeInOut' },
+  },
+}
+
+const finishcardVariants = {
+  hidden: {
+    x: '100vw',
+    opacity: 0,
+  },
+  visible: {
+    x: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      mass: 0.5,
+      damping: 10,
+      delay: 0.6,
+    },
+  },
+}
+
+const teachercardVariants = {
+  hidden: {
+    y: -50,
+    opacity: 0,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      mass: 0.5,
+      damping: 8,
+    },
+  },
+
+  exit: {
+    x: '100vw',
+    transition: { ease: 'easeInOut' },
+  },
+}
+
+const mainvariants = {
+  exit: {
+    x: '100vw',
+    transition: { ease: 'easeInOut' },
+  },
+}
 
 const Feedback = () => {
   //React Router tools
@@ -37,29 +104,32 @@ const Feedback = () => {
   const [points, setPoints] = useState(0)
 
   //Name and Sub for teacher
-  const [teacherState, setTeacherState] = useState({})
+  const [subject, setSubject] = useState({
+    teacherName: '',
+    subfull: '',
+    subcode: '',
+    teacherid: '',
+    uid: '',
+  })
 
   //Checking last question
   const [isFinish, setIsFinish] = useState(false)
   //Mounting and dismounting feedback card
   const [isToggled, setIsToggled] = useState(false)
+  //Loading State
+  const [isLoading, setIsLoading] = useState(false)
 
-  // Side Effects
-  useEffect(() => {
-    //Getting teacher data
-    const { name, sub, uid } = location.state
-    setTeacherState({ name, sub, uid })
-
-    // Delaying first animation load on feedback card
-    setTimeout(() => {
-      setIsToggled(true)
-    }, 400)
-  }, [])
+  useTitle(
+    subject.teacherName
+      ? `${subject.teacherName} | SaITFeedback`
+      : 'Feedback | SaITFeedback'
+  )
 
   //-------Functions-----
   //Click Function to update question and points
 
   const handleClick = async (point) => {
+    console.log('Point is', point, typeof point)
     setIsToggled(false)
     //For last question
     if (question >= questions.length - 1) {
@@ -73,82 +143,45 @@ const Feedback = () => {
     setTimeout(() => setIsToggled(true), 370)
   }
 
-  // Continue button click function
-  const hadleBtnClick = () => {
-    addRating(teacherState.name, points).then(() => {
-      markComplete(teacherState.uid, teacherState.name).then(() => {
-        navigate('/')
+  // Submit button click function for submitting rating
+  const handleBtnClick = () => {
+    setIsLoading(true)
+    console.log('Points added to DB', points, typeof points)
+    try {
+      submitReview(subject.teacherid, points).then(() => {
+        markComplete(subject.uid, subject.subcode).then(() => {
+          setIsLoading(false)
+          navigate('/')
+        })
       })
-    })
+    } catch (error) {
+      console.log('Submit Failed', error)
+      setIsLoading(false)
+      alert('Something Went Wrong , Please Try Again ')
+      navigate('/')
+    }
   }
 
-  const feedbackVariants = {
-    hidden: {
-      x: '100vw',
-      opacity: 0,
-    },
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        type: 'spring',
-        mass: 0.5,
-        damping: 8,
-      },
-    },
+  // Side Effect
+  useEffect(() => {
+    // If Location State is there
+    if (location.state) {
+      //Getting teacher data
+      const { teacherName, subfull, subcode, teacherid, uid } = location.state
+      setSubject({ teacherName, subfull, subcode, teacherid, uid })
 
-    exit: {
-      x: '-100vw',
-      transition: { ease: 'easeInOut' },
-    },
-  }
-
-  const finishcardVariants = {
-    hidden: {
-      x: '100vw',
-      opacity: 0,
-    },
-    visible: {
-      x: 0,
-      opacity: 1,
-      transition: {
-        type: 'spring',
-        mass: 0.5,
-        damping: 10,
-        delay: 0.6,
-      },
-    },
-  }
-
-  const teachercardVariants = {
-    hidden: {
-      y: -50,
-      opacity: 0,
-    },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: 'spring',
-        mass: 0.5,
-        damping: 8,
-      },
-    },
-
-    exit: {
-      x: '100vw',
-      transition: { ease: 'easeInOut' },
-    },
-  }
-
-  const mainvariants = {
-    exit: {
-      x: '100vw',
-      transition: { ease: 'easeInOut' },
-    },
-  }
+      // Delaying first animation load on feedback card
+      setTimeout(() => {
+        setIsToggled(true)
+      }, 400)
+    } else {
+      //Otherwise Navigate back to home
+      navigate('/')
+    }
+  }, [])
 
   useEffect(() => {
+    // Scroll to Top
     window.scrollTo(0, 0)
   }, [])
 
@@ -161,8 +194,8 @@ const Feedback = () => {
         exit='exit'
         className='wrapper teacherInfo'
       >
-        <p className='teacherName'>{teacherState.name}</p>
-        <p className='sub'>{teacherState.sub}</p>
+        <p className='teacherName'>{subject.teacherName}</p>
+        <p className='sub'>{subject.subfull}</p>
       </motion.div>
 
       <div className='wrapper'>
@@ -199,8 +232,12 @@ const Feedback = () => {
             exit='exit'
           >
             <p>Thanks for the Review</p>
-            <button onClick={hadleBtnClick} className='btn continue'>
-              Continue
+            <button
+              disabled={isLoading}
+              onClick={handleBtnClick}
+              className='btn continue'
+            >
+              {isLoading ? 'Loading..' : 'Submit'}
             </button>
           </motion.div>
         )}
