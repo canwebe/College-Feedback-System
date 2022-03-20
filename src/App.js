@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import RequireAuth from './components/requireAuth'
 import Footer from './components/footer'
+import Admin from './pages/Admin'
 
 const App = () => {
   const { user } = useAuthListner()
@@ -42,6 +43,7 @@ const App = () => {
               }
             />
             <Route path='/login' element={<Login />} />
+            <Route path='/admin' element={<Admin />} />
           </Routes>
         </AnimatePresence>
       </div>

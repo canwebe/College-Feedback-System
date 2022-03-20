@@ -1,0 +1,11 @@
+.adminGrid {
+  background-color: aquamarine;
+  display: grid;
+  grid-template-columns: 250px 1fr;
+}
+
+.sideMenu {
+  border-right: 1px solid black;
+  background-color: cadetblue;
+  height: 85vh;
+}
