@@ -3,7 +3,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import './feedback.style.css'
 import { AnimatePresence, motion } from 'framer-motion'
 import Options from '../../components/options'
-import { addRating, markComplete } from '../../utils/firebase'
+import { markComplete, submitReview } from '../../utils/firebase'
+import useTitle from '../../hooks/useTitle'
 
 const questions = [
   'Faculty preparation for the class',
@@ -116,6 +117,12 @@ const Feedback = () => {
   //Mounting and dismounting feedback card
   const [isToggled, setIsToggled] = useState(false)
 
+  useTitle(
+    subject.teacherName
+      ? `${subject.teacherName} | SaITFeedback`
+      : 'Feedback | SaITFeedback'
+  )
+
   //-------Functions-----
   //Click Function to update question and points
 
@@ -134,14 +141,20 @@ const Feedback = () => {
     setTimeout(() => setIsToggled(true), 370)
   }
 
-  // Continue button click function
-  const hadleBtnClick = () => {
+  // Submit button click function for submitting rating
+  const handleBtnClick = () => {
     console.log('Points added to DB', points, typeof points)
-    addRating(subject.teacherName, points).then(() => {
-      markComplete(subject.uid, subject.name).then(() => {
-        navigate('/')
+    try {
+      submitReview(subject.teacherid, points).then(() => {
+        markComplete(subject.uid, subject.subcode).then(() => {
+          navigate('/')
+        })
       })
-    })
+    } catch (error) {
+      console.log('Submit Failed', error)
+      alert('Something Went Wrong , Please Try Again ')
+      navigate('/')
+    }
   }
 
   // Side Effect
@@ -214,7 +227,7 @@ const Feedback = () => {
             exit='exit'
           >
             <p>Thanks for the Review</p>
-            <button onClick={hadleBtnClick} className='btn continue'>
+            <button onClick={handleBtnClick} className='btn continue'>
               Submit
             </button>
           </motion.div>

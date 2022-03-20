@@ -18,6 +18,7 @@ import { updateInfo } from '../../utils/firebase'
 import { useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import Modal from '../../components/modal'
+import useTitle from '../../hooks/useTitle'
 
 const containerVariants = {
   hidden: {
@@ -41,6 +42,10 @@ const containerVariants = {
 }
 
 const Login = () => {
+  // Setting Title
+  useTitle('Home | SaITFeedback')
+
+  //States
   const [inputData, setInputData] = useState({
     usn: '',
     otp: '',

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import useUser from '../../hooks/useUser'
-import { checkMarking, fetchSubList } from '../../utils/firebase'
+import { fetchSubList } from '../../utils/firebase'
 import './home.style.css'
 import { motion } from 'framer-motion'
 import Loader from '../../components/loader'
 import TeacherCard from '../../components/teacherCard'
+import useTitle from '../../hooks/useTitle'
 
 const usncardVariants = {
   hidden: {
@@ -65,9 +66,13 @@ const Home = () => {
   //-----States-------
   //Teacher List Data
   const [subjectList, setSubjectList] = useState([])
+  const [completed, setCompleted] = useState([])
 
   // Getting User Data
   const user = useUser()
+  console.log(user)
+  // Setting Title
+  useTitle('Home | SaITFeedback')
 
   // Loading state true means no loading
   const loading = user && subjectList.length
@@ -82,20 +87,19 @@ const Home = () => {
     }
   }
 
-  const checkColor = async (uid, name) => {
-    const result = await checkMarking(uid, name)
-    if (!result) return
-    return 'done'
-  }
-
   // Side Effect
   useEffect(() => {
-    fetchData()
+    if (user?.branch) {
+      fetchData()
+      if (user?.complete) {
+        setCompleted(user.complete)
+      }
+    }
   }, [user])
 
   return loading ? (
     <div className='wrapper home'>
-      {console.log('List', subjectList)}
+      {console.log('List', completed)}
       <motion.div
         variants={usncardVariants}
         initial='hidden'
@@ -136,7 +140,12 @@ const Home = () => {
         <hr />
         <div className='teacherListWrapper'>
           {subjectList.map((subject, i) => (
-            <TeacherCard key={i} subjectData={subject} uid={user.uid} />
+            <TeacherCard
+              key={i}
+              mark={completed.includes(subject.subcode)}
+              subjectData={subject}
+              uid={user.uid}
+            />
           ))}
         </div>
       </motion.div>

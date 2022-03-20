@@ -1,6 +1,7 @@
 import {
   arrayUnion,
   collection,
+  collectionGroup,
   doc,
   getDoc,
   getDocs,
@@ -47,6 +48,33 @@ export const fetchSubList = async (classStr) => {
   }
 }
 
+// Submiting Review
+export const submitReview = async (teacherid, point) => {
+  // Getting Ref of teacher
+  const teacherRef = collection(db, `teachers/${teacherid}/subs`)
+  const teacherData = await getDocs(teacherRef)
+  const docRef = teacherData.docs[0]
+
+  // Getting Prev Data
+  const { avgRating, total } = docRef.data()
+
+  // Incrementing Total User
+  const newTotal = total + 1
+
+  // Algorithm for new Average
+  const newAvg = (total * avgRating + point) / newTotal
+  await setDoc(
+    docRef.ref,
+    {
+      avgRating: newAvg.toFixed(4),
+      total: newTotal,
+    },
+    {
+      merge: true,
+    }
+  ).catch((err) => console.log('Submit Failed', err))
+}
+
 export const addRating = async (name, rating) => {
   const q = query(collection(db, 'teachers'), where('name', '==', name))
   const result = await getDocs(q)
@@ -68,28 +96,28 @@ export const addRating = async (name, rating) => {
   console.log('Ratting done')
 }
 
-export const markComplete = async (uid, name) => {
+// Marking Review of Students
+export const markComplete = async (uid, subcode) => {
   const q = query(collection(db, 'students'), where('uid', '==', uid))
   const snapshot = await getDocs(q)
   await setDoc(
     snapshot.docs[0].ref,
     {
-      complete: arrayUnion(name),
+      complete: arrayUnion(subcode),
     },
     {
       merge: true,
     }
-  ).catch((er) => console.log(er))
-  console.log('done')
+  ).catch((err) => console.log('Completion Update Failed', err))
 }
 
-export const checkMarking = async (uid, name) => {
-  const q = query(collection(db, 'students'), where('uid', '==', uid))
-  const snapshot = await getDocs(q)
-  const result = snapshot.docs[0].data().complete
-  if (result) {
-    return result.includes(name)
-  } else {
-    return false
-  }
-}
+// export const checkMarking = async (uid, name) => {
+//   const q = query(collection(db, 'students'), where('uid', '==', uid))
+//   const snapshot = await getDocs(q)
+//   const result = snapshot.docs[0].data().complete
+//   if (result) {
+//     return result.includes(name)
+//   } else {
+//     return false
+//   }
+// }

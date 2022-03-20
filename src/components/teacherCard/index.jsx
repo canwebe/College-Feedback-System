@@ -1,7 +1,5 @@
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { checkMarking } from '../../utils/firebase'
 
 const teachercardVariants = {
   hidden: { opacity: 0, rotateX: -180 },
@@ -28,27 +26,26 @@ const teachercardVariants = {
   // },
 }
 
-const TeacherCard = ({ subjectData, uid }) => {
+const TeacherCard = ({ subjectData, uid, mark }) => {
   // State Checking Is Review Done
-  const [classList, setClassList] = useState('')
-
+  // const [classList, setClassList] = useState('')
   // Object Destruction subjectData
   const { teacherName, subfull, subshort, subcode, teacherid } = subjectData
 
   // Side Effect
-  useEffect(() => {
-    const checkColor = async () => {
-      const result = await checkMarking(uid, teacherName)
-      if (result) return setClassList('done')
-    }
-    checkColor()
-  }, [])
+  // useEffect(() => {
+  //   const checkColor = async () => {
+  //     const result = await checkMarking(uid, teacherName)
+  //     if (result) return setClassList('done')
+  //   }
+  //   checkColor()
+  // }, [])
 
   return (
     <motion.div variants={teachercardVariants}>
       <Link
         to='feedback'
-        onClick={(e) => classList && e.preventDefault()}
+        onClick={(e) => mark && e.preventDefault()}
         state={{
           teacherName,
           teacherid,
@@ -56,7 +53,7 @@ const TeacherCard = ({ subjectData, uid }) => {
           subfull,
           uid,
         }}
-        className={`teacherCard ${classList}`}
+        className={`teacherCard ${mark && 'done'}`}
       >
         <div className='img'></div>
         <div className='right'>
