@@ -1,12 +1,10 @@
 import { AnimatePresence } from 'framer-motion'
-import React, { useContext } from 'react'
+import React from 'react'
 import { Routes, Route, Link, useLocation } from 'react-router-dom'
 import useAuthListner from './hooks/useAuthListner'
-import useUser from './hooks/useUser'
 import Feedback from './pages/Feedback'
 import Home from './pages/Home'
 import Login from './pages/Login'
-import SelectDept from './pages/SelectDept'
 import RequireAuth from './components/requireAuth'
 import Footer from './components/footer'
 
@@ -26,15 +24,6 @@ const App = () => {
       <div className='mainBody'>
         <AnimatePresence exitBeforeEnter>
           <Routes location={location} key={location.pathname}>
-            {/* <ProtectedRoute path="/" user={user} element={<Home />} /> */}
-            {/* <Route
-              path='/'
-              element={
-                <RequireAuth user={user} redirectTo='/login'>
-                  <SelectDept />
-                </RequireAuth>
-              }
-            /> */}
             <Route
               path='/'
               element={
