@@ -1,6 +1,6 @@
 .adminGrid {
-  display: grid;
-  grid-template-columns: 270px 1fr;
+  /* display: grid;
+  grid-template-columns: 270px 1fr; */
   background-color: rgb(234 239 247);
 }
 
@@ -12,11 +12,15 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
+  position: fixed;
+  width: 270px;
 }
 
 .mainContent {
   overflow-y: scroll;
   padding: 40px 50px;
+  padding-left: 330px;
+  min-height: 100vh;
 }
 .sideLogo {
   border-bottom: 1px solid #afb0b3;

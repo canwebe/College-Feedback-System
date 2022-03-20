@@ -1,4 +1,11 @@
-import { NavLink, Outlet, Route, Routes } from 'react-router-dom'
+import {
+  Navigate,
+  NavLink,
+  Outlet,
+  Route,
+  Routes,
+  useNavigate,
+} from 'react-router-dom'
 import AdminHome from '../../components/adminHome'
 import AdminStudents from '../../components/adminStudents'
 import useTitle from '../../hooks/useTitle'
@@ -13,7 +20,7 @@ import {
 import './admin.style.css'
 const Admin = () => {
   useTitle('Admin | SaITFeedback')
-
+  const navigate = useNavigate()
   return (
     <div className='admin'>
       <div className='adminGrid'>
@@ -41,7 +48,7 @@ const Admin = () => {
             </NavLink>
           </div>
           <div className='logOutDiv'>
-            <button>
+            <button onClick={() => navigate('/')}>
               Logout <FaSignOutAlt />
             </button>
           </div>
