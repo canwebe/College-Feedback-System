@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "saitfeedback-2a397"
+  },
+  "targets": {
+    "saitfeedback-2a397": {
+      "hosting": {
+        "feedbacksait": [
+          "feedbacksait"
+        ]
+      }
+    }
+  }
+}
