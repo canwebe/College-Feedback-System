@@ -68,7 +68,8 @@
   padding: 20px;
   margin: 25px 0 20px;
   box-shadow: 5px 5px 18px -3px rgba(0, 0, 0, 0.3);
-  width: fit-content;
+  width: 60%;
+  text-align: center;
 }
 
 .rankBoardDetails span {
@@ -92,35 +93,58 @@ p.noData {
 
 .rankBoardDiv {
   background-color: rgb(206, 214, 223);
-  padding: 30px 40px;
+  padding: 40px 45px;
   margin: 10px 0;
   border-radius: 7px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  width: 80%;
+  gap: 16px;
+  width: 60%;
+  border: 1px solid #a2a2a2;
 }
 
 .rankBoardDiv .rankCard {
   background-color: whitesmoke;
-  padding: 20px 30px;
+  padding: 13px 30px 13px 57px;
   box-shadow: 2px 3px 18px -5px rgba(0, 0, 0, 0.281);
   position: relative;
   border-radius: 4px;
+  cursor: pointer;
+  /* border-left: 4px solid var(--secondary-purple); */
+  /* border-top: 4px solid var(--secondary-purple); */
 }
 
 .rankCard .teacherName {
-  font-size: 1.4rem;
-  margin-bottom: 5px;
+  font-size: 1.13rem;
+  margin-bottom: 4px;
   color: var(--secondary-purple);
   font-weight: 600;
 }
 
+.rankCard .subjects {
+  font-size: 0.9rem;
+}
+
 .rankCard .point {
   position: absolute;
-  right: 20px;
-  font-size: 2.7rem;
-  top: 19px;
+  right: 18px;
+  font-size: 2.3rem;
+  top: 10px;
+}
+
+.rankCard .rankNo {
+  position: absolute;
+  background-color: var(--secondary-blue);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  font-weight: 500;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  top: 18px;
+  left: 16px;
 }
 
 /* .rankCard .subCode {

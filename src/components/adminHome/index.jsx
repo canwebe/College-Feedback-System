@@ -61,7 +61,7 @@ const wrapperVariants = {
 
 const rankBoardVariants = {
   hidden: {
-    y: 160,
+    y: 100,
     opacity: 0,
   },
   visible: {
@@ -109,7 +109,6 @@ const AdminHome = () => {
 
   // Functions
   const handleGenerate = async (e) => {
-    scrollRef.current.scrollIntoView()
     setIsLoading(true)
     e.preventDefault()
     const data = await generateRanking(branch, sem)
@@ -117,6 +116,7 @@ const AdminHome = () => {
       setIsLoading(false)
       setIsNoData(false)
       setRankList(data)
+      scrollRef.current.scrollIntoView()
     } else {
       setIsLoading(false)
       setIsNoData(true)
@@ -198,8 +198,9 @@ const AdminHome = () => {
                   key={i}
                   className='rankCard'
                 >
+                  <div className='rankNo'>{i + 1}</div>
                   <p className='teacherName'>{item.teacherName}</p>
-                  <p>
+                  <p className='subjects'>
                     {item.subfull} ,
                     <span className='subCode'> {item.subcode}</span>
                   </p>
