@@ -1,0 +1,128 @@
+.generateDiv {
+  padding: 20px 0 30px;
+  /* background-color: rgb(175, 175, 223); */
+}
+
+.generateDiv p {
+  font-weight: 500;
+  color: var(--gray-1);
+}
+.generateDiv form {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+.generateDiv form > * {
+  font-size: 1rem;
+  outline: none;
+  border: none;
+  padding: 7px 10px;
+  border-radius: 4px;
+}
+.generateDiv form select {
+  width: 200px;
+  cursor: pointer;
+  color: var(--secondary-blue);
+  border: 1px solid var(--secondary-blue);
+  background-color: transparent;
+}
+
+.generateDiv form option {
+  color: rgb(32, 32, 32);
+  background-color: rgb(206, 206, 235);
+  margin: 8px;
+}
+
+.generateDiv form button {
+  border-bottom: 2.5px solid rgb(6, 6, 146);
+  background-color: var(--secondary-blue);
+  color: whitesmoke;
+  width: 160px;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.generateDiv form button svg {
+  width: 25px;
+  height: 25px;
+}
+.generateDiv form button.loading {
+  background-color: #1c41c7b6;
+  cursor: not-allowed;
+  border-bottom-color: rgba(6, 6, 146, 0.61);
+}
+
+.generateDiv form button:hover:not(.loading) {
+  background-color: #1536ac;
+}
+.generateDiv form button:active:not(.loading) {
+  border-color: #1536ac;
+  transform: scale(0.97);
+}
+
+.rankBoardDetails {
+  background-color: cornflowerblue;
+  font-size: 1.1rem;
+  line-height: 24px;
+  padding: 20px;
+  margin: 25px 0 20px;
+  box-shadow: 5px 5px 18px -3px rgba(0, 0, 0, 0.3);
+  width: fit-content;
+}
+
+.rankBoardDetails span {
+  font-weight: 500;
+  color: mediumblue;
+}
+
+p.noData {
+  margin: 20px 0px 0px;
+  color: crimson;
+  background-color: bisque;
+  font-size: 1.1rem;
+  padding: 10px 46px;
+  width: fit-content;
+}
+
+.rankingH3 {
+  margin: 30px 15px 20px;
+  color: rgb(58, 58, 58);
+}
+
+.rankBoardDiv {
+  background-color: rgb(206, 214, 223);
+  padding: 30px 40px;
+  margin: 10px 0;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 80%;
+}
+
+.rankBoardDiv .rankCard {
+  background-color: whitesmoke;
+  padding: 20px 30px;
+  box-shadow: 2px 3px 18px -5px rgba(0, 0, 0, 0.281);
+  position: relative;
+  border-radius: 4px;
+}
+
+.rankCard .teacherName {
+  font-size: 1.4rem;
+  margin-bottom: 5px;
+  color: var(--secondary-purple);
+  font-weight: 600;
+}
+
+.rankCard .point {
+  position: absolute;
+  right: 20px;
+  font-size: 2.7rem;
+  top: 19px;
+}
+
+/* .rankCard .subCode {
+  color: steelblue;
+} */
