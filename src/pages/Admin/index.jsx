@@ -19,7 +19,6 @@ import {
 } from 'react-icons/fa'
 import './admin.style.css'
 const Admin = () => {
-  useTitle('Admin | SaITFeedback')
   const navigate = useNavigate()
   return (
     <div className='admin'>

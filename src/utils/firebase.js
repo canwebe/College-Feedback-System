@@ -5,6 +5,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  orderBy,
   query,
   setDoc,
   updateDoc,
@@ -121,3 +122,21 @@ export const markComplete = async (uid, subcode) => {
 //     return false
 //   }
 // }
+
+// Generate Rankings
+
+export const generateRanking = async (branch, sem) => {
+  const q = query(
+    collectionGroup(db, 'subs'),
+    where('branch', '==', branch),
+    where('sem', '==', sem),
+    orderBy('avgRating', 'desc')
+  )
+  const snapshot = await getDocs(q)
+  if (!snapshot.empty) {
+    const data = snapshot.docs.map((item) => item.data())
+    return data
+  } else {
+    return []
+  }
+}

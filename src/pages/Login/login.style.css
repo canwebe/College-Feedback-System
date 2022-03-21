@@ -12,7 +12,7 @@ h1.welcome {
   min-height: 85vh;
 }
 
-form {
+.login form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,7 +29,7 @@ form {
   margin: 0 auto;
 }
 
-form h2 {
+.login form h2 {
   margin-bottom: 2.6rem;
   color: var(--primary-blue);
 }
@@ -227,7 +227,7 @@ input:focus {
 }
 
 @media screen and (min-width: 740px) {
-  form {
+  .login form {
     padding: 62px 40px 47px;
     border-color: var(--secondary-purple);
   }
