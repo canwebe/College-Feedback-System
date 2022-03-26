@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import './feedback.style.css'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -28,7 +28,7 @@ const labels = [
 
 const feedbackVariants = {
   hidden: {
-    x: '100vw',
+    x: '50vw',
     opacity: 0,
   },
   visible: {
@@ -49,7 +49,7 @@ const feedbackVariants = {
 
 const finishcardVariants = {
   hidden: {
-    x: '100vw',
+    x: '50vw',
     opacity: 0,
   },
   visible: {
@@ -121,6 +121,8 @@ const Feedback = () => {
   //Loading State
   const [isLoading, setIsLoading] = useState(false)
 
+  const scrollRef = useRef()
+
   useTitle(
     subject.teacherName
       ? `${subject.teacherName} | SaITFeedback`
@@ -184,13 +186,13 @@ const Feedback = () => {
 
   useEffect(() => {
     // Scroll to Top
-    window.scrollTo(0, 0)
+    scrollRef.current.scrollIntoView()
   }, [])
 
   return (
     <>
       <Nav />
-      <div className='navMargin'></div>
+      <div ref={scrollRef} className='navMargin'></div>
       <div className='mainBody'>
         <motion.div className='feedback' variants={mainvariants} exit='exit'>
           <motion.div

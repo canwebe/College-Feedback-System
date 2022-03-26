@@ -147,6 +147,37 @@ p.noData {
   left: 16px;
 }
 
+.rankCard:nth-child(1),
+.rankCard:nth-child(2),
+.rankCard:nth-child(3) {
+  border-left-width: 5px;
+  border-left-style: solid;
+  border-left-color: #ffd966;
+}
+
+.rankCard:nth-child(2) {
+  border-left-color: #86bdbd;
+}
+
+.rankCard:nth-child(3) {
+  border-left-color: #cbb893;
+}
+
+.rankCard:nth-child(1) .rankNo {
+  background-color: #ffd966;
+  color: black;
+  left: 11px;
+}
+
+.rankCard:nth-child(2) .rankNo {
+  background-color: #86bdbd;
+  left: 11px;
+}
+
+.rankCard:nth-child(3) .rankNo {
+  background-color: #cbb893;
+  left: 11px;
+}
 /* .rankCard .subCode {
   color: steelblue;
 } */

@@ -13,7 +13,7 @@
 }
 
 .modalCard {
-  padding: 40px 40px 0px;
+  padding: 20px 20px 0px;
   /* width: auto; */
   max-width: 1400px;
   width: 90%;
@@ -23,6 +23,11 @@
   box-shadow: 1px 3px 5px rgb(0, 0, 0);
   position: relative;
   border: 7px solid rgb(220, 227, 255);
+}
+
+.modalCard p {
+  line-height: 21px;
+  word-spacing: 1px;
 }
 
 .headlineCentre {
@@ -101,10 +106,10 @@
 @media screen and (min-width: 510px) {
   .modalCard {
     width: 35%;
+    padding: 40px 40px 0px;
   }
 
   .modalCard p {
     line-height: 23px;
-    word-spacing: 1px;
   }
 }
