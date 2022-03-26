@@ -1,6 +1,6 @@
 import { onAuthStateChanged } from 'firebase/auth'
 import { useEffect, useState } from 'react'
-import { auth } from '../lib/firebase'
+import { auth, firebaseApp } from '../lib/firebase'
 
 export default function useAuthListner() {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('authUser')))
@@ -9,9 +9,14 @@ export default function useAuthListner() {
     const listner = onAuthStateChanged(auth, (authuser) => {
       if (authuser) {
         // Have authuser
-        localStorage.setItem('authUser', JSON.stringify(authuser))
-        setUser(user)
-        console.log('Set localstorage')
+        if (!user) {
+          // Setting
+          console.log('Setting User')
+          localStorage.setItem('authUser', JSON.stringify(authuser))
+          setUser(authuser)
+        }
+
+        console.count('Set localstorage')
       } else {
         // not have authuser means logout
         localStorage.removeItem('authUser')
@@ -21,7 +26,7 @@ export default function useAuthListner() {
     })
 
     return () => listner()
-  }, [auth])
+  }, [firebaseApp])
 
   return { user }
 }
