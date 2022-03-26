@@ -13,17 +13,17 @@ const backdropVariants = {
 }
 
 const cardVariants = {
-  hidden: { y: '-100vh' },
+  hidden: { y: '-80vh' },
   visible: {
     y: 0,
-    transition: { type: 'spring', stiffness: 200, damping: 20, delay: 0.3 },
+    transition: { type: 'spring', mass: 0.5, damping: 9 },
   },
   exit: {
     scale: 0,
     opacity: 0,
     transition: {
       ease: 'easeInOut',
-      duration: 0.3,
+      // duration: 0.3,
     },
   },
 }
@@ -53,9 +53,9 @@ const Modal = ({ setIsModal, handleSubmit }) => {
       exit='exit'
     >
       <motion.div className='modalCard' variants={cardVariants}>
-        <span className='cancelIcon' onClick={() => setIsModal(false)}>
+        {/* <span className='cancelIcon' onClick={() => setIsModal(false)}>
           <FaTimes />
-        </span>
+        </span> */}
         <div>
           {/* <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit.

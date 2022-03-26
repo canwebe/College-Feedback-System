@@ -62,6 +62,7 @@ const Login = () => {
   const [succes, setSucces] = useState('')
   const [loading, setLoading] = useState(false)
   const [isModal, setIsModal] = useState(false)
+  const [isNew, setIsNew] = useState(true)
 
   const inputRef = useRef()
   const { usn, otp } = inputData
@@ -103,6 +104,10 @@ const Login = () => {
       // console.log(doc.data());
       setUserData(doc.data())
       pno = doc.data().number
+      if (doc.data()?.uid) {
+        setIsNew(false)
+        console.log('Not a new user')
+      }
     })
 
     //If Phone Number Found
@@ -149,18 +154,23 @@ const Login = () => {
     if (otp === null || final === null) return
     final
       .confirm(otp)
-      .then((result) => {
-        console.log(result.user.uid)
-        updateInfo(result.user.uid, usn)
-        setLoading(false)
-        navigate('/')
+      .then(async (result) => {
+        console.log(result)
         window.grecaptcha = null
         window.recaptcha = null
+        if (isNew) {
+          // New User
+          await updateInfo(result.user.uid, usn)
+          setLoading(false)
+          navigate('/')
+        } else {
+          setLoading(false)
+          navigate('/')
+        }
       })
       .catch((err) => {
         console.log(err)
         setLoading(false)
-
         setInputData({
           usn: '',
           otp: '',
