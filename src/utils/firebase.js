@@ -112,19 +112,7 @@ export const markComplete = async (uid, subcode) => {
   ).catch((err) => console.log('Completion Update Failed', err))
 }
 
-// export const checkMarking = async (uid, name) => {
-//   const q = query(collection(db, 'students'), where('uid', '==', uid))
-//   const snapshot = await getDocs(q)
-//   const result = snapshot.docs[0].data().complete
-//   if (result) {
-//     return result.includes(name)
-//   } else {
-//     return false
-//   }
-// }
-
 // Generate Rankings
-
 export const generateRanking = async (branch, sem) => {
   const q = query(
     collectionGroup(db, 'subs'),
