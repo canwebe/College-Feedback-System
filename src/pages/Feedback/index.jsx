@@ -150,7 +150,6 @@ const Feedback = () => {
   // Submit button click function for submitting rating
   const handleBtnClick = () => {
     setIsLoading(true)
-    console.log('Points added to DB', points, typeof points)
     try {
       submitReview(subject.teacherid, points).then(() => {
         markComplete(subject.uid, subject.subcode).then(() => {
