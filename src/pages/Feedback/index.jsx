@@ -124,7 +124,7 @@ const Feedback = () => {
           </div>
         </motion.div>
       </div>
-      <Footer />
+      <Footer desktop={true} />
     </>
   )
 }

@@ -1,8 +1,8 @@
 import './footer.style.css'
 
-const Footer = () => {
+const Footer = ({ desktop }) => {
   return (
-    <p className='footer'>
+    <p className={`footer ${desktop && 'deskFooter'}`}>
       Copyright © {new Date().getFullYear()} Developed by{' '}
       <a
         href='http://canwebe.netlify.app'
