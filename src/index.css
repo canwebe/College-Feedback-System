@@ -58,12 +58,12 @@ body {
 nav {
   text-align: center;
   /* padding: 12px; */
-  padding: 7px;
+  padding: 9px 0;
   font-size: 1.6em;
-  background-color: #eee;
-  background-color: var(--secondary-purple);
+  background-color: rgb(255, 255, 255);
+  /* background-color: var(--secondary-purple); */
   box-shadow: 0 3px 26px rgba(0, 0, 0, 0.422);
-  border-bottom: 2px solid #704cad;
+  /* border-bottom: 2px solid #704cad; */
   position: fixed;
   top: 0;
   left: 0;
@@ -77,19 +77,19 @@ nav {
   align-items: center;
 }
 .logo img {
-  width: 40px;
-  height: 40px;
-  margin-right: 6px;
+  width: auto;
+  height: 37px;
+  margin-left: -5px;
 }
 
-a.logo {
+/* a.logo {
   color: rgb(255, 255, 255);
-}
-nav span {
+} */
+/* nav span {
   font-weight: 600;
   color: var(--light-background);
   color: rgb(52, 2, 88);
-}
+} */
 /* .navMargin {
   height: 56px;
 } */
