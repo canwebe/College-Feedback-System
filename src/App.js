@@ -4,7 +4,8 @@ import { Routes, Route, Link, useLocation } from 'react-router-dom'
 import useAuthListner from './hooks/useAuthListner'
 import RequireAuth from './components/requireAuth'
 import LoaderPage from './components/loaderPage'
-
+import MainLayout from './layout/mainLayout'
+import AdminLayout from './layout/AdminLayout'
 // import Feedback from './pages/Feedback'
 // import Home from './pages/Home'
 // import Login from './pages/Login'
@@ -13,8 +14,9 @@ import LoaderPage from './components/loaderPage'
 // import AdminHome from './components/adminHome'
 // import AdminClasses from './components/adminClasses'
 // import AdminTeachers from './components/adminTeachers'
-const AdminLayout = lazy(() => import('./layout/AdminLayout'))
-const MainLayout = lazy(() => import('./layout/mainLayout'))
+// const AdminLayout = lazy(() => import('./layout/AdminLayout'))
+// const MainLayout = lazy(() => import('./layout/mainLayout'))
+
 const Feedback = lazy(() => import('./pages/Feedback'))
 const Home = lazy(() => import('./pages/Home'))
 const Login = lazy(() => import('./pages/Login'))
