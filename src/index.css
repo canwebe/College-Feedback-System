@@ -56,7 +56,6 @@ body {
 } */
 
 nav {
-  text-align: center;
   /* padding: 12px; */
   padding: 12px 0;
   font-size: 1.6em;
@@ -71,6 +70,27 @@ nav {
   z-index: 99;
   width: 100vw;
 }
+
+a.adminLink {
+  margin-left: auto;
+  font-size: 1.2rem;
+  position: absolute;
+  right: 25px;
+  top: 6px;
+  font-weight: 600;
+  align-items: center;
+  gap: 5px;
+  color: var(--secondary-blue);
+  display: none;
+}
+a.adminLink svg {
+  font-size: 1.3rem;
+}
+
+nav .nav {
+  position: relative;
+}
+
 .logo {
   display: flex;
   justify-content: center;
@@ -96,7 +116,7 @@ nav {
 
 .wrapper {
   width: 93%;
-  max-width: 1800px;
+  max-width: 1600px;
   margin: 0 auto;
 }
 
@@ -177,6 +197,12 @@ a {
   .homeBtn {
     bottom: 45px;
     right: 20px;
+  }
+}
+
+@media screen and (min-width: 680px) {
+  a.adminLink {
+    display: flex;
   }
 }
 
