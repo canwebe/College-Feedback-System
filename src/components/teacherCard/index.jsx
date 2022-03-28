@@ -2,13 +2,14 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 
 const teachercardVariants = {
-  hidden: { opacity: 0, rotateX: -180 },
+  hidden: { opacity: 0, scale: 0.6, rotateX: -180 },
 
   visible: {
     opacity: 1,
     rotateX: 0,
+    scale: 1,
     transition: {
-      duration: 0.5,
+      duration: 0.45,
     },
   },
   // tap: {

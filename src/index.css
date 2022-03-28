@@ -58,9 +58,9 @@ body {
 nav {
   text-align: center;
   /* padding: 12px; */
-  padding: 9px 0;
+  padding: 12px 0;
   font-size: 1.6em;
-  background-color: rgb(255, 255, 255);
+  background-color: #e8dff7;
   /* background-color: var(--secondary-purple); */
   box-shadow: 0 3px 26px rgba(0, 0, 0, 0.422);
   /* border-bottom: 2px solid #704cad; */
@@ -75,11 +75,11 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: -18px;
 }
 .logo img {
   width: auto;
-  height: 37px;
-  margin-left: -5px;
+  height: 34px;
 }
 
 /* a.logo {

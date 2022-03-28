@@ -36,7 +36,7 @@
   animation-delay: 0s;
 }
 .loadingCircle div:nth-child(2) {
-  border-color: #1a73e8;
+  border-color: #2f4fc1;
   animation-delay: -0.5s;
 }
 .loadingBox {
