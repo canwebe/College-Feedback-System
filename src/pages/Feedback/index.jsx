@@ -8,6 +8,7 @@ import useTitle from '../../hooks/useTitle'
 import Footer from '../../components/footer'
 import Nav from '../../components/nav'
 import FeedbackQuestions from '../../components/feedbackQuestions'
+import GoToHome from '../../components/goToHome'
 
 const finishcardVariants = {
   hidden: {
@@ -99,6 +100,7 @@ const Feedback = () => {
 
   return (
     <>
+      <GoToHome />
       <Nav />
       <div ref={scrollRef} className='navMargin'></div>
       <div className='mainBody'>

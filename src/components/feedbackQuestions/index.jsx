@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { markComplete, submitReview } from '../../utils/firebase'
 import Options from '../options'
+import { FaCaretLeft, FaVoteYea, FaHourglassStart } from 'react-icons/fa'
 
 const questions = [
   'Faculty preparation for the class',
@@ -109,6 +110,31 @@ export default function FeedbackQuestions({ teacherid, uid, subcode }) {
 
   return (
     <>
+      <div className='topBtnDiv'>
+        {page !== 0 && (
+          <button onClick={() => handlePage(-1)}>
+            <FaCaretLeft />
+            Prev
+          </button>
+        )}
+        <p>{page + 1} / 7</p>
+        {isFinish && page === 6 && (
+          <button
+            disabled={isLoading}
+            onClick={handleSubmit}
+            className='submit'
+          >
+            {isLoading ? (
+              <FaHourglassStart />
+            ) : (
+              <>
+                {' '}
+                <FaVoteYea /> Submit
+              </>
+            )}
+          </button>
+        )}
+      </div>
       <AnimatePresence exitBeforeEnter custom={direction}>
         <motion.div
           className='feedbackSection'
@@ -119,7 +145,6 @@ export default function FeedbackQuestions({ teacherid, uid, subcode }) {
           custom={direction}
           key={page}
         >
-          <p>{page + 1} / 7</p>
           <p className='question'>{questions[page]}</p>
           <div className='answers'>
             {labels.map((item, i) => (
@@ -134,7 +159,7 @@ export default function FeedbackQuestions({ teacherid, uid, subcode }) {
           </div>
         </motion.div>
       </AnimatePresence>
-      <div className='feedbackBtnDiv'>
+      {/* <div className='feedbackBtnDiv'>
         {page !== 0 && <button onClick={() => handlePage(-1)}>Prev</button>}
         {isFinish && page === 6 && (
           <button
@@ -145,7 +170,7 @@ export default function FeedbackQuestions({ teacherid, uid, subcode }) {
             {isLoading ? 'Loading..' : 'Submit'}
           </button>
         )}
-      </div>
+      </div> */}
     </>
   )
 }
