@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import useUser from '../../hooks/useUser'
 import { fetchSubList } from '../../utils/firebase'
 import './home.style.css'
@@ -66,7 +66,6 @@ const Home = () => {
   //Teacher List Data
   const [subjectList, setSubjectList] = useState([])
   const [completed, setCompleted] = useState([])
-  const scrollRef = useRef()
   // Getting User Data
   const user = useUser()
   console.log(user)
@@ -86,7 +85,6 @@ const Home = () => {
       console.log(classStr)
       const data = await fetchSubList(classStr)
       setSubjectList(data.sub)
-      scrollRef.current.scrollIntoView()
     }
   }
 
@@ -145,7 +143,7 @@ const Home = () => {
         exit='exit'
         className='teacherListCard'
       >
-        <h1 ref={scrollRef}>Teachers</h1>
+        <h1>Teachers</h1>
         <hr />
         <div className='teacherListWrapper'>
           {subjectList.map((subject, i) => (
