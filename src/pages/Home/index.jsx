@@ -9,6 +9,7 @@ import TeacherCard from '../../components/teacherCard'
 import useTitle from '../../hooks/useTitle'
 import Footer from '../../components/footer'
 import Nav from '../../components/nav'
+import LoaderPage from '../../components/loaderPage'
 
 const usncardVariants = {
   hidden: {
@@ -167,7 +168,7 @@ const Home = () => {
             </motion.div>
           </div>
         ) : (
-          <Loader />
+          <LoaderPage />
         )}
       </div>
       <Footer />
