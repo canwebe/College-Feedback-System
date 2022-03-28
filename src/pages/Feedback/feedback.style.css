@@ -222,15 +222,18 @@ span.star {
 }
 
 @media screen and (min-height: 780px) {
+  .teacherInfo {
+    margin: 30px auto 25px;
+  }
   .topBtnDiv {
-    margin: 30px auto;
+    margin: 25px auto 30px;
   }
 }
 
 @media screen and (min-width: 630px) {
   .teacherInfo {
     padding: 20px 30px;
-    margin: 20px auto;
+    margin: 30px auto 25px;
   }
   .feedbackSection {
     padding: 0 25px 50px;
@@ -243,7 +246,7 @@ span.star {
   }
 }
 
-@media screen and (min-width: 760px) {
+@media screen and (min-width: 760px) and (min-height: 640px) {
   .topBtnDiv {
     margin: 30px auto;
     height: 40px;

@@ -1,6 +1,6 @@
 .usnCard {
   padding: 90px 15px 20px;
-  margin: 30px auto 40px;
+  margin: 30px auto 55px;
   border: 5px solid #f4f1ff;
   box-shadow: 2px 4px 10px 3px rgba(0, 0, 0, 0.2);
   position: relative;
@@ -52,7 +52,7 @@
 .teacherListCard {
   padding: 15px 12px 45px;
   box-shadow: 0 0 16px 3px rgba(0, 0, 0, 0.3);
-  margin: 60px auto 40px;
+  margin: 0px auto 40px;
   border-top: 9px solid var(--secondary-purple);
   border-radius: 8px 8px 0 0;
   background-color: whitesmoke;
@@ -148,6 +148,7 @@ p.deptName {
   }
   .home .usnCard {
     padding: 78px 40px 20px;
+    margin-bottom: 50px;
   }
 }
 
@@ -160,7 +161,7 @@ p.deptName {
   }
 
   .teacherListCard {
-    padding: 30px 30px 70px;
+    padding: 20px 30px 70px;
   }
   .teacherListWrapper .teacherCard div.img {
     margin-right: 20px;
