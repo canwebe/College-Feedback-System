@@ -187,91 +187,84 @@ const Login = () => {
   }, [user])
 
   return (
-    <>
-      <Nav />
-      <div className='navMargin'></div>
-      <div className='mainBody'>
-        <div className='loginDiv'>
-          <motion.div
-            variants={containerVariants}
-            animate='visible'
-            initial='hidden'
-            exit='exit'
-            className='wrapper login'
-          >
-            <form>
-              {error && <p className='errorMsg'>{error}</p>}
-              {succes && <p className='succesMsg'>{succes}</p>}
-              <h2>Authentication</h2>
-              {show ? (
-                <>
-                  <div className='formDiv'>
-                    <input
-                      name='otp'
-                      ref={inputRef}
-                      className='formInput'
-                      placeholder=' '
-                      value={otp}
-                      maxLength='6'
-                      required
-                      onChange={handleChange}
-                    />
-                    <label className='formLabel'>Enter OTP</label>
-                  </div>
+    <div className='loginDiv'>
+      <motion.div
+        variants={containerVariants}
+        animate='visible'
+        initial='hidden'
+        exit='exit'
+        className='wrapper login'
+      >
+        <form>
+          {error && <p className='errorMsg'>{error}</p>}
+          {succes && <p className='succesMsg'>{succes}</p>}
+          <h2>Authentication</h2>
+          {show ? (
+            <>
+              <div className='formDiv'>
+                <input
+                  name='otp'
+                  ref={inputRef}
+                  className='formInput'
+                  placeholder=' '
+                  value={otp}
+                  maxLength='6'
+                  required
+                  onChange={handleChange}
+                />
+                <label className='formLabel'>Enter OTP</label>
+              </div>
 
-                  <button
-                    onClick={handleVerify}
-                    className={`btn ${otpInvalid ? 'disabled' : ''}`}
-                    disabled={otpInvalid || loading}
-                  >
-                    {loading ? 'loading...' : 'Verify'}
-                  </button>
-                  <p className='captchaText'>Hidden Auto ReCaptcha Verifier</p>
-                </>
-              ) : (
-                <>
-                  <div className='formDiv'>
-                    <input
-                      name='usn'
-                      className='formInput'
-                      placeholder=' '
-                      value={usn}
-                      required
-                      maxLength='10'
-                      autoComplete='off'
-                      onChange={handleChange}
-                    />
-                    <label className='formLabel'>Enter Your USN</label>
-                  </div>
+              <button
+                onClick={handleVerify}
+                className={`btn ${otpInvalid ? 'disabled' : ''}`}
+                disabled={otpInvalid || loading}
+              >
+                {loading ? 'loading...' : 'Verify'}
+              </button>
+              <p className='captchaText'>Hidden Auto ReCaptcha Verifier</p>
+            </>
+          ) : (
+            <>
+              <div className='formDiv'>
+                <input
+                  name='usn'
+                  className='formInput'
+                  placeholder=' '
+                  value={usn}
+                  required
+                  maxLength='10'
+                  autoComplete='off'
+                  onChange={handleChange}
+                />
+                <label className='formLabel'>Enter Your USN</label>
+              </div>
 
-                  <div id='captcha' className='captcha'></div>
+              <div id='captcha' className='captcha'></div>
 
-                  <button
-                    onClick={handleModal}
-                    className={`btn ${isValid ? 'disabled' : ''}`}
-                    disabled={isValid || loading}
-                  >
-                    {loading ? 'Sending Code...' : 'Next'}
-                  </button>
-                  <p className='captchaText'>Hidden Auto ReCaptcha Verifier</p>
-                </>
-              )}
-            </form>
+              <button
+                onClick={handleModal}
+                className={`btn ${isValid ? 'disabled' : ''}`}
+                disabled={isValid || loading}
+              >
+                {loading ? 'Sending Code...' : 'Next'}
+              </button>
+              <p className='captchaText'>Hidden Auto ReCaptcha Verifier</p>
+            </>
+          )}
+        </form>
 
-            {/* <button onClick={() => studentWithUid("abc")}>Update</button> */}
-            {/* <button className="signOut" onClick={handleSignout}>
+        {/* <button onClick={() => studentWithUid("abc")}>Update</button> */}
+        {/* <button className="signOut" onClick={handleSignout}>
         SignOut---Only for testing
       </button> */}
-          </motion.div>
-          <AnimatePresence>
-            {isModal && (
-              <Modal setIsModal={setIsModal} handleSubmit={handleSubmit} />
-            )}
-          </AnimatePresence>
-        </div>
-      </div>
-      <Footer />
-    </>
+      </motion.div>
+      <AnimatePresence>
+        {isModal && (
+          <Modal setIsModal={setIsModal} handleSubmit={handleSubmit} />
+        )}
+      </AnimatePresence>
+    </div>
   )
 }
 

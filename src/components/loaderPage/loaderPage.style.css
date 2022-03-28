@@ -1,7 +1,6 @@
 .loaderPage {
   z-index: 90;
   width: 100%;
-  background-color: #f1f2f3;
   background-color: #e7def6;
   height: 100vh;
   display: flex;
@@ -11,22 +10,9 @@
   top: 0;
 }
 
-.loaderPage img {
-  width: 90px;
-  margin-top: -15px;
-}
-
-.loaderPage .loader {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-top: -10px;
-}
-
 .loaderPage p {
   font-size: 1.7rem;
-  color: #3d3d3d;
+  color: #4e4e4e;
 }
 
 .loaderPage p span {
