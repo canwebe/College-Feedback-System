@@ -5,7 +5,7 @@
   "targets": {
     "saitfeedback-2a397": {
       "hosting": {
-        "feedbacksait": [
+        "main": [
           "feedbacksait"
         ]
       }

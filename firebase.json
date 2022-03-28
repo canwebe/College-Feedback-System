@@ -1,7 +1,7 @@
 {
   "hosting": {
-    "target": "feedbacksait",
     "public": "build",
+    "target": "main",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
