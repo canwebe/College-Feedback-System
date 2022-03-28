@@ -18,7 +18,7 @@ import {
   FaSignOutAlt,
 } from 'react-icons/fa'
 import './admin.style.css'
-const Admin = () => {
+const AdminLayout = () => {
   const navigate = useNavigate()
   return (
     <div className='admin'>
@@ -60,4 +60,4 @@ const Admin = () => {
   )
 }
 
-export default Admin
+export default AdminLayout
