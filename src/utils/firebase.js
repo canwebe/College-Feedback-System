@@ -1,11 +1,9 @@
 import {
   arrayUnion,
   collection,
-  collectionGroup,
   doc,
   getDoc,
   getDocs,
-  orderBy,
   query,
   setDoc,
   updateDoc,
@@ -76,27 +74,6 @@ export const submitReview = async (teacherid, point) => {
   ).catch((err) => console.log('Submit Failed', err))
 }
 
-export const addRating = async (name, rating) => {
-  const q = query(collection(db, 'teachers'), where('name', '==', name))
-  const result = await getDocs(q)
-  const singleData = result.docs[0]
-  const { avgRating, total } = singleData.data()
-  const newTotal = total + 1
-  const newAvg = (total * avgRating + parseInt(rating)) / newTotal
-  console.log(newAvg)
-  await setDoc(
-    singleData.ref,
-    {
-      avgRating: newAvg,
-      total: newTotal,
-    },
-    {
-      merge: true,
-    }
-  ).catch((er) => console.log(er))
-  console.log('Ratting done')
-}
-
 // Marking Review of Students
 export const markComplete = async (uid, subcode) => {
   const q = query(collection(db, 'students'), where('uid', '==', uid))
@@ -110,21 +87,4 @@ export const markComplete = async (uid, subcode) => {
       merge: true,
     }
   ).catch((err) => console.log('Completion Update Failed', err))
-}
-
-// Generate Rankings
-export const generateRanking = async (branch, sem) => {
-  const q = query(
-    collectionGroup(db, 'subs'),
-    where('branch', '==', branch),
-    where('sem', '==', sem),
-    orderBy('avgRating', 'desc')
-  )
-  const snapshot = await getDocs(q)
-  if (!snapshot.empty) {
-    const data = snapshot.docs.map((item) => item.data())
-    return data
-  } else {
-    return []
-  }
 }

@@ -1,4 +1,3 @@
-import { FaTimes } from 'react-icons/fa'
 import { motion } from 'framer-motion'
 import './modal.style.css'
 const backdropVariants = {
@@ -13,7 +12,7 @@ const backdropVariants = {
 }
 
 const cardVariants = {
-  hidden: { y: '-80vh' },
+  hidden: { y: '-70vh' },
   visible: {
     y: 0,
     transition: { type: 'spring', mass: 0.5, damping: 9 },
@@ -23,7 +22,7 @@ const cardVariants = {
     opacity: 0,
     transition: {
       ease: 'easeInOut',
-      // duration: 0.3,
+      duration: 0.3,
     },
   },
 }
@@ -53,16 +52,7 @@ const Modal = ({ setIsModal, handleSubmit }) => {
       exit='exit'
     >
       <motion.div className='modalCard' variants={cardVariants}>
-        {/* <span className='cancelIcon' onClick={() => setIsModal(false)}>
-          <FaTimes />
-        </span> */}
         <div>
-          {/* <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Dignissimos, quasi molestiae esse dolor iure totam maiores facilis
-            et repellat nulla porro aperiam beatae at doloribus repellendus
-            voluptate mollitia repudiandae? Ab.
-          </p> */}
           <p>
             Please provide your valid USN only because for security reason this
             app has no logout feature. Once You signed in with your usn there is
