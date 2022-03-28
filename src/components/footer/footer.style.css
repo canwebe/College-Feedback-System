@@ -9,6 +9,7 @@
   border-top: 1px solid #a7a7a7;
   font-size: 0.7rem;
   margin-top: auto;
+  display: none;
 }
 
 .footer a {
@@ -22,5 +23,6 @@
 @media screen and (min-width: 720px) {
   .footer {
     font-size: 0.9rem;
+    display: block;
   }
 }

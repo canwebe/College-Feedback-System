@@ -161,12 +161,69 @@ span.star {
   letter-spacing: 0.9px;
 }
 
+/* Top Section button grid */
+.topBtnDiv {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  margin: 20px auto;
+  width: 96%;
+  max-width: 604px;
+  height: 38px;
+}
+
+.topBtnDiv p {
+  margin: 0 auto;
+  grid-column: 2;
+}
+
+.topBtnDiv button {
+  /* padding: 7px 0px; */
+  height: 100%;
+  width: 100%;
+  background-color: var(--secondary-blue);
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s;
+  max-width: 150px;
+}
+
+.topBtnDiv button:nth-child(1) svg {
+  margin-left: -8px;
+  transition: all 0.2s ease-in;
+}
+
+.topBtnDiv button.submit {
+  gap: 5px;
+  margin-left: auto;
+}
+.topBtnDiv button:active {
+  background-color: #1835a0;
+}
+
+.topBtnDiv button:active:not(.submit) svg {
+  margin-left: -16px;
+}
+
+/* Media Q for height */
 @media screen and (min-height: 670px) {
   .feedback {
     min-height: 85vh;
   }
   .teacherInfo {
     margin: 25px auto;
+  }
+}
+
+@media screen and (min-height: 780px) {
+  .topBtnDiv {
+    margin: 30px auto;
   }
 }
 
@@ -180,6 +237,16 @@ span.star {
   }
   .feedback {
     min-height: 90vh;
+  }
+  .topBtnDiv button:hover {
+    letter-spacing: 2px;
+  }
+}
+
+@media screen and (min-width: 760px) {
+  .topBtnDiv {
+    margin: 30px auto;
+    height: 40px;
   }
 }
 
