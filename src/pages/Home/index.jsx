@@ -168,7 +168,7 @@ const Home = () => {
             </motion.div>
           </div>
         ) : (
-          <LoaderPage />
+          <Loader />
         )}
       </div>
       <Footer />

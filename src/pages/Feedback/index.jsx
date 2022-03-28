@@ -10,23 +10,6 @@ import Nav from '../../components/nav'
 import FeedbackQuestions from '../../components/feedbackQuestions'
 import GoToHome from '../../components/goToHome'
 
-const finishcardVariants = {
-  hidden: {
-    x: '50vw',
-    opacity: 0,
-  },
-  visible: {
-    x: 0,
-    opacity: 1,
-    transition: {
-      type: 'spring',
-      mass: 0.5,
-      damping: 10,
-      delay: 0.6,
-    },
-  },
-}
-
 const teachercardVariants = {
   hidden: {
     y: -50,
