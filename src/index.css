@@ -70,6 +70,18 @@ nav {
   z-index: 99;
   width: 100vw;
 }
+nav.offline {
+  background-color: #8e87a0;
+}
+
+nav p.offlineP {
+  font-size: 1rem;
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  color: rgb(121, 80, 80);
+  font-weight: 500;
+}
 
 a.adminLink {
   margin-left: auto;
@@ -203,6 +215,14 @@ a {
 @media screen and (min-width: 680px) {
   a.adminLink {
     display: flex;
+  }
+  nav p.offlineP {
+    font-size: 1.2rem;
+
+    left: 25px;
+    top: 6px;
+
+    letter-spacing: 3px;
   }
 }
 
