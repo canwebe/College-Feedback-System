@@ -70,9 +70,6 @@ nav {
   z-index: 99;
   width: 100vw;
 }
-nav.offline {
-  background-color: #8e87a0;
-}
 
 nav p.offlineP {
   font-size: 1rem;

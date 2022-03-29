@@ -4,7 +4,7 @@ import { FaUserShield } from 'react-icons/fa'
 
 const Nav = () => {
   return (
-    <nav className={!navigator.onLine ? 'offline' : ''}>
+    <nav>
       <div className='wrapper nav'>
         {!navigator.onLine && <p className='offlineP'>Offline</p>}
         <Link to='/' className='logo'>
