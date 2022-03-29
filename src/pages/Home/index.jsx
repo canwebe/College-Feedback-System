@@ -5,7 +5,6 @@ import './home.style.css'
 import { motion } from 'framer-motion'
 import Loader from '../../components/loader'
 import TeacherCard from '../../components/teacherCard'
-import useTitle from '../../hooks/useTitle'
 
 const usncardVariants = {
   hidden: {
@@ -69,8 +68,6 @@ const Home = () => {
   // Getting User Data
   const user = useUser()
   console.log(user)
-  // Setting Title
-  useTitle('Home | SaITFeedback')
 
   // Loading state true means no loading
   const loading = user && subjectList.length

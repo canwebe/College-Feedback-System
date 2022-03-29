@@ -1,12 +1,9 @@
+const CACHE = 'pwabuilder-offline'
+const QUEUE_NAME = 'bgSyncQueue'
+
 importScripts(
   'https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js'
 )
-
-const HTML_CACHE = 'html'
-const JS_CACHE = 'javascript'
-const STYLE_CACHE = 'stylesheets'
-const ASSETS = 'images'
-const FONT_CACHE = 'fonts'
 
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
@@ -14,63 +11,17 @@ self.addEventListener('message', (event) => {
   }
 })
 
-workbox.routing.registerRoute(
-  ({ event }) => event.request.destination === 'document',
-  new workbox.strategies.NetworkFirst({
-    cacheName: HTML_CACHE,
-    plugins: [
-      new workbox.expiration.ExpirationPlugin({
-        maxEntries: 10,
-      }),
-    ],
-  })
+const bgSyncPlugin = new workbox.backgroundSync.BackgroundSyncPlugin(
+  QUEUE_NAME,
+  {
+    maxRetentionTime: 24 * 60, // Retry for max of 24 Hours (specified in minutes)
+  }
 )
 
 workbox.routing.registerRoute(
-  ({ event }) => event.request.destination === 'script',
+  new RegExp('/*'),
   new workbox.strategies.StaleWhileRevalidate({
-    cacheName: JS_CACHE,
-    plugins: [
-      new workbox.expiration.ExpirationPlugin({
-        maxEntries: 15,
-        maxAgeSeconds: 60 * 60 * 24 * 3,
-      }),
-    ],
-  })
-)
-
-workbox.routing.registerRoute(
-  ({ event }) => event.request.destination === 'style',
-  new workbox.strategies.StaleWhileRevalidate({
-    cacheName: STYLE_CACHE,
-    plugins: [
-      new workbox.expiration.ExpirationPlugin({
-        maxEntries: 15,
-      }),
-    ],
-  })
-)
-
-workbox.routing.registerRoute(
-  ({ event }) => event.request.destination === 'image',
-  new workbox.strategies.CacheFirst({
-    cacheName: ASSETS,
-    plugins: [
-      new workbox.expiration.ExpirationPlugin({
-        maxEntries: 15,
-      }),
-    ],
-  })
-)
-
-workbox.routing.registerRoute(
-  ({ event }) => event.request.destination === 'font',
-  new workbox.strategies.StaleWhileRevalidate({
-    cacheName: FONT_CACHE,
-    plugins: [
-      new workbox.expiration.ExpirationPlugin({
-        maxEntries: 15,
-      }),
-    ],
+    cacheName: CACHE,
+    plugins: [bgSyncPlugin],
   })
 )
