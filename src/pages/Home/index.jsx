@@ -204,6 +204,7 @@ const Home = () => {
               initial='hidden'
               whileInView='visible'
               exit='exit'
+              viewport={{ once: true }}
             >
               <p>For faster experience Install this App</p>
               <div className='btnDiv'>
