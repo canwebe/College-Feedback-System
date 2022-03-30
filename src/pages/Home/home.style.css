@@ -141,8 +141,8 @@ p.deptName {
 
 .pwaModal {
   background-color: #2a272d;
-  margin: -5px auto 25px;
-  max-width: 600px;
+  margin: -10px auto 25px;
+  max-width: 728px;
   padding: 25px 10px;
   text-align: center;
   display: flex;
@@ -241,5 +241,8 @@ p.deptName {
     width: 100%;
     margin: 7px auto 15px;
     height: 2px;
+  }
+  .pwaModal {
+    flex-direction: row;
   }
 }
