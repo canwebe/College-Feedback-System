@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
 import Star from '../star'
-import { useState, useEffect } from 'react'
 
 const optionvariants = {
   hover: {
