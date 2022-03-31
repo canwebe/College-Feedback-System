@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import useUser from '../../hooks/useUser'
-import { fetchSubList } from '../../utils/firebase'
+import { completeStatus, fetchSubList } from '../../utils/firebase'
 import './home.style.css'
 import { motion } from 'framer-motion'
 import Loader from '../../components/loader'
@@ -84,10 +84,10 @@ const Home = () => {
   const [subjectList, setSubjectList] = useState([])
   const [completed, setCompleted] = useState([])
   const [isPwamodal, setIsPwaModal] = useState(false)
+  const [isDone, setIsDone] = useState(false)
 
   // Getting User Data
   const user = useUser()
-  console.log(user)
 
   const { isStandalone, isInstallPromptSupported, promptInstall } = usePWA()
 
@@ -100,10 +100,22 @@ const Home = () => {
   // Function
   const fetchData = async () => {
     if (user?.branch) {
-      const classStr = `${user.branch}_${user.sem}_${user.sec}`
-      console.log(classStr)
-      const data = await fetchSubList(classStr)
-      setSubjectList(data.sub)
+      try {
+        const classStr = `${user.branch}_${user.sem}_${user.sec}`
+        const data = await fetchSubList(classStr)
+        setSubjectList(data.sub)
+      } catch (error) {
+        console.log('Something went worng in finding the sub list', error)
+      }
+    }
+  }
+
+  const addStatus = async () => {
+    try {
+      await completeStatus(user?.uid)
+      console.log('Succesfully Completed Reviews')
+    } catch (error) {
+      console.log('Something went wrong!', error)
     }
   }
 
@@ -120,9 +132,17 @@ const Home = () => {
       fetchData()
       if (user?.complete) {
         setCompleted(user.complete)
+        setIsDone(user.status)
       }
     }
   }, [user])
+
+  // Complete status
+  useEffect(() => {
+    if (!isDone && subjectList.length && status === 0) {
+      addStatus()
+    }
+  }, [completed, subjectList, isDone])
 
   //Side effect for PWA Banner
   useEffect(() => {
@@ -133,13 +153,7 @@ const Home = () => {
 
   return (
     <>
-      {console.log(
-        isStandalone,
-        isInstallPromptSupported,
-        promptInstall,
-        isPwamodal
-      )}
-
+      {console.log(status)}
       {loading ? (
         <div className='wrapper home'>
           <motion.div

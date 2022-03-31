@@ -88,3 +88,14 @@ export const markComplete = async (uid, subcode) => {
     }
   ).catch((err) => console.log('Completion Update Failed', err))
 }
+
+// Making STatus is true
+export const completeStatus = async (uid) => {
+  const q = query(collection(db, 'students'), where('uid', '==', uid))
+  const snapshot = await getDocs(q)
+  if (!snapshot.empty) {
+    await updateDoc(snapshot.docs[0].ref, {
+      status: true,
+    })
+  }
+}

@@ -1,17 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { auth, db } from '../../lib/firebase'
-import {
-  RecaptchaVerifier,
-  signInWithPhoneNumber,
-  signOut,
-} from 'firebase/auth'
-import {
-  collection,
-  query,
-  where,
-  getDocs,
-  updateDoc,
-} from 'firebase/firestore'
+import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
+import { collection, query, where, getDocs } from 'firebase/firestore'
 import useAuthListner from '../../hooks/useAuthListner'
 import './login.style.css'
 import { updateInfo } from '../../utils/firebase'
@@ -19,8 +9,6 @@ import { useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import Modal from '../../components/modal'
 import useTitle from '../../hooks/useTitle'
-import Nav from '../../components/nav'
-import Footer from '../../components/footer'
 
 const containerVariants = {
   hidden: {
@@ -52,9 +40,6 @@ const Login = () => {
     usn: '',
     otp: '',
   })
-  // const [usn, setUsn] = useState('')
-  // const [branch, setBranch] = useState('')
-  // const [otp, setOtp] = useState('')
   const [final, setFinal] = useState()
   const [show, setShow] = useState(false)
   const [userData, setUserData] = useState({})
@@ -68,10 +53,8 @@ const Login = () => {
   const { usn, otp } = inputData
   const { user } = useAuthListner()
   const navigate = useNavigate()
-  // const no = useUser();
   let pno = ''
 
-  console.log(usn, otp)
   const isValid = usn === '' || usn.length < 10
   const otpInvalid = otp === '' || otp.length < 6
 
@@ -94,7 +77,6 @@ const Login = () => {
   const handleSubmit = async (e) => {
     // e.preventDefault()
     setLoading(true)
-    console.log(usn)
     const q = query(
       collection(db, 'students'),
       where('usn', '==', usn.trim().toUpperCase())
@@ -141,7 +123,6 @@ const Login = () => {
         })
     } else {
       setLoading(false)
-      console.log(userData, pno)
       setSucces('')
       setError('No info found USN incorrect , please try again')
     }
@@ -155,7 +136,6 @@ const Login = () => {
     final
       .confirm(otp)
       .then(async (result) => {
-        console.log(result)
         window.grecaptcha = null
         window.recaptcha = null
         if (isNew) {

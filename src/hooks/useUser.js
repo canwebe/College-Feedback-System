@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { studentWithUid, testWithUid } from '../utils/firebase'
+import { studentWithUid } from '../utils/firebase'
 import useAuthListner from './useAuthListner'
 
 const useUser = () => {
