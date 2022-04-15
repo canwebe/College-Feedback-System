@@ -3,7 +3,7 @@ import 'firebase/compat/auth'
 import 'firebase/compat/firestore'
 import { getAnalytics } from 'firebase/analytics'
 import { getAuth } from 'firebase/auth'
-import { getFirestore } from 'firebase/firestore'
+import { enableIndexedDbPersistence, getFirestore } from 'firebase/firestore'
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_APIKEY,
@@ -17,8 +17,10 @@ const firebaseConfig = {
 
 // Initialize Firebase
 export const firebaseApp = firebase.initializeApp(firebaseConfig)
-const analytics = getAnalytics(firebaseApp)
 export const auth = getAuth(firebaseApp)
 
 export const db = getFirestore(firebaseApp)
+enableIndexedDbPersistence(db).catch((err) => {
+  console.log(err.message)
+})
 export default firebase

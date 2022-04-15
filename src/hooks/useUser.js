@@ -1,20 +1,24 @@
+import { collection, doc, onSnapshot, query, where } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
-import { studentWithUid } from '../utils/firebase'
+import { db } from '../lib/firebase'
 import useAuthListner from './useAuthListner'
 
 const useUser = () => {
-  const [activeUser, setActiveUser] = useState({})
   const { user } = useAuthListner()
   const uid = user?.uid
-  const getUser = async (uid) => {
-    const response = await studentWithUid(uid)
-    setActiveUser(response)
-  }
+  const [userData, setUserData] = useState({})
+  const userQ = query(collection(db, 'students'), where('uid', '==', uid))
 
   useEffect(() => {
-    getUser(uid)
-  }, [uid])
-  return activeUser
+    const unsub = onSnapshot(userQ, (snapshot) => {
+      if (!snapshot.empty) {
+        setUserData(snapshot.docs[0].data())
+      }
+    })
+    return () => unsub()
+  }, [user])
+
+  return userData
 }
 
 export default useUser
