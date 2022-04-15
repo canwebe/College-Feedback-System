@@ -2,6 +2,7 @@ import {
   arrayUnion,
   collection,
   doc,
+  enableIndexedDbPersistence,
   getDoc,
   getDocs,
   query,
@@ -12,15 +13,13 @@ import {
 import { db } from '../lib/firebase'
 
 // Getting Student Data with UID
-export const studentWithUid = async (uid) => {
-  const q = query(collection(db, 'students'), where('uid', '==', uid))
-  const snapshot = await getDocs(q)
-  if (!snapshot.empty) {
-    return snapshot.docs[0].data()
-  } else {
-    return null
-  }
-}
+// export const studentWithUid = async (uid) => {
+//   const q = query(collection(db, 'students'), where('uid', '==', uid))
+//   const snapshot = await getDocs(q)
+//   if (!snapshot.empty) {
+//     return snapshot.docs[0].data()
+//   }
+// }
 
 // Update Student Data with UID
 export const updateInfo = async (uid, usn) => {

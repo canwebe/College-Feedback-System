@@ -86,22 +86,25 @@ const Home = () => {
   const [isPwamodal, setIsPwaModal] = useState(false)
   const [isDone, setIsDone] = useState(false)
 
+  // const { user } = useAuthListner()
+  // const uid = user?.uid
+
   // Getting User Data
-  const user = useUser()
+  const userData = useUser()
 
   const { isStandalone, isInstallPromptSupported, promptInstall } = usePWA()
 
   // Loading state true means no loading
-  const loading = user && subjectList.length
+  const loading = userData && subjectList.length
 
   // Pending Status
   const status = subjectList.length - completed.length
 
   // Function
   const fetchData = async () => {
-    if (user?.branch) {
+    if (userData?.branch) {
       try {
-        const classStr = `${user.branch}_${user.sem}_${user.sec}`
+        const classStr = `${userData.branch}_${userData.sem}_${userData.sec}`
         const data = await fetchSubList(classStr)
         setSubjectList(data.sub)
       } catch (error) {
@@ -112,7 +115,7 @@ const Home = () => {
 
   const addStatus = async () => {
     try {
-      await completeStatus(user?.uid)
+      await completeStatus(userData?.uid)
       console.log('Succesfully Completed Reviews')
     } catch (error) {
       console.log('Something went wrong!', error)
@@ -128,14 +131,14 @@ const Home = () => {
 
   // Side Effect
   useEffect(() => {
-    if (user?.branch) {
+    if (userData?.branch) {
       fetchData()
-      if (user?.complete) {
-        setCompleted(user.complete)
-        setIsDone(user.status)
+      if (userData?.complete) {
+        setCompleted(userData.complete)
+        setIsDone(userData.status)
       }
     }
-  }, [user])
+  }, [userData])
 
   // Complete status
   useEffect(() => {
@@ -153,7 +156,6 @@ const Home = () => {
 
   return (
     <>
-      {console.log(status)}
       {loading ? (
         <div className='wrapper home'>
           <motion.div
@@ -163,17 +165,19 @@ const Home = () => {
             exit='exit'
             className='usnCard'
           >
-            <p className='deptName'>DEPARTMENT OF {deptList[user.branch]}</p>
+            <p className='deptName'>
+              DEPARTMENT OF {deptList[userData.branch]}
+            </p>
             <p className='usnNumber'>
-              <strong>USN :</strong> <span className='usn'>{user.usn}</span>
+              <strong>USN :</strong> <span className='usn'>{userData.usn}</span>
             </p>
             <hr />
             <div className='semSec'>
               <p>
-                <strong>Sem :</strong> {user.sem} ,
+                <strong>Sem :</strong> {userData.sem} ,
               </p>
               <p>
-                <strong>Sec :</strong> {user.sec} ,
+                <strong>Sec :</strong> {userData.sec} ,
               </p>
               <p>
                 <strong> Branch :</strong> CSE
@@ -206,7 +210,7 @@ const Home = () => {
                   key={i}
                   mark={completed.includes(subject.subcode)}
                   subjectData={subject}
-                  uid={user.uid}
+                  uid={userData.uid}
                 />
               ))}
             </div>
