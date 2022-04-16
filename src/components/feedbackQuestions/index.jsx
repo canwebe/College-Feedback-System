@@ -89,6 +89,14 @@ export default function FeedbackQuestions({ teacherid, uid, subcode }) {
   // Submiting the points
   const handleSubmit = () => {
     setIsLoading(true)
+    if (!navigator.onLine) {
+      setIsLoading(false)
+      alert(
+        'You need to turn on Your Internet Connection for Submiting Review.'
+      )
+      navigate('/')
+      return
+    }
     let result = 0
     for (const x in records) {
       result += records[x]
