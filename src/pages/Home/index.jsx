@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import useUser from '../../hooks/useUser'
-import { completeStatus, fetchSubList } from '../../utils/firebase'
+import { completeStatus } from '../../utils/firebase'
 import './home.style.css'
 import { motion } from 'framer-motion'
-import Loader from '../../components/loader'
 import TeacherCard from '../../components/teacherCard'
 import usePWA from 'react-pwa-install-prompt'
+import useData from '../../hooks/useData'
+import SkeletonHome from '../../components/skeleton/skeletonHome'
 
 const usncardVariants = {
   hidden: {
@@ -79,37 +79,25 @@ const deptList = {
 }
 
 const Home = () => {
+  // Getting User Data
+  // const userData = useUser()
+  const { userData, subLists } = useData()
+
   //-----States-------
   //Teacher List Data
-  const [subjectList, setSubjectList] = useState([])
-  const [completed, setCompleted] = useState([])
+  // const [subjectList, setSubjectList] = useState(subLists || [])
+  const completed = userData?.complete || []
+  // const [completed, setCompleted] = useState(userData?.complete || [])
   const [isPwamodal, setIsPwaModal] = useState(false)
-  const [isDone, setIsDone] = useState(false)
-
-  // Getting User Data
-  const userData = useUser()
+  const [isDone, setIsDone] = useState(userData ? userData.status : false)
 
   // Loading state true means no loading
-  const loading = userData && subjectList.length
+  const loading = userData && subLists.length
 
   // Pending Status
-  const status = subjectList.length - completed.length
+  const status = subLists.length - completed.length
 
   // Function
-  //Fetching Subject List
-  const fetchSubjects = async () => {
-    //If User data have branch means not empty
-    if (userData?.branch) {
-      try {
-        const classStr = `${userData.branch}_${userData.sem}_${userData.sec}`
-        const data = await fetchSubList(classStr)
-        setSubjectList(data?.sub)
-      } catch (error) {
-        console.log('Something went worng in finding the sub list', error)
-      }
-    }
-  }
-
   //Adding for completed review Toggle Complete
   const addStatus = async () => {
     try {
@@ -131,22 +119,13 @@ const Home = () => {
   }
 
   // Side Effect
-  useEffect(() => {
-    if (userData?.branch) {
-      fetchSubjects()
-      if (userData?.complete) {
-        setCompleted(userData.complete)
-        setIsDone(userData.status)
-      }
-    }
-  }, [userData])
 
   // Complete status
   useEffect(() => {
-    if (!isDone && subjectList.length && status === 0) {
+    if (!isDone && subLists.length && status === 0) {
       addStatus()
     }
-  }, [completed, subjectList, isDone])
+  }, [completed, subLists, isDone])
 
   //Side effect for PWA Banner
   useEffect(() => {
@@ -157,6 +136,7 @@ const Home = () => {
 
   return (
     <>
+      {console.log(loading, subLists, userData)}
       {loading ? (
         <div className='wrapper home'>
           <motion.div
@@ -206,7 +186,7 @@ const Home = () => {
             <h1>Teachers</h1>
             <hr />
             <div className='teacherListWrapper'>
-              {subjectList.map((subject, i) => (
+              {subLists.map((subject, i) => (
                 <TeacherCard
                   key={i}
                   mark={completed.includes(subject.subcode)}
@@ -241,7 +221,7 @@ const Home = () => {
           )}
         </div>
       ) : (
-        <Loader />
+        <SkeletonHome />
       )}
     </>
   )

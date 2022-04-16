@@ -10,11 +10,6 @@
   top: 0;
 }
 
-.loaderPage p {
-  font-size: 1.7rem;
-  color: #4e4e4e;
-}
-
-.loaderPage p span {
-  font-weight: 600;
+.loaderImg {
+  width: 100px;
 }
