@@ -1,0 +1,160 @@
+/* basic STyles */
+.skeleton {
+  background-color: #a197b6;
+  margin: 10px 0;
+  border-radius: 7px;
+}
+
+.shimmerWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  animation: loading 2.1s infinite;
+}
+
+.shimmer {
+  width: 50%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.13);
+  transform: skewX(-20deg);
+  box-shadow: 0 0 30px 30px rgba(255, 255, 255, 0.05);
+}
+
+@keyframes loading {
+  0% {
+    transform: translateX(-150%);
+  }
+  50% {
+    transform: translateX(-60%);
+  }
+
+  100% {
+    transform: translateX(150%);
+  }
+}
+
+.avatar {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.text,
+.textShort {
+  width: 100%;
+  height: 16px;
+}
+
+.text {
+  margin-bottom: 14px;
+  max-width: 500px;
+}
+
+.textShort {
+  width: 60%;
+}
+
+.h2Text,
+.h2TextShort {
+  height: 24px;
+}
+.h2Text {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.h2TextShort {
+  width: 70%;
+  margin-bottom: 18px;
+}
+
+.title,
+.titleShort {
+  height: 30px;
+  margin: 10px auto 30px;
+  max-width: 400px;
+}
+.title {
+  width: 70%;
+}
+
+.titleShort {
+  width: 50%;
+  margin-bottom: 18px;
+}
+
+.skeletonUsn {
+  /* height: 230px; */
+  width: 100%;
+  background-color: #b4a9ca;
+  margin: 30px auto 55px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  max-width: 988px;
+}
+.skeletonSubject {
+  background-color: #b4a9ca;
+  display: flex;
+  padding: 16px 13px 5px 10px;
+  border-radius: 8px;
+  align-items: center;
+  border-left: 12px solid #a197b6;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeletonMainWrapper {
+  background-color: #d7cceb;
+  padding: 15px 12px 30px;
+  margin: 0 auto 50px;
+  border-radius: 8px;
+  max-width: 988px;
+}
+
+.skeletonSubjectWrapper {
+  display: grid;
+  grid-gap: 20px;
+}
+
+.skeletonSubject .right {
+  width: 70%;
+}
+
+@media screen and (min-width: 640px) {
+  .skeletonMainWrapper {
+    padding: 15px 27px 45px;
+  }
+  .title {
+    margin-left: 0;
+  }
+
+  .titleShort {
+    margin-bottom: 30px;
+  }
+
+  .skeletonUsn {
+    padding: 20px 40px 20px;
+    margin-bottom: 50px;
+  }
+}
+
+@media screen and (min-width: 850px) {
+  .skeletonSubjectWrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .skeletonMainWrapper {
+    padding: 20px 30px 70px;
+  }
+  .avatar {
+    margin-right: 20px;
+  }
+
+  .skeletonSubject {
+    padding: 16px 13px;
+  }
+}

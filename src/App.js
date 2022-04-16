@@ -6,7 +6,6 @@ import RequireAuth from './components/requireAuth'
 import LoaderPage from './components/loaderPage'
 import Nav from './components/nav'
 import Footer from './components/footer'
-import Loader from './components/loader'
 
 const Feedback = lazy(() => import('./pages/Feedback'))
 const Home = lazy(() => import('./pages/Home'))
@@ -22,7 +21,7 @@ const App = () => {
       <Nav />
       <div ref={scrollRef} className='navMargin'></div>
       <div className='mainBody'>
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={<LoaderPage />}>
           <AnimatePresence exitBeforeEnter>
             <Routes location={location} key={location.pathname}>
               <Route
@@ -33,7 +32,6 @@ const App = () => {
                   </RequireAuth>
                 }
               />
-
               <Route
                 path='/feedback'
                 element={
