@@ -86,13 +86,8 @@ const Home = () => {
   const [isPwamodal, setIsPwaModal] = useState(false)
   const [isDone, setIsDone] = useState(false)
 
-  // const { user } = useAuthListner()
-  // const uid = user?.uid
-
   // Getting User Data
   const userData = useUser()
-
-  const { isStandalone, isInstallPromptSupported, promptInstall } = usePWA()
 
   // Loading state true means no loading
   const loading = userData && subjectList.length
@@ -101,18 +96,21 @@ const Home = () => {
   const status = subjectList.length - completed.length
 
   // Function
-  const fetchData = async () => {
+  //Fetching Subject List
+  const fetchSubjects = async () => {
+    //If User data have branch means not empty
     if (userData?.branch) {
       try {
         const classStr = `${userData.branch}_${userData.sem}_${userData.sec}`
         const data = await fetchSubList(classStr)
-        setSubjectList(data.sub)
+        setSubjectList(data?.sub)
       } catch (error) {
         console.log('Something went worng in finding the sub list', error)
       }
     }
   }
 
+  //Adding for completed review Toggle Complete
   const addStatus = async () => {
     try {
       await completeStatus(userData?.uid)
@@ -123,6 +121,9 @@ const Home = () => {
   }
 
   //For PWA banner
+
+  const { isStandalone, isInstallPromptSupported, promptInstall } = usePWA()
+
   const onClickInstall = async () => {
     const didInstall = await promptInstall()
     console.log(didInstall)
@@ -132,7 +133,7 @@ const Home = () => {
   // Side Effect
   useEffect(() => {
     if (userData?.branch) {
-      fetchData()
+      fetchSubjects()
       if (userData?.complete) {
         setCompleted(userData.complete)
         setIsDone(userData.status)
