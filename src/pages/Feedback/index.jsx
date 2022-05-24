@@ -51,7 +51,7 @@ const Feedback = ({ scrollRef }) => {
     teacherName: '',
     subfull: '',
     subcode: '',
-    teacherid: '',
+    subid: '',
     uid: '',
   })
 
@@ -66,8 +66,9 @@ const Feedback = ({ scrollRef }) => {
     // If Location State is there
     if (location.state) {
       //Getting teacher data
-      const { teacherName, subfull, subcode, teacherid, uid } = location.state
-      setSubject({ teacherName, subfull, subcode, teacherid, uid })
+      const { teacherName, subfull, subcode, subid, uid } = location.state
+
+      setSubject({ teacherName, subfull, subcode, subid, uid })
     } else {
       //Otherwise Navigate back to home
       navigate('/')
@@ -98,7 +99,7 @@ const Feedback = ({ scrollRef }) => {
         </motion.div>
         <div className='wrapper questionHeight'>
           <FeedbackQuestions
-            teacherid={subject.teacherid}
+            subid={subject.subid}
             uid={subject.uid}
             subcode={subject.subcode}
           />

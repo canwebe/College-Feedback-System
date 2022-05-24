@@ -44,7 +44,7 @@ const feedbackVariants = {
   }),
 }
 
-export default function FeedbackQuestions({ teacherid, uid, subcode }) {
+export default function FeedbackQuestions({ subid, uid, subcode }) {
   const navigate = useNavigate()
 
   //----States----
@@ -67,7 +67,6 @@ export default function FeedbackQuestions({ teacherid, uid, subcode }) {
 
   // Click fxn for options
   const handleClick = async (point) => {
-    console.log('Point is', point, typeof point)
     setRecords((prev) => ({
       ...prev,
       [page]: point,
@@ -102,7 +101,7 @@ export default function FeedbackQuestions({ teacherid, uid, subcode }) {
       result += records[x]
     }
     try {
-      submitReview(teacherid, result).then(() => {
+      submitReview(subid, result).then(() => {
         markComplete(uid, subcode).then(() => {
           setIsLoading(false)
           navigate('/')

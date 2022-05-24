@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import logo from '../../assets/logo.webp'
 import { FaUserShield } from 'react-icons/fa'
+import { changeSem } from '../../utils/firebase'
 
 const Nav = () => {
   return (
@@ -10,10 +11,10 @@ const Nav = () => {
         <Link to='/' className='logo'>
           <img src={logo} alt='logo' />
         </Link>
-        <a className='adminLink' href='https://saitdashboard.netlify.app'>
+        {/* <a className='adminLink' href='https://saitdashboard.netlify.app'>
           <FaUserShield />
           Admin
-        </a>
+        </a> */}
       </div>
     </nav>
   )

@@ -82,7 +82,6 @@ const Home = () => {
   // Getting User Data
   // const userData = useUser()
   const { userData, subLists } = useData()
-
   //-----States-------
   //Teacher List Data
   // const [subjectList, setSubjectList] = useState(subLists || [])
@@ -136,7 +135,6 @@ const Home = () => {
 
   return (
     <>
-      {console.log(loading, subLists, userData)}
       {loading ? (
         <div className='wrapper home'>
           <motion.div
