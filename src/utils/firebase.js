@@ -47,22 +47,19 @@ export const fetchSubList = async (classStr) => {
 }
 
 // Submiting Review
-export const submitReview = async (teacherid, point) => {
+export const submitReview = async (subid, point) => {
   // Getting Ref of teacher
-  const teacherRef = collection(db, `teachers/${teacherid}/subs`)
-  const teacherData = await getDocs(teacherRef)
-  const docRef = teacherData.docs[0]
+  const teacherRef = doc(db, `teacherstest/${subid}`)
+  const teacherData = await getDoc(teacherRef)
 
   // Getting Prev Data
-  const { avgRating, total } = docRef.data()
-
+  const { avgRating, total } = teacherData.data()
   // Incrementing Total User
   const newTotal = total + 1
-
   // Algorithm for new Average
   const newAvg = (total * avgRating + point) / newTotal
   await setDoc(
-    docRef.ref,
+    teacherData.ref,
     {
       avgRating: parseInt(newAvg.toFixed(4)),
       total: newTotal,
@@ -96,5 +93,18 @@ export const completeStatus = async (uid) => {
     await updateDoc(snapshot.docs[0].ref, {
       status: true,
     })
+  }
+}
+
+export const changeSem = async () => {
+  const q = query(collection(db, 'students'), where('sem', '==', '7'))
+  const snapshot = await getDocs(q)
+  if (!snapshot.empty) {
+    snapshot.docs.map(
+      async (item) =>
+        await updateDoc(item.ref, {
+          sem: '8',
+        })
+    )
   }
 }

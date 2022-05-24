@@ -29,7 +29,7 @@ const teachercardVariants = {
 
 const TeacherCard = ({ subjectData, uid, mark }) => {
   // Object Destruction subjectData
-  const { teacherName, subfull, subshort, subcode, teacherid } = subjectData
+  const { teacherName, subfull, subshort, subcode, subid } = subjectData
 
   return (
     <motion.div variants={teachercardVariants}>
@@ -38,7 +38,7 @@ const TeacherCard = ({ subjectData, uid, mark }) => {
         onClick={(e) => mark && e.preventDefault()}
         state={{
           teacherName,
-          teacherid,
+          subid,
           subcode,
           subfull,
           uid,

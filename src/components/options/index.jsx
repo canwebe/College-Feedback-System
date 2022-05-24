@@ -17,7 +17,6 @@ const Options = ({ label, value, clickFxn, flag }) => {
       className={flag ? 'active' : ''}
       onClick={() => clickFxn(value)}
     >
-      {console.log('value', label, flag)}
       {label}
       <span className='star'>
         <Star rating={value} />
