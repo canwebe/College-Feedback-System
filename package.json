@@ -3,11 +3,11 @@
   "version": "2.1.0",
   "private": true,
   "dependencies": {
-    "firebase": "^9.7.0",
+    "firebase": "^9.8.1",
     "framer-motion": "^5.6.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-icons": "^4.3.1",
+    "react-icons": "^4.4.0",
     "react-pwa-install-prompt": "^1.0.5",
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.1"
