@@ -1,0 +1,40 @@
+.bottombar {
+  width: 70%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  position: absolute;
+  bottom: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: blue;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.32);
+  overflow: hidden;
+  background-color: white;
+  padding: 5px;
+  gap: 13px;
+  border-radius: 50px;
+}
+
+.bottombar a {
+  width: 50%;
+  text-align: center;
+  background-color: white;
+  padding: 12px 0;
+  font-size: 0.8rem;
+  transition: all 0.4s ease-in-out;
+}
+
+/* .bottombar a:nth-child(1) {
+  border-right: 1px solid rgb(214, 214, 214);
+} */
+.bottombar a.active {
+  background-color: #5c62b3;
+  background-color: #673694;
+  border-radius: 50px;
+  color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.368);
+}
