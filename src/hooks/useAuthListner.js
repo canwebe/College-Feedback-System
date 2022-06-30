@@ -11,7 +11,6 @@ export default function useAuthListner() {
         // Have authuser
         if (!user) {
           // Setting
-          console.log('Setting User')
           localStorage.setItem('authUser', JSON.stringify(authuser))
           setUser(authuser)
         }
@@ -21,7 +20,6 @@ export default function useAuthListner() {
         // not have authuser means logout
         localStorage.removeItem('authUser')
         setUser(null)
-        console.log('User Signout')
       }
     })
 

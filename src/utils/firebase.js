@@ -32,7 +32,7 @@ export const updateInfo = async (uid, usn) => {
     where('usn', '==', usn.trim().toUpperCase(), limit(1))
   )
   const result = await getDocs(q)
-  console.log('update done', uid, usn, result)
+
   if (!result.empty) {
     await updateDoc(result.docs[0].ref, {
       uid,
@@ -73,7 +73,7 @@ export const submitReview = async (teacherid, point) => {
     {
       merge: true,
     }
-  ).catch((err) => console.log('Submit Failed', err))
+  ).catch((err) => console.error(err))
 }
 
 // Marking Review of Students
@@ -88,7 +88,7 @@ export const markComplete = async (uid, subcode) => {
     {
       merge: true,
     }
-  ).catch((err) => console.log('Completion Update Failed', err))
+  ).catch((err) => console.error(err))
 }
 
 // Making STatus is true

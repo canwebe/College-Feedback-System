@@ -121,7 +121,7 @@ export default function FeedbackQuestions({ teacherid, uid, subcode }) {
         navigate('/')
       }
     } catch (error) {
-      console.log('Submit Failed', error)
+      console.error(error)
       setIsLoading(false)
       toast.error(<b>Please try again something went wrong</b>, {
         id: toastId,
