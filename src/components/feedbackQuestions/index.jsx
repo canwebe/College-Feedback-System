@@ -45,9 +45,8 @@ const feedbackVariants = {
   }),
 }
 
-export default function FeedbackQuestions({ teacherid, uid, subcode }) {
+export default function FeedbackQuestions({ teacherid, usn, subcode }) {
   const navigate = useNavigate()
-
   //----States----
   //Question Ans records
   const [records, setRecords] = useState({
@@ -103,9 +102,9 @@ export default function FeedbackQuestions({ teacherid, uid, subcode }) {
       result += records[x]
     }
     try {
-      if (teacherid && result && uid && subcode) {
+      if (teacherid && result && usn && subcode) {
         submitReview(teacherid, result).then(() => {
-          markComplete(uid, subcode).then(() => {
+          markComplete(usn, subcode).then(() => {
             setIsLoading(false)
             toast.success(<b>Submitted successfuly</b>, {
               id: toastId,

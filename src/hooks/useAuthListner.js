@@ -9,12 +9,8 @@ export default function useAuthListner() {
     const listner = onAuthStateChanged(auth, (authuser) => {
       if (authuser) {
         // Have authuser
-        if (!user) {
-          // Setting
-          localStorage.setItem('authUser', JSON.stringify(authuser))
-          setUser(authuser)
-        }
-
+        localStorage.setItem('authUser', JSON.stringify(authuser))
+        setUser(authuser)
         console.count('Set localstorage')
       } else {
         // not have authuser means logout

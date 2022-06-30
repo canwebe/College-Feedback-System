@@ -79,7 +79,7 @@ const Home = ({ user }) => {
   //Adding for completed review Toggle Complete
   const addStatus = async () => {
     try {
-      await completeStatus(userData?.uid)
+      await completeStatus(userData?.usn)
     } catch (error) {
       console.error(error)
     }
@@ -108,7 +108,8 @@ const Home = ({ user }) => {
               DEPARTMENT OF {deptList[userData.branch]}
             </p>
             <p className='usnNumber'>
-              <strong>USN :</strong> <span className='usn'>{userData.usn}</span>
+              <strong>USN :</strong>{' '}
+              <span className='usn'>{userData.usn.toUpperCase()}</span>
             </p>
             <hr />
             <div className='semSec'>
@@ -116,10 +117,10 @@ const Home = ({ user }) => {
                 <strong>Sem :</strong> {userData.sem} ,
               </p>
               <p>
-                <strong>Sec :</strong> {userData.sec} ,
+                <strong>Sec :</strong> {userData.sec.toUpperCase()} ,
               </p>
               <p>
-                <strong> Branch :</strong> CSE
+                <strong> Branch :</strong> {userData.branch.toUpperCase()}
               </p>
             </div>
             {status === 0 ? (
@@ -149,7 +150,7 @@ const Home = ({ user }) => {
                   key={i}
                   mark={completed.includes(subject.subcode)}
                   subjectData={subject}
-                  uid={userData.uid}
+                  usn={userData.usn}
                 />
               ))}
             </div>

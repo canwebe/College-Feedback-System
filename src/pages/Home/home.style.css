@@ -113,7 +113,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 2px;
 }
+
 .teacherCard .right {
   width: 70%;
 }

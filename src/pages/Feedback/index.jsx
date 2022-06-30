@@ -48,7 +48,7 @@ const Feedback = ({ scrollRef }) => {
     subfull: '',
     subcode: '',
     teacherid: '',
-    uid: '',
+    usn: '',
   })
 
   useTitle(
@@ -62,9 +62,9 @@ const Feedback = ({ scrollRef }) => {
     // If Location State is there
     if (location.state) {
       //Getting teacher data
-      const { teacherName, subfull, subcode, teacherid, uid } = location.state
+      const { teacherName, subfull, subcode, teacherid, usn } = location.state
 
-      setSubject({ teacherName, subfull, subcode, teacherid, uid })
+      setSubject({ teacherName, subfull, subcode, teacherid, usn })
     } else {
       //Otherwise Navigate back to home
       navigate('/')
@@ -96,7 +96,7 @@ const Feedback = ({ scrollRef }) => {
         <div className='wrapper questionHeight'>
           <FeedbackQuestions
             teacherid={subject.teacherid}
-            uid={subject.uid}
+            usn={subject.usn}
             subcode={subject.subcode}
           />
         </div>
