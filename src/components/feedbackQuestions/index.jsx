@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { markComplete, submitReview } from '../../utils/firebase'
 import Options from '../options'
 import { FaCaretLeft, FaVoteYea, FaHourglassStart } from 'react-icons/fa'
+import toast from 'react-hot-toast'
 
 const questions = [
   'Faculty preparation for the class',
@@ -44,7 +45,7 @@ const feedbackVariants = {
   }),
 }
 
-export default function FeedbackQuestions({ subid, uid, subcode }) {
+export default function FeedbackQuestions({ teacherid, uid, subcode }) {
   const navigate = useNavigate()
 
   //----States----
@@ -88,10 +89,11 @@ export default function FeedbackQuestions({ subid, uid, subcode }) {
   // Submiting the points
   const handleSubmit = () => {
     setIsLoading(true)
+    const toastId = toast.loading('Submitting please wait...')
     if (!navigator.onLine) {
       setIsLoading(false)
-      alert(
-        'You need to turn on Your Internet Connection for Submiting Review.'
+      toast.error(
+        <b>You need to turn on Your Internet Connection for Submiting Review</b>
       )
       navigate('/')
       return
@@ -101,16 +103,29 @@ export default function FeedbackQuestions({ subid, uid, subcode }) {
       result += records[x]
     }
     try {
-      submitReview(subid, result).then(() => {
-        markComplete(uid, subcode).then(() => {
-          setIsLoading(false)
-          navigate('/')
+      if (teacherid && result && uid && subcode) {
+        submitReview(teacherid, result).then(() => {
+          markComplete(uid, subcode).then(() => {
+            setIsLoading(false)
+            toast.success(<b>Submitted successfuly</b>, {
+              id: toastId,
+            })
+            navigate('/')
+          })
         })
-      })
+      } else {
+        setIsLoading(false)
+        toast.error(<b>Please try again something went wrong</b>, {
+          id: toastId,
+        })
+        navigate('/')
+      }
     } catch (error) {
       console.log('Submit Failed', error)
       setIsLoading(false)
-      alert('Something Went Wrong , Please Try Again ')
+      toast.error(<b>Please try again something went wrong</b>, {
+        id: toastId,
+      })
       navigate('/')
     }
   }

@@ -6,6 +6,7 @@ import RequireAuth from './components/requireAuth'
 import LoaderPage from './components/loaderPage'
 import Nav from './components/nav'
 import Footer from './components/footer'
+import { Toaster } from 'react-hot-toast'
 
 const Feedback = lazy(() => import('./pages/Feedback'))
 const Home = lazy(() => import('./pages/Home'))
@@ -19,6 +20,7 @@ const App = () => {
   return (
     <>
       <Nav />
+      <Toaster />
       <div ref={scrollRef} className='navMargin'></div>
       <div className='mainBody'>
         <Suspense fallback={<LoaderPage />}>
@@ -28,7 +30,7 @@ const App = () => {
                 path='/'
                 element={
                   <RequireAuth user={user} redirectTo='/login'>
-                    <Home />
+                    <Home user={user} />
                   </RequireAuth>
                 }
               />
@@ -40,7 +42,7 @@ const App = () => {
                   </RequireAuth>
                 }
               />
-              <Route path='/login' element={<Login />} />
+              <Route path='/login' element={<Login user={user} />} />
             </Routes>
           </AnimatePresence>
         </Suspense>

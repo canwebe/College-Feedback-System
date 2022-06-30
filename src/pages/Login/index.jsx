@@ -4,11 +4,12 @@ import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
 import { collection, query, where, getDocs } from 'firebase/firestore'
 import useAuthListner from '../../hooks/useAuthListner'
 import './login.style.css'
-import { updateInfo } from '../../utils/firebase'
+import { studentWithUsn, updateInfo } from '../../utils/firebase'
 import { useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import Modal from '../../components/modal'
 import useTitle from '../../hooks/useTitle'
+import toast from 'react-hot-toast'
 
 const containerVariants = {
   hidden: {
@@ -31,7 +32,7 @@ const containerVariants = {
   },
 }
 
-const Login = () => {
+const Login = ({ user }) => {
   // Setting Title
   useTitle('Home | SaITFeedback')
 
@@ -42,7 +43,7 @@ const Login = () => {
   })
   const [final, setFinal] = useState()
   const [show, setShow] = useState(false)
-  const [userData, setUserData] = useState({})
+  // const [userData, setUserData] = useState({})
   const [error, setError] = useState('')
   const [succes, setSucces] = useState('')
   const [loading, setLoading] = useState(false)
@@ -51,7 +52,7 @@ const Login = () => {
 
   const inputRef = useRef()
   const { usn, otp } = inputData
-  const { user } = useAuthListner()
+  // const { user } = useAuthListner()
   const navigate = useNavigate()
   let pno = ''
 
@@ -73,29 +74,40 @@ const Login = () => {
     e.preventDefault()
     setIsModal(true)
   }
+
+  // const handleSubmitToast = async () => {
+  //   toast.promise(await handleSubmit(), {
+  //     loading: 'Checking the database for information',
+  //     success: 'Fpund the data',
+  //     error: 'Not found any data',
+  //   })
+  // }
+
+  //asubmit promis
+
   // Submit
   const handleSubmit = async (e) => {
     // e.preventDefault()
     setLoading(true)
-    const q = query(
-      collection(db, 'students'),
-      where('usn', '==', usn.trim().toUpperCase())
-    )
-    const snapshot = await getDocs(q)
-    snapshot.forEach((doc) => {
-      // console.log(doc.data());
-      setUserData(doc.data())
-      pno = doc.data().number
-      if (doc.data()?.uid) {
+    const toastId = toast.loading('Collecting data from the database')
+    const data = await studentWithUsn(usn)
+
+    if (data) {
+      pno = data.number
+      if (data?.uid) {
         setIsNew(false)
         console.log('Not a new user')
       }
-    })
+    }
 
-    //If Phone Number Found
+    // If Phone Number Found
     if (pno) {
       console.log('Phone Number Found')
       let verify = new RecaptchaVerifier('captcha', { size: 'invisible' }, auth)
+      toast.success(<b>Student information found</b>, {
+        id: toastId,
+      })
+      const toastId2 = toast.loading('Sending the otp...')
       signInWithPhoneNumber(auth, '+91' + pno, verify)
         .then((confirm) => {
           setLoading(false)
@@ -108,12 +120,18 @@ const Login = () => {
           )
           setFinal(confirm)
           setShow(true)
+          toast.success(<b>OTP sent to the registered number</b>, {
+            id: toastId2,
+          })
           inputRef.current.focus()
         })
         .catch((err) => {
           setLoading(false)
+          toast.error(<b>OTP sending failed, Try again</b>, {
+            id: toastId2,
+          })
           console.log(err)
-          setUserData({
+          setInputData({
             usn: '',
             otp: '',
           })
@@ -124,13 +142,17 @@ const Login = () => {
     } else {
       setLoading(false)
       setSucces('')
-      setError('No info found USN incorrect , please try again')
+      toast.error(<b>No data found for USN: {usn.trim().toUpperCase()}</b>, {
+        id: toastId,
+      })
+      setError('No info found USN incorrect , Please contact department')
     }
   }
 
   // Verify
   const handleVerify = (e) => {
     e.preventDefault()
+    const toastId3 = toast.loading('Verifying...')
     setLoading(true)
     if (otp === null || final === null) return
     final
@@ -142,21 +164,30 @@ const Login = () => {
           // New User
           await updateInfo(result.user.uid, usn)
           setLoading(false)
+          toast.success(<b>Verification Complete</b>, {
+            id: toastId3,
+          })
           navigate('/')
         } else {
           setLoading(false)
+          toast.success(<b>Verification Complete</b>, {
+            id: toastId3,
+          })
           navigate('/')
         }
       })
       .catch((err) => {
         console.log(err)
         setLoading(false)
-        setInputData({
-          usn: '',
+        setInputData((prev) => ({
+          ...prev,
           otp: '',
-        })
+        }))
         setSucces('')
-        setError('Verification failed OTP did not matched Try Again !!')
+        setError('OTP did not matched Try Again !!')
+        toast.error(<b>Verification Failed</b>, {
+          id: toastId3,
+        })
       })
   }
 
@@ -227,7 +258,7 @@ const Login = () => {
                 className={`btn ${isValid ? 'disabled' : ''}`}
                 disabled={isValid || loading}
               >
-                {loading ? 'Sending Code...' : 'Next'}
+                {loading ? 'Please Wait...' : 'Next'}
               </button>
               <p className='captchaText'>Hidden Auto ReCaptcha Verifier</p>
             </>

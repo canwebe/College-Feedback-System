@@ -78,10 +78,13 @@ const deptList = {
   civil: 'CIVIL ENGINEERING',
 }
 
-const Home = () => {
+const Home = ({ user }) => {
   // Getting User Data
   // const userData = useUser()
-  const { userData, subLists } = useData()
+  // const { user } = useAuthListner()
+  const uid = user?.uid
+  const { userData, subLists } = useData(uid)
+  console.log(userData, subLists, user)
   //-----States-------
   //Teacher List Data
   // const [subjectList, setSubjectList] = useState(subLists || [])
