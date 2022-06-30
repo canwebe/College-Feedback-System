@@ -37,7 +37,6 @@ const Modal = ({ setIsModal, handleSubmit }) => {
 
   // When user agree
   const handleAgree = () => {
-    console.log('agreed')
     handleSubmit()
     setIsModal(false)
   }

@@ -27,9 +27,10 @@ const teachercardVariants = {
   // },
 }
 
-const TeacherCard = ({ subjectData, uid, mark }) => {
+const TeacherCard = ({ subjectData, usn, mark }) => {
   // Object Destruction subjectData
-  const { teacherName, subfull, subshort, subcode, teacherid } = subjectData
+  const { teacherName, subfull, subshort, subcode, teacherid, img } =
+    subjectData
 
   return (
     <motion.div variants={teachercardVariants}>
@@ -41,11 +42,11 @@ const TeacherCard = ({ subjectData, uid, mark }) => {
           teacherid,
           subcode,
           subfull,
-          uid,
+          usn,
         }}
         className={`teacherCard ${mark && 'done'}`}
       >
-        <div className='img'></div>
+        <div className='img'>{img && <img src={img} alt='Avatar Img' />}</div>
         <div className='right'>
           <p className='teacherName'>{teacherName}</p>
           <p className='subName'>

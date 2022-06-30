@@ -113,7 +113,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 2px;
 }
+
 .teacherCard .right {
   width: 70%;
 }
@@ -137,69 +139,6 @@ p.deptName {
   font-size: 1.2rem;
 }
 
-/* PWA Modal  */
-
-.pwaModal {
-  background-color: #2a272d;
-  margin: -10px auto 25px;
-  max-width: 728px;
-  padding: 25px 10px;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  border-radius: 4px;
-  box-shadow: 2px 4px 14px 3px rgba(0, 0, 0, 0.3);
-  color: white;
-  gap: 15px;
-  position: relative;
-}
-
-.pwaModal .installPwa,
-.pwaModal .cancelPwa {
-  border-radius: 19px;
-  padding: 6px 0;
-  width: 120px;
-  background-color: transparent;
-  border: 1px solid #d6d6d6;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: white;
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-}
-
-.pwaModal .installPwa {
-  color: #2a272d;
-  background-color: rgb(255, 255, 255);
-}
-
-.pwaModal .installPwa svg {
-  font-size: 0.88rem;
-}
-
-.pwaModal .installPwa:hover {
-  background-color: #5f0bb3;
-  background-color: var(--secondary-purple);
-  border: 1px solid rgb(255, 255, 255);
-  color: rgb(255, 255, 255);
-}
-.pwaModal .installPwa:active {
-  border-color: rgb(122, 122, 122);
-  color: rgb(43, 2, 70);
-}
-.pwaModal .cancelPwa:hover,
-.pwaModal .cancelPwa:active {
-  color: #2a272d;
-  background-color: rgb(207, 156, 156);
-}
-
-.pwaModal .btnDiv {
-  display: flex;
-  gap: 11px;
-}
-
 /* ---MEDIA QUERIES--- */
 
 @media screen and (min-width: 640px) {
@@ -212,10 +151,6 @@ p.deptName {
   .home .usnCard {
     padding: 78px 40px 20px;
     margin-bottom: 50px;
-  }
-
-  .pwaModal p {
-    font-size: 1.2rem;
   }
 }
 
@@ -241,8 +176,5 @@ p.deptName {
     width: 100%;
     margin: 7px auto 15px;
     height: 2px;
-  }
-  .pwaModal {
-    flex-direction: row;
   }
 }

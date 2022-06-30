@@ -1,6 +1,7 @@
 import {
   arrayUnion,
   collection,
+  deleteDoc,
   doc,
   getDoc,
   getDocs,
@@ -14,41 +15,22 @@ import { db } from '../lib/firebase'
 
 //Getting Student Data with UID
 export const studentWithUsn = async (usn) => {
-  const q = query(
-    collection(db, 'students'),
-    where('usn', '==', usn.trim().toUpperCase()),
-    limit(1)
-  )
-  const snapshot = await getDocs(q)
-  if (!snapshot.empty) {
-    return snapshot.docs[0].data()
+  const docref = doc(db, 'students', usn.trim().toLowerCase())
+
+  const snapshot = await getDoc(docref)
+  if (snapshot.exists) {
+    return snapshot.data()
   }
 }
 
 // Update Student Data with UID
 export const updateInfo = async (uid, usn) => {
-  const q = query(
-    collection(db, 'students'),
-    where('usn', '==', usn.trim().toUpperCase(), limit(1))
-  )
-  const result = await getDocs(q)
-  console.log('update done', uid, usn, result)
-  if (!result.empty) {
-    await updateDoc(result.docs[0].ref, {
+  const docref = doc(db, 'students', usn.trim().toLowerCase())
+  const result = await getDoc(docref)
+  if (result.exists) {
+    await updateDoc(docref, {
       uid,
     })
-  }
-}
-
-// Getting Subject List of Each Class
-export const fetchSubList = async (classStr) => {
-  const docRef = doc(db, 'classes', classStr)
-  const docSnap = await getDoc(docRef)
-
-  if (docSnap.exists()) {
-    return docSnap.data()
-  } else {
-    return []
   }
 }
 
@@ -73,44 +55,32 @@ export const submitReview = async (teacherid, point) => {
     {
       merge: true,
     }
-  ).catch((err) => console.log('Submit Failed', err))
+  ).catch((err) => console.error(err))
 }
 
 // Marking Review of Students
-export const markComplete = async (uid, subcode) => {
-  const q = query(collection(db, 'students'), where('uid', '==', uid))
-  const snapshot = await getDocs(q)
+export const markComplete = async (usn, subcode) => {
+  const docref = doc(db, 'students', usn.trim().toLowerCase())
+
   await setDoc(
-    snapshot.docs[0].ref,
+    docref,
     {
       complete: arrayUnion(subcode),
     },
     {
       merge: true,
     }
-  ).catch((err) => console.log('Completion Update Failed', err))
+  )
 }
 
 // Making STatus is true
-export const completeStatus = async (uid) => {
-  const q = query(collection(db, 'students'), where('uid', '==', uid))
-  const snapshot = await getDocs(q)
-  if (!snapshot.empty) {
-    await updateDoc(snapshot.docs[0].ref, {
+export const completeStatus = async (usn) => {
+  const docref = doc(db, 'students', usn.trim().toLowerCase())
+  const snapshot = await getDoc(docref)
+
+  if (snapshot.exists) {
+    await updateDoc(docref, {
       status: true,
     })
-  }
-}
-
-export const changeSem = async () => {
-  const q = query(collection(db, 'students'), where('sem', '==', '7'))
-  const snapshot = await getDocs(q)
-  if (!snapshot.empty) {
-    snapshot.docs.map(
-      async (item) =>
-        await updateDoc(item.ref, {
-          sem: '8',
-        })
-    )
   }
 }

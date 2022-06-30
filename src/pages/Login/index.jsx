@@ -1,8 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { auth, db } from '../../lib/firebase'
+import { auth } from '../../lib/firebase'
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
-import { collection, query, where, getDocs } from 'firebase/firestore'
-import useAuthListner from '../../hooks/useAuthListner'
 import './login.style.css'
 import { studentWithUsn, updateInfo } from '../../utils/firebase'
 import { useNavigate } from 'react-router-dom'
@@ -96,13 +94,11 @@ const Login = ({ user }) => {
       pno = data.number
       if (data?.uid) {
         setIsNew(false)
-        console.log('Not a new user')
       }
     }
 
     // If Phone Number Found
     if (pno) {
-      console.log('Phone Number Found')
       let verify = new RecaptchaVerifier('captcha', { size: 'invisible' }, auth)
       toast.success(<b>Student information found</b>, {
         id: toastId,
@@ -111,7 +107,6 @@ const Login = ({ user }) => {
       signInWithPhoneNumber(auth, '+91' + pno, verify)
         .then((confirm) => {
           setLoading(false)
-          console.log('Otp Sent')
           setError('')
           setSucces(
             `OTP sent to the phone number ending with +91 XXXXXXXX${pno.slice(
@@ -130,7 +125,7 @@ const Login = ({ user }) => {
           toast.error(<b>OTP sending failed, Try again</b>, {
             id: toastId2,
           })
-          console.log(err)
+          console.error(err)
           setInputData({
             usn: '',
             otp: '',
@@ -177,7 +172,7 @@ const Login = ({ user }) => {
         }
       })
       .catch((err) => {
-        console.log(err)
+        console.error(err)
         setLoading(false)
         setInputData((prev) => ({
           ...prev,

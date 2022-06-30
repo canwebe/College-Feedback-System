@@ -21,6 +21,6 @@ export const auth = getAuth(firebaseApp)
 
 export const db = getFirestore(firebaseApp)
 // enableIndexedDbPersistence(db).catch((err) => {
-//   console.log(err.message)
+//   console.error(err.message)
 // })
 export default firebase
