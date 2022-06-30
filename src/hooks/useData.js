@@ -1,12 +1,8 @@
 import { collection, doc, onSnapshot, query, where } from 'firebase/firestore'
 import { useEffect, useState } from 'react'
 import { db } from '../lib/firebase'
-import useAuthListner from './useAuthListner'
 
-const useData = () => {
-  const { user } = useAuthListner()
-  const uid = user?.uid
-
+const useData = (uid) => {
   const [userData, setUserData] = useState({})
   const [subLists, setSubLists] = useState([])
   const userQ = query(collection(db, 'students'), where('uid', '==', uid))
@@ -18,7 +14,7 @@ const useData = () => {
       }
     })
     return () => unsub()
-  }, [user])
+  }, [uid])
 
   useEffect(() => {
     let unsub

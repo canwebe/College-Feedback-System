@@ -2,9 +2,9 @@ import {
   arrayUnion,
   collection,
   doc,
-  enableIndexedDbPersistence,
   getDoc,
   getDocs,
+  limit,
   query,
   setDoc,
   updateDoc,
@@ -12,26 +12,32 @@ import {
 } from 'firebase/firestore'
 import { db } from '../lib/firebase'
 
-// Getting Student Data with UID
-// export const studentWithUid = async (uid) => {
-//   const q = query(collection(db, 'students'), where('uid', '==', uid))
-//   const snapshot = await getDocs(q)
-//   if (!snapshot.empty) {
-//     return snapshot.docs[0].data()
-//   }
-// }
+//Getting Student Data with UID
+export const studentWithUsn = async (usn) => {
+  const q = query(
+    collection(db, 'students'),
+    where('usn', '==', usn.trim().toUpperCase()),
+    limit(1)
+  )
+  const snapshot = await getDocs(q)
+  if (!snapshot.empty) {
+    return snapshot.docs[0].data()
+  }
+}
 
 // Update Student Data with UID
 export const updateInfo = async (uid, usn) => {
   const q = query(
     collection(db, 'students'),
-    where('usn', '==', usn.trim().toUpperCase())
+    where('usn', '==', usn.trim().toUpperCase(), limit(1))
   )
   const result = await getDocs(q)
-
-  await updateDoc(result.docs[0].ref, {
-    uid,
-  })
+  console.log('update done', uid, usn, result)
+  if (!result.empty) {
+    await updateDoc(result.docs[0].ref, {
+      uid,
+    })
+  }
 }
 
 // Getting Subject List of Each Class
@@ -47,9 +53,9 @@ export const fetchSubList = async (classStr) => {
 }
 
 // Submiting Review
-export const submitReview = async (subid, point) => {
+export const submitReview = async (teacherid, point) => {
   // Getting Ref of teacher
-  const teacherRef = doc(db, `teacherstest/${subid}`)
+  const teacherRef = doc(db, `teachers/${teacherid}`)
   const teacherData = await getDoc(teacherRef)
 
   // Getting Prev Data
