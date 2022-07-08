@@ -65,7 +65,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-This a full stack feedback application for Sambhram Institution. This app is the frontend of the whole feedback system. Admin section is only available to authorised department head only. Only Sambhram's Student can use this app. 
+This is a full stack feedback application for Sambhram Institution. This app is the frontend of the whole feedback system. Admin section is only available to authorised department head only. Only Sambhram's Student can use this app. 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
