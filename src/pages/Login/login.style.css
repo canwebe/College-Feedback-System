@@ -20,11 +20,12 @@ h1.welcome {
   width: 100%;
   max-width: 500px;
   /* box-shadow: 2px 3px 6px 2px rgba(41, 41, 41, 0.815); */
-  box-shadow: 2px 3px 10px 2px rgba(107, 106, 106, 62%);
+  /* box-shadow: 2px 3px 10px 2px rgba(107, 106, 106, 62%); */
+  box-shadow: 4px 4px 15px 0px rgba(0, 0, 0, 0.49);
   /* padding: 52px 20px 80px; */
   padding: 52px 20px 37px;
   background-color: white;
-  border: 10px solid var(--primary-blue);
+  border: 10px solid #e8dff7;
   /* border-radius: 10px 10px 5px 5px; */
   margin: 0 auto;
 }
@@ -229,6 +230,6 @@ input:focus {
 @media screen and (min-width: 740px) {
   .login form {
     padding: 62px 40px 47px;
-    border-color: var(--secondary-purple);
+    border-color: #bba6df;
   }
 }
