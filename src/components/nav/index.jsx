@@ -1,3 +1,4 @@
+import { AnimatePresence } from 'framer-motion'
 import { useState } from 'react'
 import { FaInfo, FaUserShield } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
@@ -23,7 +24,9 @@ const Nav = () => {
           Admin
         </a>
       </div>
-      {isModal && <InfoModal setIsModal={setIsModal} />}
+      <AnimatePresence>
+        {isModal && <InfoModal setIsModal={setIsModal} />}{' '}
+      </AnimatePresence>
     </nav>
   )
 }
