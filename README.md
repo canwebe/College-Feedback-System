@@ -2,19 +2,25 @@
 
 <!-- PROJECT SHIELDS -->
 
-![Netlify](https://img.shields.io/netlify/ae22e8e4-9d21-49bb-aa54-4ac93d30bbd5)
-[![GitHub issues](https://img.shields.io/github/issues/canwebe/SaITFeedBack)](https://github.com/canwebe/SaITFeedBack/issues)
-[![GitHub forks](https://img.shields.io/github/forks/canwebe/SaITFeedBack)](https://github.com/canwebe/SaITFeedBack/network)
-[![GitHub stars](https://img.shields.io/github/stars/canwebe/SaITFeedBack)](https://github.com/canwebe/SaITFeedBack/stargazers)
-![GitHub top language](https://img.shields.io/github/languages/top/canwebe/SaITFeedBack)
-![GitHub language count](https://img.shields.io/github/languages/count/canwebe/SaITFeedBack)
-![GitHub repo size](https://img.shields.io/github/repo-size/canwebe/SaITFeedBack)
-![GitHub contributors](https://img.shields.io/github/contributors/canwebe/saitfeedback)
-[![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fteamcanwebe)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fcanwebe%2FSaITFeedBack)
-
-
 <div align='center'>
-
+  <img src='https://img.shields.io/netlify/ae22e8e4-9d21-49bb-aa54-4ac93d30bbd5' alt='badge'/>
+  <a href="https://github.com/canwebe/SaITFeedBack/issues">
+  <img src='https://img.shields.io/github/issues/canwebe/SaITFeedBack' alt='badge'/>
+  </a>
+  <a href="https://github.com/canwebe/SaITFeedBack/network">
+   <img src='https://img.shields.io/github/forks/canwebe/SaITFeedBack' alt='badge'/>
+  </a>
+  <a href="https://github.com/canwebe/SaITFeedBack/stargazers">
+    <img src='https://img.shields.io/github/stars/canwebe/SaITFeedBack' alt='badge'/>
+  </a>
+  <img src='https://img.shields.io/github/languages/top/canwebe/SaITFeedBack' alt='badge'/>
+  <img src='https://img.shields.io/github/languages/count/canwebe/SaITFeedBack' alt='badge'/>
+  <img src='https://img.shields.io/github/repo-size/canwebe/SaITFeedBack' alt='badge'/>
+  <img src='https://img.shields.io/github/contributors/canwebe/saitfeedback' alt='badge'/>
+  <a href="https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fcanwebe%2FSaITFeedBack">
+     <img src='https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fteamcanwebe' alt='badge'/>
+  </a>
+ 
 </div>
 
 
