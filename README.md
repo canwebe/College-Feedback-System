@@ -4,4 +4,7 @@
 
 # SaITFeedBack
 
-![image](https://saitfeedback.netlify.app/logo512n.png)
+<div align='center'>
+<img width="200px" height="200px" src="https://saitfeedback.netlify.app/logo512n.png" alt="logo"/>
+</div>
+
