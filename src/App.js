@@ -61,7 +61,7 @@ const App = () => {
         <Bottombar />
       )}
 
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 }

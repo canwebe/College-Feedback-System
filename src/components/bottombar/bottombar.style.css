@@ -17,6 +17,7 @@
   padding: 5px;
   gap: 13px;
   border-radius: 50px;
+  max-width: 400px;
 }
 
 .bottombar a {
