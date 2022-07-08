@@ -5,6 +5,5 @@
 # SaITFeedBack
 
 <div align='center'>
-<img width="200px" height="200px" src="https://saitfeedback.netlify.app/logo512n.png" alt="logo"/>
+<img width="300px" height="300px" src="https://saitfeedback.netlify.app/logo512n.png" alt="logo"/>
 </div>
-
