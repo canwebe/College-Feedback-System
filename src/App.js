@@ -7,6 +7,8 @@ import LoaderPage from './components/loaderPage'
 import Nav from './components/nav'
 import Footer from './components/footer'
 import { Toaster } from 'react-hot-toast'
+import Bottombar from './components/bottombar'
+import Webniar from './pages/Webniar'
 
 const Feedback = lazy(() => import('./pages/Feedback'))
 const Home = lazy(() => import('./pages/Home'))
@@ -42,12 +44,24 @@ const App = () => {
                   </RequireAuth>
                 }
               />
+              <Route
+                path='/webniar'
+                element={
+                  <RequireAuth user={user} redirectTo='/login'>
+                    <Webniar user={user} />
+                  </RequireAuth>
+                }
+              />
               <Route path='/login' element={<Login user={user} />} />
             </Routes>
           </AnimatePresence>
         </Suspense>
       </div>
-      <Footer />
+      {(location.pathname === '/' || location.pathname === '/webniar') && (
+        <Bottombar />
+      )}
+
+      {/* <Footer /> */}
     </>
   )
 }

@@ -59,6 +59,35 @@
   /* background-color: rgb(226, 226, 226); */
 }
 
+.cancelInfo {
+  font-size: 2rem;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
+  color: #668bd2;
+}
+
+.infoModal {
+  font-size: 1rem;
+  padding: 35px 0 20px;
+  text-align: center;
+  word-spacing: 2px;
+}
+.infoModal div {
+  font-size: 0.9rem;
+  margin-top: 30px;
+  color: #959595;
+  word-spacing: 0;
+  border-top: 1px solid rgb(186, 186, 186);
+  padding-top: 15px;
+}
+
+.infoModal a {
+  color: orangered;
+  font-weight: 600;
+}
+
 @media screen and (min-width: 510px) {
   .modalCard {
     width: 65%;
