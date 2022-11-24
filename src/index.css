@@ -251,3 +251,9 @@ a {
     font-size: 1.5rem;
   }
 }
+
+.noTeacherData {
+  text-align: center;
+  margin-top: 50px;
+  color: rgb(216, 121, 121);
+}

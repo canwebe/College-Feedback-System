@@ -64,16 +64,17 @@ const Home = ({ user }) => {
   // Getting User Data
   const uid = user?.uid
   const { userData, subLists } = useData(uid)
+  console.log(userData, subLists)
   //-----States-------
   //Teacher List Data
   const completed = userData?.complete || []
-  const [isDone, setIsDone] = useState(userData ? userData.status : false)
+  const [isDone] = useState(userData ? userData.status : false)
 
   // Loading state true means no loading
-  const loading = userData && subLists.length
+  const loading = userData && subLists
 
   // Pending Status
-  const status = subLists.length - completed.length
+  const status = subLists?.length - completed?.length
 
   // Function
   //Adding for completed review Toggle Complete
@@ -88,7 +89,7 @@ const Home = ({ user }) => {
   // Side Effect
   // Complete status
   useEffect(() => {
-    if (!isDone && subLists.length && status === 0) {
+    if (!isDone && subLists?.length && status === 0) {
       addStatus()
     }
   }, [completed, subLists, isDone])
@@ -96,23 +97,23 @@ const Home = ({ user }) => {
   return (
     <>
       {loading ? (
-        <div className='wrapper home'>
+        <div className="wrapper home">
           <motion.div
             variants={usncardVariants}
-            initial='hidden'
-            animate='visible'
-            exit='exit'
-            className='usnCard'
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="usnCard"
           >
-            <p className='deptName'>
+            <p className="deptName">
               DEPARTMENT OF {deptList[userData.branch]}
             </p>
-            <p className='usnNumber'>
+            <p className="usnNumber">
               <strong>USN :</strong>{' '}
-              <span className='usn'>{userData.usn.toUpperCase()}</span>
+              <span className="usn">{userData.usn.toUpperCase()}</span>
             </p>
             <hr />
-            <div className='semSec'>
+            <div className="semSec">
               <p>
                 <strong>Sem :</strong> {userData.sem} ,
               </p>
@@ -126,34 +127,39 @@ const Home = ({ user }) => {
             {status === 0 ? (
               <p>
                 <strong>Feedback Status :</strong>{' '}
-                <span className='status completed'>Completed</span>
+                <span className="status completed">Completed</span>
               </p>
             ) : (
               <p>
                 <strong>Pending Feedback :</strong>{' '}
-                <span className='status'>{status}</span>
+                <span className="status">{status}</span>
               </p>
             )}
           </motion.div>
           <motion.div
             variants={wrappercardVariants}
-            animate='visible'
-            initial='hidden'
-            exit='exit'
-            className='teacherListCard'
+            animate="visible"
+            initial="hidden"
+            exit="exit"
+            className="teacherListCard"
           >
             <h1>Teachers</h1>
             <hr />
-            <div className='teacherListWrapper'>
-              {subLists.map((subject, i) => (
-                <TeacherCard
-                  key={i}
-                  mark={completed.includes(subject.subcode)}
-                  subjectData={subject}
-                  usn={userData.usn}
-                />
-              ))}
-            </div>
+            {subLists?.length > 0 ? (
+              <div className="teacherListWrapper">
+                {subLists?.map((subject, i) => (
+                  <TeacherCard
+                    key={i}
+                    mark={completed.includes(subject?.subcode)}
+                    subjectData={subject}
+                    usn={userData.usn}
+                    branch={deptList[userData.branch]}
+                  />
+                ))}
+              </div>
+            ) : (
+              <p className="noTeacherData">No Teachers Data Found</p>
+            )}
           </motion.div>
         </div>
       ) : (
